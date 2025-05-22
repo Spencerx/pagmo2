@@ -1,36 +1,47 @@
- <!DOCTYPE html>
+ 
+
+<!DOCTYPE html>
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" >
+
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Artificial Bee Colony &#8212; pagmo 2.4 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootswatch-3.3.6/yeti/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pagmo.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../',
-        VERSION:     '2.4',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Artificial Bee Colony &#8212; pagmo 2.19.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/cpp/algorithms/bee_colony';</script>
     <link rel="shortcut icon" href="../../../_static/logo_favico.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,373 +49,632 @@
     <link rel="prev" title="Null algorithm" href="null.html" />
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto|Comfortaa|Space+Mono"> 
   </head>
-  <body role="document">
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="../../../index.html"><span><img src="../../../_static/logo_small_html.png"></span>
-           </a>
-        <span class="navbar-text navbar-version pull-left"><b>2.4</b></span>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">pagmo 2.19.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Capabilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/cpp_tut.html">C++ tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/cpp_tut_preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/cpp_tut_first_problem.html">Writing your first optimisation problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/evolving_a_population.html">Evolving a population</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../cpp_docs.html">C++ API documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problem.html">Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithm.html">Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../population.html">Population</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../island.html">Island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../archipelago.html">Archipelago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bfe.html">Batch fitness evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topology.html">Topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../r_policy.html">Replacement policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../s_policy.html">Selection policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="null.html">Null algorithm</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Artificial Bee Colony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmaes.html">Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compass_search.html">Compass Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de.html">Differential Evolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de1220.html">Self-adaptive Differential Evolution (DE 1220 aka pDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaco.html">Extended Ant Colony Optimization (gaco)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gwo.html">Grey Wolf Optimizer (gwo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ihs.html">Improved Harmony Search (IHS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ipopt.html">Ipopt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maco.html">Multi-objective Hypervolume-based Ant Colony Optimizer (MHACO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moead.html">Multi-objective Evolutionary Algorithm by Decomposition (MOEA/D-DE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moead_gen.html">Multi-objective Evolutionary Algorithm by Decomposition Generational (GMOEA/D-DE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mbh.html">Monotonic Basin Hopping (MBH) - Generalized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cstrs_self_adaptive.html">Self-adaptive constraints handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlopt.html">NLopt solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsga2.html">Non dominated sorting genetic algorithm (NSGA-II)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nspso.html">Non dominated sorting particle swarm optimization(NSPSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pso.html">Particle Swarm Optimization (PSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pso_gen.html">Particle Swarm Optimization Generational (GPSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sade.html">Self-adaptive Differential Evolution (jDE and iDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sea.html">(N+1)-ES Simple Evolutionary Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sga.html">Simple Genetic Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulated_annealing.html">Simulated Annealing (Corana’s version)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xnes.html">Exponential Natural Evolution Strategies (xNES)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/null.html">Null problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/rosenbrock.html">Rosenbrock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/rastrigin.html">Rastrigin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/schwefel.html">Schwefel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/ackley.html">Ackley</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/golomb_ruler.html">Optimal Golomb Ruler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/griewank.html">Griewank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/lennard_jones.html">Lennard Jones Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/zdt.html">ZDT test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/dtlz.html">DTLZ test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/hock_schittkowski_71.html">Hock Schittkowsky No.71</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/inventory.html">News-vendor problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/luksan_vlcek1.html">Luksan Vlcek 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/minlp_rastrigin.html">MINLP Rastrigin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/translate.html">Translate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/decompose.html">Decompose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2006.html">CEC 2006 Problem Suite (single-objective, constrained)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2009.html">CEC 2009 Problem Suite (multi-objective, constrained and unconstrained)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2013.html">CEC 2013 Problem Suite (box-bound, single objective)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2014.html">CEC 2014 Problem Suite (box-bound, single objective)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/unconstrain.html">Unconstrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/wfg.html">WFG problem test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../islands/thread_island.html">Thread island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../islands/fork_island.html">Fork island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../batch_evaluators/default_bfe.html">Default BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../batch_evaluators/thread_bfe.html">Multithreaded BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../batch_evaluators/member_bfe.html">Member function BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/unconnected.html">Unconnected topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/fully_connected.html">Fully connected</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/base_bgl_topology.html">Base BGL topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/ring.html">Ring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/free_form.html">Free-form topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../r_policies/fair_replace.html">Fair replacement policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../s_policies/select_best.html">Best selection policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/multi_objective.html">Multi-objective optimization utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/constrained.html">Constrained optimization utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/discrepancy.html">Low-discrepancy sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/hypervolume.html">Hypervolumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/gradient_and_hessians.html">Utilities for gradient and hessians</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/genetic_operators.html">Genetic Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/generic.html">Generic utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/type_traits.html">Type traits and enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/exceptions.html">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/utility_classes.html">Utility classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
       </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
 
-        <div class="collapse navbar-collapse nav-collapse">
-          <ul class="nav navbar-nav">
-            
-                <li><a href="../../../index.html">Home</a></li>
-                <li><a href="../../../install.html">Install</a></li>
-                <li><a href="../../../quickstart.html">Quickstart</a></li>
-            
-            
-              <li class="dropdown globaltoc-container">
-  <a role="button"
-     id="dLabelGlobalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="../../../index.html">All <b class="caret"></b></a>
-  <ul class="dropdown-menu globaltoc"
-      role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../install.html#c">C++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../install.html#python">Python</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick start</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#c">C++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#python">Python</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../algorithm_list.html">List of algorithms (UDAs) available in pagmo/pygmo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../algorithm_list.html#heuristic-global-optimization">Heuristic Global Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../algorithm_list.html#meta-algorithms">Meta-algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../algorithm_list.html#local-optimization">Local optimization</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../problem_list.html">List of problems (UDPs) available in pagmo/pygmo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../problem_list.html#scalable-problems">Scalable problems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../problem_list.html#problem-suites">Problem suites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../problem_list.html#meta-problems">Meta-problems</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../island_list.html">List of islands (UDIs) available in pagmo/pygmo</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../cpp_docs.html">C++ Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#core-classes">Core classes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../cpp_docs.html#implemented-algorithms">Implemented algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#implemented-problems">Implemented problems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#implemented-islands">Implemented islands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#utilities">Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#miscellanea">Miscellanea</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../python/python_docs.html">Python Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../python/python_docs.html#core-classes">Core classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/python_docs.html#implemented-problems-algorithms-and-islands">Implemented problems, algorithms and islands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/python_docs.html#utilities">Utilities</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../python/tutorials/python_tut.html">Python tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#basics">Basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#coding-your-own-problem-udp">Coding your own problem (UDP)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#coding-your-own-island-udi">Coding your own island (UDI)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#local-optimization">Local optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#multi-objective-optimization">Multi-objective optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#hypervolumes">Hypervolumes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#advanced-examples">Advanced Examples</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../credits.html#main-developers">Main developers</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#unreleased">2.5 (unreleased)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id1">2.4 (2017-06-09)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id3">2.3 (2017-05-19)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id6">2.2 (2017-05-12)</a></li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
-                <li class="dropdown">
-  <a role="button"
-     id="dLabelLocalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="#">This Page <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"
-      role="menu"
-      aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Artificial Bee Colony</a></li>
-</ul>
-</ul>
-</li>
-              
-            
-            
-            
-            
-            
-          </ul>
+<div class="sbt-scroll-pixel-helper"></div>
 
-          
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/esa/pagmo2" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/esa/pagmo2/issues/new?title=Issue%20on%20page%20%2Fdocs/cpp/algorithms/bee_colony.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/docs/cpp/algorithms/bee_colony.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Artificial Bee Colony</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<form class="navbar-form navbar-right" action="../../../search.html" method="get">
- <div class="form-group">
-  <input type="text" name="q" class="form-control" placeholder="Search" />
- </div>
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
-          
         </div>
     </div>
-  </div>
+</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 content">
-      
-  <div class="section" id="artificial-bee-colony">
-<h1>Artificial Bee Colony<a class="headerlink" href="#artificial-bee-colony" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="_CPPv2N5pagmo10bee_colonyE">
-<span id="pagmo::bee_colony"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony"></span><em class="property">class </em><code class="descclassname">pagmo::</code><code class="descname">bee_colony</code><a class="headerlink" href="#_CPPv2N5pagmo10bee_colonyE" title="Permalink to this definition">¶</a><br /></dt>
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="artificial-bee-colony">
+<h1>Artificial Bee Colony<a class="headerlink" href="#artificial-bee-colony" title="Permalink to this headline">#</a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo10bee_colonyE">
+<span id="_CPPv3N5pagmo10bee_colonyE"></span><span id="_CPPv2N5pagmo10bee_colonyE"></span><span id="pagmo::bee_colony"></span><span class="target" id="classpagmo_1_1bee__colony"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bee_colony</span></span></span><a class="headerlink" href="#_CPPv4N5pagmo10bee_colonyE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Artificial Bee Colony Algorithm. </p>
 <p><img alt="../../../_images/BeeColony.gif" src="../../../_images/BeeColony.gif" /></p>
 <p>Artificial Bee Colony is an optimization algorithm based on the intelligent foraging behaviour of honey bee swarm, proposed by Karaboga in 2005.</p>
-<p>The implementation provided for PaGMO is based on the pseudo-code provided in Mernik et al. (2015) - Algorithm 2. <a class="reference internal" href="#pagmoclasspagmo_1_1bee__colony"><span class="std std-ref">pagmo::bee_colony</span></a> is suitable for box-constrained single-objective continuous optimization.</p>
-<p>See: <a class="reference external" href="http://mf.erciyes.edu.tr/abc/">http://mf.erciyes.edu.tr/abc/</a> for the official ABC web site</p>
+<p>The implementation provided for PaGMO is based on the pseudo-code provided in Mernik et al. (2015) - Algorithm 2. <a class="reference internal" href="#classpagmo_1_1bee__colony"><span class="std std-ref">pagmo::bee_colony</span></a> is suitable for box-constrained single-objective continuous optimization.</p>
+<p>See: <a class="reference external" href="https://abc.erciyes.edu.tr/">https://abc.erciyes.edu.tr/</a> for the official ABC web site</p>
 <p>See: <a class="reference external" href="https://link.springer.com/article/10.1007/s10898-007-9149-x">https://link.springer.com/article/10.1007/s10898-007-9149-x</a> for the paper that introduces Artificial Bee Colony</p>
-<p>See: <a class="reference external" href="http://www.sciencedirect.com/science/article/pii/S0020025514008378">http://www.sciencedirect.com/science/article/pii/S0020025514008378</a> for the pseudo-code </p>
+<p>See: <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0020025514008378">https://www.sciencedirect.com/science/article/pii/S0020025514008378</a> for the pseudo-code </p>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Types</p>
-<dl class="type">
-<dt id="_CPPv2N5pagmo10bee_colony13log_line_typeE">
-<span id="pagmo::bee_colony::log_line_type"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1a2b678cb586784b57262f50a3580e23ff"></span><em class="property">typedef </em>std::tuple&lt;unsigned, unsigned long long, double, double&gt; <code class="descname">log_line_type</code><a class="headerlink" href="#_CPPv2N5pagmo10bee_colony13log_line_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo10bee_colony13log_line_typeE">
+<span id="_CPPv3N5pagmo10bee_colony13log_line_typeE"></span><span id="_CPPv2N5pagmo10bee_colony13log_line_typeE"></span><span id="pagmo::bee_colony::log_line_type"></span><span class="target" id="classpagmo_1_1bee__colony_1a3c5ac892fdb86ad4741a46e4d2fafaed"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_line_type</span></span></span><a class="headerlink" href="#_CPPv4N5pagmo10bee_colony13log_line_typeE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Single entry of the log (gen, fevals, best, cur_best) </p>
 </dd></dl>
 
-<dl class="type">
-<dt id="_CPPv2N5pagmo10bee_colony8log_typeE">
-<span id="pagmo::bee_colony::log_type"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1a1c04a1e8efb4d87519a5f96eab39b9e3"></span><em class="property">typedef </em>std::vector&lt;<a class="reference internal" href="#_CPPv2N5pagmo10bee_colony13log_line_typeE" title="pagmo::bee_colony::log_line_type">log_line_type</a>&gt; <code class="descname">log_type</code><a class="headerlink" href="#_CPPv2N5pagmo10bee_colony8log_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo10bee_colony8log_typeE">
+<span id="_CPPv3N5pagmo10bee_colony8log_typeE"></span><span id="_CPPv2N5pagmo10bee_colony8log_typeE"></span><span id="pagmo::bee_colony::log_type"></span><span class="target" id="classpagmo_1_1bee__colony_1a451d33432d8d5b321b97a847c2fc32ed"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N5pagmo10bee_colony13log_line_typeE" title="pagmo::bee_colony::log_line_type"><span class="n"><span class="pre">log_line_type</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_type</span></span></span><a class="headerlink" href="#_CPPv4N5pagmo10bee_colony8log_typeE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>The log. </p>
 </dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt id="_CPPv2N5pagmo10bee_colony10bee_colonyEjjj">
-<span id="pagmo::bee_colony::bee_colony__unsigned.unsigned.unsigned"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1ab475f8e4d51a5053226c285759d8acf8"></span><code class="descname">bee_colony</code><span class="sig-paren">(</span>unsigned <em>gen</em> = 1u, unsigned <em>limit</em> = 20u, unsigned <em>seed</em> = pagmo::random_device::next ()<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo10bee_colony10bee_colonyEjjj" title="Permalink to this definition">¶</a><br /></dt>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo10bee_colony10bee_colonyEjjj">
+<span id="_CPPv3N5pagmo10bee_colony10bee_colonyEjjj"></span><span id="_CPPv2N5pagmo10bee_colony10bee_colonyEjjj"></span><span id="pagmo::bee_colony::bee_colony__unsigned.unsigned.unsigned"></span><span class="target" id="classpagmo_1_1bee__colony_1ab475f8e4d51a5053226c285759d8acf8"></span><span class="sig-name descname"><span class="n"><span class="pre">bee_colony</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gen</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1u</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">limit</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">20u</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">seed</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">pagmo</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">random_device</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo10bee_colony10bee_colonyEjjj" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Constructor. </p>
-<p>Constructs a <a class="reference internal" href="#pagmoclasspagmo_1_1bee__colony"><span class="std std-ref">bee_colony</span></a> algorithm</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">gen</span></code>: number of generations. Note that the total number of fitness evaluations will be 2*gen </li>
-<li><code class="docutils literal"><span class="pre">limit</span></code>: maximum number of trials for abandoning a source </li>
-<li><code class="docutils literal"><span class="pre">seed</span></code>: seed used by the internal random number generator (default is random)</li>
+<p>Constructs a <a class="reference internal" href="#classpagmo_1_1bee__colony"><span class="std std-ref">bee_colony</span></a> algorithm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gen</strong> – number of generations. Note that the total number of fitness evaluations will be 2*gen </p></li>
+<li><p><strong>limit</strong> – maximum number of trials for abandoning a source </p></li>
+<li><p><strong>seed</strong> – seed used by the internal random number generator (default is random)</p></li>
 </ul>
 </dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if limit equals 0 </li>
-</ul>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if limit equals 0 </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo10bee_colony6evolveE10population">
-<span id="pagmo::bee_colony::evolve__populationC"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1a975fca8c742c45258ea16d08409c811e"></span><a class="reference internal" href="../population.html#_CPPv2N5pagmo10populationE" title="pagmo::population">population</a> <code class="descname">evolve</code><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv2N5pagmo10populationE" title="pagmo::population">population</a> <em>pop</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo10bee_colony6evolveE10population" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Algorithm evolve method (juice implementation of the algorithm) </p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo10bee_colony6evolveE10population">
+<span id="_CPPv3NK5pagmo10bee_colony6evolveE10population"></span><span id="_CPPv2NK5pagmo10bee_colony6evolveE10population"></span><span id="pagmo::bee_colony::evolve__populationC"></span><span class="target" id="classpagmo_1_1bee__colony_1aa5fcf3582d12077d71ad5dade0ad20a6"></span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10populationE" title="pagmo::population"><span class="n"><span class="pre">population</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">evolve</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10populationE" title="pagmo::population"><span class="n"><span class="pre">population</span></span></a><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo10bee_colony6evolveE10population" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Algorithm evolve method. </p>
 <p>Evolves the population for a maximum number of generations</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>evolved population </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">pop</span></code>: population to be evolved </li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pop</strong> – population to be evolved </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if the problem is multi-objective or constrained or stochastic </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if the population size is smaller than 2 </p></li>
 </ul>
 </dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if the problem is multi-objective or constrained or stochastic </li>
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if the population size is smaller than 2 </li>
-</ul>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>evolved population </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo10bee_colony8set_seedEj">
-<span id="pagmo::bee_colony::set_seed__unsigned"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1a83b092b66001e158d722c7b1fd29693a"></span>void <code class="descname">set_seed</code><span class="sig-paren">(</span>unsigned <em>seed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo10bee_colony8set_seedEj" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo10bee_colony8set_seedEj">
+<span id="_CPPv3N5pagmo10bee_colony8set_seedEj"></span><span id="_CPPv2N5pagmo10bee_colony8set_seedEj"></span><span id="pagmo::bee_colony::set_seed__unsigned"></span><span class="target" id="classpagmo_1_1bee__colony_1a17dd73c17ca9da9817632e41d038edb6"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_seed</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo10bee_colony8set_seedEj" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Sets the seed. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">seed</span></code>: the seed controlling the algorithm stochastic behaviour </li>
-</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seed</strong> – the seed controlling the algorithm stochastic behaviour </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo10bee_colony8get_seedEv">
-<span id="pagmo::bee_colony::get_seedC"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1a28a7f69a1f3bf55f22da8d9d584cb601"></span>unsigned <code class="descname">get_seed</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo10bee_colony8get_seedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo10bee_colony8get_seedEv">
+<span id="_CPPv3NK5pagmo10bee_colony8get_seedEv"></span><span id="_CPPv2NK5pagmo10bee_colony8get_seedEv"></span><span id="pagmo::bee_colony::get_seedC"></span><span class="target" id="classpagmo_1_1bee__colony_1a28a7f69a1f3bf55f22da8d9d584cb601"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_seed</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo10bee_colony8get_seedEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Gets the seed. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the seed controlling the algorithm stochastic behaviour </dd>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the seed controlling the algorithm stochastic behaviour </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo10bee_colony13set_verbosityEj">
-<span id="pagmo::bee_colony::set_verbosity__unsigned"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1af133473d1c4e47b05cec3097f9a86deb"></span>void <code class="descname">set_verbosity</code><span class="sig-paren">(</span>unsigned <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo10bee_colony13set_verbosityEj" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo10bee_colony13set_verbosityEj">
+<span id="_CPPv3N5pagmo10bee_colony13set_verbosityEj"></span><span id="_CPPv2N5pagmo10bee_colony13set_verbosityEj"></span><span id="pagmo::bee_colony::set_verbosity__unsigned"></span><span class="target" id="classpagmo_1_1bee__colony_1af133473d1c4e47b05cec3097f9a86deb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_verbosity</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo10bee_colony13set_verbosityEj" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Sets the algorithm verbosity. </p>
-<p>Sets the verbosity level of the screen output and of the log returned by <a class="reference internal" href="#pagmoclasspagmo_1_1bee__colony_1ae1494f8ff388c4f7febbf8df4b957070"><span class="std std-ref">get_log()</span></a>. <code class="docutils literal"><span class="pre">level</span></code> can be:<ul class="simple">
-<li>0: no verbosity</li>
-<li>&gt;0: will print and log one line each <code class="docutils literal"><span class="pre">level</span></code> generations.</li>
+<p>Sets the verbosity level of the screen output and of the log returned by <a class="reference internal" href="#classpagmo_1_1bee__colony_1ad0d153bb9cc149f682e49e1a438a2831"><span class="std std-ref">get_log()</span></a>. <code class="docutils literal notranslate"><span class="pre">level</span></code> can be:<ul class="simple">
+<li><p>0: no verbosity</p></li>
+<li><p>&gt;0: will print and log one line each <code class="docutils literal notranslate"><span class="pre">level</span></code> generations.</p></li>
 </ul>
 </p>
-<p>Example (verbosity 100): <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Gen</span><span class="p">:</span>        <span class="n">Fevals</span><span class="p">:</span>          <span class="n">Best</span><span class="p">:</span> <span class="n">Current</span> <span class="n">Best</span><span class="p">:</span>
-   <span class="mi">1</span>             <span class="mi">40</span>         <span class="mi">261363</span>         <span class="mi">261363</span>
- <span class="mi">101</span>           <span class="mi">4040</span>        <span class="mf">112.237</span>        <span class="mf">267.969</span>
- <span class="mi">201</span>           <span class="mi">8040</span>        <span class="mf">20.8885</span>        <span class="mf">265.122</span>
- <span class="mi">301</span>          <span class="mi">12040</span>        <span class="mf">20.6076</span>        <span class="mf">20.6076</span>
- <span class="mi">401</span>          <span class="mi">16040</span>         <span class="mf">18.252</span>        <span class="mf">140.079</span>
+<p>Example (verbosity 100): <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Gen:        Fevals:          Best: Current Best:
+   1             40         261363         261363
+ 101           4040        112.237        267.969
+ 201           8040        20.8885        265.122
+ 301          12040        20.6076        20.6076
+ 401          16040         18.252        140.079
 </pre></div>
 </div>
  Gen is the generation number, Fevals the number of function evaluation used, , Best is the best fitness found, Current best is the best fitness currently in the population.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">level</span></code>: verbosity level </li>
-</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>level</strong> – verbosity level </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo10bee_colony13get_verbosityEv">
-<span id="pagmo::bee_colony::get_verbosityC"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1aff151a99da5af732409b0217e14521a1"></span>unsigned <code class="descname">get_verbosity</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo10bee_colony13get_verbosityEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo10bee_colony13get_verbosityEv">
+<span id="_CPPv3NK5pagmo10bee_colony13get_verbosityEv"></span><span id="_CPPv2NK5pagmo10bee_colony13get_verbosityEv"></span><span id="pagmo::bee_colony::get_verbosityC"></span><span class="target" id="classpagmo_1_1bee__colony_1aff151a99da5af732409b0217e14521a1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_verbosity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo10bee_colony13get_verbosityEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Gets the verbosity level. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the verbosity level </dd>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the verbosity level </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo10bee_colony7get_genEv">
-<span id="pagmo::bee_colony::get_genC"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1a6d66f74d04f027b8d13a3181ad46f8f9"></span>unsigned <code class="descname">get_gen</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo10bee_colony7get_genEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo10bee_colony7get_genEv">
+<span id="_CPPv3NK5pagmo10bee_colony7get_genEv"></span><span id="_CPPv2NK5pagmo10bee_colony7get_genEv"></span><span id="pagmo::bee_colony::get_genC"></span><span class="target" id="classpagmo_1_1bee__colony_1a6d66f74d04f027b8d13a3181ad46f8f9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_gen</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo10bee_colony7get_genEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Gets the number of generations. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the number of generations to evolve for </dd>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the number of generations to evolve for </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo10bee_colony8get_nameEv">
-<span id="pagmo::bee_colony::get_nameC"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1a877770350db94275ecaccd2e239c0e05"></span>std::string <code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo10bee_colony8get_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo10bee_colony8get_nameEv">
+<span id="_CPPv3NK5pagmo10bee_colony8get_nameEv"></span><span id="_CPPv2NK5pagmo10bee_colony8get_nameEv"></span><span id="pagmo::bee_colony::get_nameC"></span><span class="target" id="classpagmo_1_1bee__colony_1a877770350db94275ecaccd2e239c0e05"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo10bee_colony8get_nameEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Algorithm name. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a string containing the algorithm name </dd>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a string containing the algorithm name </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo10bee_colony14get_extra_infoEv">
-<span id="pagmo::bee_colony::get_extra_infoC"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1ac17b1051d23d8283f9b0484a2dbbdac3"></span>std::string <code class="descname">get_extra_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo10bee_colony14get_extra_infoEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Extra informations. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a string containing extra informations on the algorithm </dd>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo10bee_colony14get_extra_infoEv">
+<span id="_CPPv3NK5pagmo10bee_colony14get_extra_infoEv"></span><span id="_CPPv2NK5pagmo10bee_colony14get_extra_infoEv"></span><span id="pagmo::bee_colony::get_extra_infoC"></span><span class="target" id="classpagmo_1_1bee__colony_1ac17b1051d23d8283f9b0484a2dbbdac3"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_extra_info</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo10bee_colony14get_extra_infoEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Extra info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a string containing extra info on the algorithm </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo10bee_colony7get_logEv">
-<span id="pagmo::bee_colony::get_logC"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1ae1494f8ff388c4f7febbf8df4b957070"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5pagmo10bee_colony8log_typeE" title="pagmo::bee_colony::log_type">log_type</a> &amp;<code class="descname">get_log</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo10bee_colony7get_logEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo10bee_colony7get_logEv">
+<span id="_CPPv3NK5pagmo10bee_colony7get_logEv"></span><span id="_CPPv2NK5pagmo10bee_colony7get_logEv"></span><span id="pagmo::bee_colony::get_logC"></span><span class="target" id="classpagmo_1_1bee__colony_1ad0d153bb9cc149f682e49e1a438a2831"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo10bee_colony8log_typeE" title="pagmo::bee_colony::log_type"><span class="n"><span class="pre">log_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_log</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo10bee_colony7get_logEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get log. </p>
-<p>A log containing relevant quantities monitoring the last call to evolve. Each element of the returned <code class="docutils literal"><span class="pre">std::vector</span></code> is a <a class="reference internal" href="#pagmoclasspagmo_1_1bee__colony_1a2b678cb586784b57262f50a3580e23ff"><span class="std std-ref">bee_colony::log_line_type</span></a> containing: Gen, Fevals, Current best, Best as described in <a class="reference internal" href="#pagmoclasspagmo_1_1bee__colony_1af133473d1c4e47b05cec3097f9a86deb"><span class="std std-ref">bee_colony::set_verbosity()</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>an <code class="docutils literal"> <span class="pre">std::vector</span></code> of <a class="reference internal" href="#pagmoclasspagmo_1_1bee__colony_1a2b678cb586784b57262f50a3580e23ff"><span class="std std-ref">bee_colony::log_line_type</span></a> containing the logged values Gen, Fevals, Current best, Best </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<em class="property">template </em>&lt;<em class="property">typename</em> Archive&gt;</dt>
-<dt id="_CPPv2N5pagmo10bee_colony9serializeER7Archive">
-<span id="pagmo::bee_colony::serialize__ArchiveR"></span><span class="target" id="pagmoclasspagmo_1_1bee__colony_1a7c05ab37c3bb61ce8efbec522a4923b8"></span>void <code class="descname">serialize</code><span class="sig-paren">(</span>Archive &amp;<em>ar</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo10bee_colony9serializeER7Archive" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Object serialization. </p>
-<p>This method will save/load <code class="docutils literal"><span class="pre">this</span></code> into the archive <code class="docutils literal"><span class="pre">ar</span></code>.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">ar</span></code>: target archive.</li>
-</ul>
-</dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">unspecified</span></code>: any exception thrown by the serialization of the UDP and of primitive types. </li>
-</ul>
+<p>A log containing relevant quantities monitoring the last call to evolve. Each element of the returned <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> is a <a class="reference internal" href="#classpagmo_1_1bee__colony_1a3c5ac892fdb86ad4741a46e4d2fafaed"><span class="std std-ref">bee_colony::log_line_type</span></a> containing: Gen, Fevals, Current best, Best as described in <a class="reference internal" href="#classpagmo_1_1bee__colony_1af133473d1c4e47b05cec3097f9a86deb"><span class="std std-ref">bee_colony::set_verbosity()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>an <code class="docutils literal notranslate"> <span class="pre">std::vector</span></code> of <a class="reference internal" href="#classpagmo_1_1bee__colony_1a3c5ac892fdb86ad4741a46e4d2fafaed"><span class="std std-ref">bee_colony::log_line_type</span></a> containing the logged values Gen, Fevals, Current best, Best </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
 </div>
 </dd></dl>
 
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="null.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Null algorithm</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cmaes.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
 </div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By pagmo development team
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2017-2024, pagmo development team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
-      
   </div>
-</div>
-<footer class="footer">
-  <div class="container">
-    <p class="pull-right">
-      <a href="#">Back to top</a>
-      
-    </p>
-    <p>
-        &copy; Copyright 2017, pagmo development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.<br/>
-    </p>
-  </div>
-</footer>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

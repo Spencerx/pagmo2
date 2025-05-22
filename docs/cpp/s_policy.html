@@ -1,0 +1,918 @@
+ 
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Selection policy &#8212; pagmo 2.19.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/cpp/s_policy';</script>
+    <link rel="shortcut icon" href="../../_static/logo_favico.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Null algorithm" href="algorithms/null.html" />
+    <link rel="prev" title="Replacement policy" href="r_policy.html" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto|Comfortaa|Space+Mono"> 
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">pagmo 2.19.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Capabilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/cpp_tut.html">C++ tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/cpp_tut_preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/cpp_tut_first_problem.html">Writing your first optimisation problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/evolving_a_population.html">Evolving a population</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="cpp_docs.html">C++ API documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem.html">Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithm.html">Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="population.html">Population</a></li>
+<li class="toctree-l2"><a class="reference internal" href="island.html">Island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="archipelago.html">Archipelago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bfe.html">Batch fitness evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="r_policy.html">Replacement policy</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Selection policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/null.html">Null algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/bee_colony.html">Artificial Bee Colony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/cmaes.html">Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/compass_search.html">Compass Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/de.html">Differential Evolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/de1220.html">Self-adaptive Differential Evolution (DE 1220 aka pDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/gaco.html">Extended Ant Colony Optimization (gaco)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/gwo.html">Grey Wolf Optimizer (gwo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/ihs.html">Improved Harmony Search (IHS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/ipopt.html">Ipopt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/maco.html">Multi-objective Hypervolume-based Ant Colony Optimizer (MHACO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/moead.html">Multi-objective Evolutionary Algorithm by Decomposition (MOEA/D-DE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/moead_gen.html">Multi-objective Evolutionary Algorithm by Decomposition Generational (GMOEA/D-DE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/mbh.html">Monotonic Basin Hopping (MBH) - Generalized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/cstrs_self_adaptive.html">Self-adaptive constraints handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/nlopt.html">NLopt solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/nsga2.html">Non dominated sorting genetic algorithm (NSGA-II)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/nspso.html">Non dominated sorting particle swarm optimization(NSPSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/pso.html">Particle Swarm Optimization (PSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/pso_gen.html">Particle Swarm Optimization Generational (GPSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/sade.html">Self-adaptive Differential Evolution (jDE and iDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/sea.html">(N+1)-ES Simple Evolutionary Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/sga.html">Simple Genetic Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/simulated_annealing.html">Simulated Annealing (Corana’s version)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/xnes.html">Exponential Natural Evolution Strategies (xNES)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/null.html">Null problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/rosenbrock.html">Rosenbrock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/rastrigin.html">Rastrigin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/schwefel.html">Schwefel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/ackley.html">Ackley</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/golomb_ruler.html">Optimal Golomb Ruler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/griewank.html">Griewank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/lennard_jones.html">Lennard Jones Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/zdt.html">ZDT test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/dtlz.html">DTLZ test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/hock_schittkowski_71.html">Hock Schittkowsky No.71</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/inventory.html">News-vendor problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/luksan_vlcek1.html">Luksan Vlcek 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/minlp_rastrigin.html">MINLP Rastrigin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/translate.html">Translate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/decompose.html">Decompose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/cec2006.html">CEC 2006 Problem Suite (single-objective, constrained)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/cec2009.html">CEC 2009 Problem Suite (multi-objective, constrained and unconstrained)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/cec2013.html">CEC 2013 Problem Suite (box-bound, single objective)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/cec2014.html">CEC 2014 Problem Suite (box-bound, single objective)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/unconstrain.html">Unconstrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/wfg.html">WFG problem test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="islands/thread_island.html">Thread island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="islands/fork_island.html">Fork island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_evaluators/default_bfe.html">Default BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_evaluators/thread_bfe.html">Multithreaded BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_evaluators/member_bfe.html">Member function BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topologies/unconnected.html">Unconnected topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topologies/fully_connected.html">Fully connected</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topologies/base_bgl_topology.html">Base BGL topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topologies/ring.html">Ring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topologies/free_form.html">Free-form topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="r_policies/fair_replace.html">Fair replacement policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s_policies/select_best.html">Best selection policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/multi_objective.html">Multi-objective optimization utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/constrained.html">Constrained optimization utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/discrepancy.html">Low-discrepancy sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/hypervolume.html">Hypervolumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/gradient_and_hessians.html">Utilities for gradient and hessians</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/genetic_operators.html">Genetic Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellanea/generic.html">Generic utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellanea/type_traits.html">Type traits and enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellanea/exceptions.html">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellanea/utility_classes.html">Utility classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/esa/pagmo2" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/esa/pagmo2/issues/new?title=Issue%20on%20page%20%2Fdocs/cpp/s_policy.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/cpp/s_policy.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Selection policy</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associated-type-traits">Associated type traits</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="selection-policy">
+<h1>Selection policy<a class="headerlink" href="#selection-policy" title="Permalink to this headline">#</a></h1>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 2.11.</span></p>
+</div>
+<p><em>#include &lt;pagmo/s_policy.hpp&gt;</em></p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo8s_policyE">
+<span id="_CPPv3N5pagmo8s_policyE"></span><span id="_CPPv2N5pagmo8s_policyE"></span><span id="pagmo::s_policy"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">s_policy</span></span></span><a class="headerlink" href="#_CPPv4N5pagmo8s_policyE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Selection policy.</p>
+<p>A selection policy establishes
+how, during migration within an <a class="reference internal" href="archipelago.html#_CPPv4N5pagmo11archipelagoE" title="pagmo::archipelago"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">archipelago</span></code></a>,
+candidate migrants are selected from an <a class="reference internal" href="island.html#_CPPv4N5pagmo6islandE" title="pagmo::island"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">island</span></code></a>.</p>
+<p>Following the same schema adopted for <a class="reference internal" href="problem.html#_CPPv4N5pagmo7problemE" title="pagmo::problem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">problem</span></code></a>, <a class="reference internal" href="algorithm.html#_CPPv4N5pagmo9algorithmE" title="pagmo::algorithm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">algorithm</span></code></a>, etc.,
+<a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">s_policy</span></code></a> exposes a type-erased generic
+interface to <em>user-defined selection policies</em> (or UDSP for short).
+UDSPs are classes providing a certain set
+of member functions that implement the logic of the selection policy. Once
+defined and instantiated, a UDSP can then be used to construct an instance of this class,
+<a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">s_policy</span></code></a>, which
+provides a generic interface to selection policies for use by <a class="reference internal" href="island.html#_CPPv4N5pagmo6islandE" title="pagmo::island"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">island</span></code></a>.</p>
+<p>Every UDSP must implement at least the following member function:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">individuals_group_t</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">individuals_group_t</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="o">::</span><span class="n">size_type</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="o">::</span><span class="n">size_type</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="o">::</span><span class="n">size_type</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="o">::</span><span class="n">size_type</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="o">::</span><span class="n">size_type</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">select()</span></code> function takes in input the following parameters:</p>
+<ul class="simple">
+<li><p>a group of individuals <em>inds</em> (represented as an <a class="reference internal" href="types.html#_CPPv4N5pagmo19individuals_group_tE" title="pagmo::individuals_group_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">individuals_group_t</span></code></a>),</p></li>
+<li><p>a set of arguments describing the properties of the <a class="reference internal" href="problem.html#_CPPv4N5pagmo7problemE" title="pagmo::problem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">problem</span></code></a> the individuals refer to:</p>
+<ul>
+<li><p>the total dimension <em>nx</em>,</p></li>
+<li><p>the integral dimension <em>nix</em>,</p></li>
+<li><p>the number of objectives <em>nobj</em>,</p></li>
+<li><p>the number of equality constraints <em>nec</em>,</p></li>
+<li><p>the number of inequality constraints <em>nic</em>,</p></li>
+<li><p>the problem’s constraint tolerances <em>tol</em>,</p></li>
+</ul>
+</li>
+</ul>
+<p>and it produces in output another set of individuals resulting from selecting individuals in <em>inds</em>
+(following some logic established by the UDSP).</p>
+<p>In addition to providing the above member function, a UDSP must also be default, copy and move constructible.</p>
+<p>Additional optional member functions can be implemented in a UDSP:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">get_name</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">get_extra_info</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>See the documentation of the corresponding member functions in this class for details on how the optional
+member functions in the UDSP are used by <a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">s_policy</span></code></a>.</p>
+<p>Selection policies are used in asynchronous operations involving migration in archipelagos,
+and thus they need to provide a certain degree of thread safety. Specifically, the
+<code class="docutils literal notranslate"><span class="pre">select()</span></code> member function of the UDSP might be invoked concurrently with
+any other member function of the UDSP interface (except for the destructor, the move
+constructor, and, if implemented, the deserialisation function). It is up to the
+authors of user-defined selection policies to ensure that this safety requirement is satisfied.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The only operations allowed on a moved-from <a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::s_policy</span></code></a> are destruction,
+assignment, and the invocation of the <a class="reference internal" href="#_CPPv4NK5pagmo8s_policy8is_validEv" title="pagmo::s_policy::is_valid"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">is_valid()</span></code></a> member function.
+Any other operation will result in undefined behaviour.</p>
+</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo8s_policy8s_policyEv">
+<span id="_CPPv3N5pagmo8s_policy8s_policyEv"></span><span id="_CPPv2N5pagmo8s_policy8s_policyEv"></span><span id="pagmo::s_policy::s_policy"></span><span class="sig-name descname"><span class="n"><span class="pre">s_policy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo8s_policy8s_policyEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Default constructor.</p>
+<p>The default constructor will initialize an <a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">s_policy</span></code></a> containing a
+<a class="reference internal" href="s_policies/select_best.html#_CPPv4N5pagmo11select_bestE" title="pagmo::select_best"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">select_best</span></code></a> selection policy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception raised by the constructor from a generic UDSP.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo8s_policy8s_policyERK8s_policy">
+<span id="_CPPv3N5pagmo8s_policy8s_policyERK8s_policy"></span><span id="_CPPv2N5pagmo8s_policy8s_policyERK8s_policy"></span><span id="pagmo::s_policy::s_policy__s_policyCR"></span><span class="sig-name descname"><span class="n"><span class="pre">s_policy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo8s_policy8s_policyERK8s_policy" title="pagmo::s_policy::s_policy"><span class="n"><span class="pre">s_policy</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo8s_policy8s_policyERK8s_policy" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo8s_policy8s_policyERR8s_policy">
+<span id="_CPPv3N5pagmo8s_policy8s_policyERR8s_policy"></span><span id="_CPPv2N5pagmo8s_policy8s_policyERR8s_policy"></span><span id="pagmo::s_policy::s_policy__s_policyRR"></span><span class="sig-name descname"><span class="n"><span class="pre">s_policy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5pagmo8s_policy8s_policyERR8s_policy" title="pagmo::s_policy::s_policy"><span class="n"><span class="pre">s_policy</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N5pagmo8s_policy8s_policyERR8s_policy" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo8s_policyaSERK8s_policy">
+<span id="_CPPv3N5pagmo8s_policyaSERK8s_policy"></span><span id="_CPPv2N5pagmo8s_policyaSERK8s_policy"></span><span id="pagmo::s_policy::assign-operator__s_policyCR"></span><a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><span class="n"><span class="pre">s_policy</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><span class="n"><span class="pre">s_policy</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo8s_policyaSERK8s_policy" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo8s_policyaSERR8s_policy">
+<span id="_CPPv3N5pagmo8s_policyaSERR8s_policy"></span><span id="_CPPv2N5pagmo8s_policyaSERR8s_policy"></span><span id="pagmo::s_policy::assign-operator__s_policyRR"></span><a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><span class="n"><span class="pre">s_policy</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><span class="n"><span class="pre">s_policy</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N5pagmo8s_policyaSERR8s_policy" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">s_policy</span></code></a> is copy/move constructible, and copy/move assignable.
+Copy construction/assignment will perform deep copies, move operations will leave the moved-from object in
+a state which is destructible and assignable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – when performing copy operations, any exception raised by the UDSP upon copying, or by memory allocation failures.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN5pagmo8s_policy8s_policyERR1T">
+<span id="_CPPv3I0EN5pagmo8s_policy8s_policyERR1T"></span><span id="_CPPv2I0EN5pagmo8s_policy8s_policyERR1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">s_policy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5pagmo8s_policy8s_policyERR1T" title="pagmo::s_policy::s_policy::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5pagmo8s_policy8s_policyERR1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Generic constructor from a UDSP.</p>
+<p>This constructor participates in overload resolution only if <code class="docutils literal notranslate"><span class="pre">T</span></code>, after the removal of reference
+and cv qualifiers, is not <a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">s_policy</span></code></a> and if it satisfies <a class="reference internal" href="#_CPPv4I0EN5pagmo7is_udspE" title="pagmo::is_udsp"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::is_udsp</span></code></a>.</p>
+<p>This constructor will construct an <a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">s_policy</span></code></a> from the UDSP (user-defined selection policy)
+<em>x</em> of type <code class="docutils literal notranslate"><span class="pre">T</span></code>. The input parameter <em>x</em> will be perfectly forwarded to construct the internal UDSP instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> – the input UDSP.</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by the public API of the UDSP, or by memory allocation failures.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN5pagmo8s_policyaSER8s_policyRR1T">
+<span id="_CPPv3I0EN5pagmo8s_policyaSERR1T"></span><span id="_CPPv2I0EN5pagmo8s_policyaSERR1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><span class="n"><span class="pre">s_policy</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5pagmo8s_policyaSER8s_policyRR1T" title="pagmo::s_policy::operator=::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5pagmo8s_policyaSER8s_policyRR1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Generic assignment operator from a UDSP.</p>
+<p>This operator participates in overload resolution only if <code class="docutils literal notranslate"><span class="pre">T</span></code>, after the removal of reference
+and cv qualifiers, is not <a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">s_policy</span></code></a> and if it satisfies <a class="reference internal" href="#_CPPv4I0EN5pagmo7is_udspE" title="pagmo::is_udsp"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::is_udsp</span></code></a>.</p>
+<p>This operator will set the internal UDSP to <em>x</em> by constructing an <a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">s_policy</span></code></a> from <em>x</em>,
+and then move-assigning the result to <em>this</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> – the input UDSP.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to <em>this</em>.</p>
+</dd>
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by the generic constructor from a UDSP.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK5pagmo8s_policy7extractEPK1Tv">
+<span id="_CPPv3I0ENK5pagmo8s_policy7extractEv"></span><span id="_CPPv2I0ENK5pagmo8s_policy7extractEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK5pagmo8s_policy7extractEPK1Tv" title="pagmo::s_policy::extract::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">extract</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4I0ENK5pagmo8s_policy7extractEPK1Tv" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN5pagmo8s_policy7extractEP1Tv">
+<span id="_CPPv3I0EN5pagmo8s_policy7extractEv"></span><span id="_CPPv2I0EN5pagmo8s_policy7extractEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0EN5pagmo8s_policy7extractEP1Tv" title="pagmo::s_policy::extract::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">extract</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4I0EN5pagmo8s_policy7extractEP1Tv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Extract a (const) pointer to the internal UDSP instance.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">T</span></code> is the type of the UDSP currently stored within this object, then this function
+will return a (const) pointer to the internal UDSP instance. Otherwise, <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> will be returned.</p>
+<p>The returned value is a raw non-owning pointer: the lifetime of the pointee is tied to the lifetime
+of <code class="docutils literal notranslate"><span class="pre">this</span></code>, and <code class="docutils literal notranslate"><span class="pre">delete</span></code> must never be called on the pointer.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The non-const overload of this function is provided only in order to allow to call non-const
+member functions on the internal UDSP instance. Assigning a new UDSP via pointers obtained
+through this function is undefined behaviour.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a (const) pointer to the internal UDSP instance, or <code class="docutils literal notranslate"><span class="pre">nullptr</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK5pagmo8s_policy2isEbv">
+<span id="_CPPv3I0ENK5pagmo8s_policy2isEv"></span><span id="_CPPv2I0ENK5pagmo8s_policy2isEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4I0ENK5pagmo8s_policy2isEbv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Check the type of the UDSP.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">T</span></code> is the type of the UDSP currently stored within this object, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo8s_policy6selectERK19individuals_group_tRKN13vector_double9size_typeERKN13vector_double9size_typeERKN13vector_double9size_typeERKN13vector_double9size_typeERKN13vector_double9size_typeERK13vector_double">
+<span id="_CPPv3NK5pagmo8s_policy6selectERK19individuals_group_tRKN13vector_double9size_typeERKN13vector_double9size_typeERKN13vector_double9size_typeERKN13vector_double9size_typeERKN13vector_double9size_typeERK13vector_double"></span><span id="_CPPv2NK5pagmo8s_policy6selectERK19individuals_group_tRKN13vector_double9size_typeERKN13vector_double9size_typeERKN13vector_double9size_typeERKN13vector_double9size_typeERKN13vector_double9size_typeERK13vector_double"></span><span id="pagmo::s_policy::select__individuals_group_tCR.vector_double::size_typeCR.vector_double::size_typeCR.vector_double::size_typeCR.vector_double::size_typeCR.vector_double::size_typeCR.vector_doubleCRC"></span><a class="reference internal" href="types.html#_CPPv4N5pagmo19individuals_group_tE" title="pagmo::individuals_group_t"><span class="n"><span class="pre">individuals_group_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">select</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="types.html#_CPPv4N5pagmo19individuals_group_tE" title="pagmo::individuals_group_t"><span class="n"><span class="pre">individuals_group_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">inds</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><span class="n"><span class="pre">vector_double</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">nx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><span class="n"><span class="pre">vector_double</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">nix</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><span class="n"><span class="pre">vector_double</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">nobj</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><span class="n"><span class="pre">vector_double</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">nec</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><span class="n"><span class="pre">vector_double</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">nic</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><span class="n"><span class="pre">vector_double</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">tol</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo8s_policy6selectERK19individuals_group_tRKN13vector_double9size_typeERKN13vector_double9size_typeERKN13vector_double9size_typeERKN13vector_double9size_typeERKN13vector_double9size_typeERK13vector_double" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Select individuals from a group.</p>
+<p>This member function will invoke the <code class="docutils literal notranslate"><span class="pre">select()</span></code> member function of the UDSP.
+Given a set of individuals, <em>inds</em>, the <code class="docutils literal notranslate"><span class="pre">select()</span></code> member function of the UDSP
+is expected to return a new set of individuals selected from <em>inds</em>.
+The other arguments of this member function describe the properties of the <a class="reference internal" href="problem.html#_CPPv4N5pagmo7problemE" title="pagmo::problem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">problem</span></code></a>
+that the individuals in <em>inds</em> refer to.</p>
+<p>In addition to invoking the <code class="docutils literal notranslate"><span class="pre">select()</span></code> member function of the UDSP, this function will also
+perform a variety of sanity checks on both the input arguments and on the output produced by the
+UDSP.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inds</strong> – the original group of individuals.</p></li>
+<li><p><strong>nx</strong> – the dimension of the problem <em>inds</em> refers to.</p></li>
+<li><p><strong>nix</strong> – the integral dimension of the problem <em>inds</em> refers to.</p></li>
+<li><p><strong>nobj</strong> – the number of objectives of the problem <em>inds</em> refers to.</p></li>
+<li><p><strong>nec</strong> – the number of equality constraints of the problem <em>inds</em> refers to.</p></li>
+<li><p><strong>nic</strong> – the number of inequality constraints of the problem <em>inds</em> refers to.</p></li>
+<li><p><strong>tol</strong> – the vector of constraints tolerances of the problem <em>inds</em> refers to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a new set of individuals resulting from selecting individuals in <em>inds</em>.</p>
+</dd>
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – <p>if either:</p>
+<ul>
+<li><p><em>inds</em> or the return value are not consistent with the problem properties,</p></li>
+<li><p>the ID, decision and fitness vectors in <em>inds</em> or the return value have inconsistent sizes,</p></li>
+<li><p>the problem properties are invalid (e.g., <em>nobj</em> is zero, <em>nix</em> &gt; <em>nx</em>, etc.).</p></li>
+</ul>
+</p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception raised by the <code class="docutils literal notranslate"><span class="pre">select()</span></code> member function of the UDSP.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo8s_policy8get_nameEv">
+<span id="_CPPv3NK5pagmo8s_policy8get_nameEv"></span><span id="_CPPv2NK5pagmo8s_policy8get_nameEv"></span><span id="pagmo::s_policy::get_nameC"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo8s_policy8get_nameEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Get the name of this selection policy.</p>
+<p>If the UDSP satisfies <a class="reference internal" href="miscellanea/type_traits.html#_CPPv4I0EN5pagmo8has_nameE" title="pagmo::has_name"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::has_name</span></code></a>, then this member function will return the output of its <code class="docutils literal notranslate"><span class="pre">get_name()</span></code> member function.
+Otherwise, an implementation-defined name based on the type of the UDSP will be returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the name of this selection policy.</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by copying an <code class="docutils literal notranslate"><span class="pre">std::string</span></code> object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo8s_policy14get_extra_infoEv">
+<span id="_CPPv3NK5pagmo8s_policy14get_extra_infoEv"></span><span id="_CPPv2NK5pagmo8s_policy14get_extra_infoEv"></span><span id="pagmo::s_policy::get_extra_infoC"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_extra_info</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo8s_policy14get_extra_infoEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Extra info for this selection policy.</p>
+<p>If the UDSP satisfies <a class="reference internal" href="miscellanea/type_traits.html#_CPPv4I0EN5pagmo14has_extra_infoE" title="pagmo::has_extra_info"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::has_extra_info</span></code></a>, then this member function will return the output of its
+<code class="docutils literal notranslate"><span class="pre">get_extra_info()</span></code> member function. Otherwise, an empty string will be returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>extra info about the UDSP.</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by the <code class="docutils literal notranslate"><span class="pre">get_extra_info()</span></code> member function of the UDSP, or by copying an <code class="docutils literal notranslate"><span class="pre">std::string</span></code> object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo8s_policy8is_validEv">
+<span id="_CPPv3NK5pagmo8s_policy8is_validEv"></span><span id="_CPPv2NK5pagmo8s_policy8is_validEv"></span><span id="pagmo::s_policy::is_validC"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_valid</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo8s_policy8is_validEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Check if this selection policy is in a valid state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if <em>this</em> was moved from, <code class="docutils literal notranslate"><span class="pre">true</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo8s_policy14get_type_indexEv">
+<span id="_CPPv3NK5pagmo8s_policy14get_type_indexEv"></span><span id="_CPPv2NK5pagmo8s_policy14get_type_indexEv"></span><span id="pagmo::s_policy::get_type_indexC"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">type_index</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_type_index</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo8s_policy14get_type_indexEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 2.15.</span></p>
+</div>
+<p>Get the type of the UDSP.</p>
+<p>This function will return the type
+of the UDSP stored within this <a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">s_policy</span></code></a>
+instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the type of the UDSP.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo8s_policy7get_ptrEv">
+<span id="_CPPv3NK5pagmo8s_policy7get_ptrEv"></span><span id="_CPPv2NK5pagmo8s_policy7get_ptrEv"></span><span id="pagmo::s_policy::get_ptrC"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_ptr</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo8s_policy7get_ptrEv" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo8s_policy7get_ptrEv">
+<span id="_CPPv3N5pagmo8s_policy7get_ptrEv"></span><span id="_CPPv2N5pagmo8s_policy7get_ptrEv"></span><span id="pagmo::s_policy::get_ptr"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_ptr</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo8s_policy7get_ptrEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 2.15.</span></p>
+</div>
+<p>Get a pointer to the UDSP.</p>
+<p>These functions will return a raw (const) pointer
+to the internal UDSP instance. Differently from
+the <a class="reference internal" href="#_CPPv4I0ENK5pagmo8s_policy7extractEPK1Tv" title="pagmo::s_policy::extract"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">extract()</span></code></a> overloads, these functions
+do not require to pass the correct type
+in input. It is however the user’s responsibility
+to cast the returned void pointer to the correct type.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The returned value is a raw non-owning pointer: the lifetime of the pointee is tied to the lifetime
+of <code class="docutils literal notranslate"><span class="pre">this</span></code>, and <code class="docutils literal notranslate"><span class="pre">delete</span></code> must never be called on the pointer.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ability to extract a mutable pointer is provided only in order to allow to call non-const
+methods on the internal UDSP instance. Assigning a new UDSP via this pointer is undefined behaviour.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a pointer to the internal UDSP.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmolsERNSt7ostreamERK8s_policy">
+<span id="_CPPv3N5pagmolsERNSt7ostreamERK8s_policy"></span><span id="_CPPv2N5pagmolsERNSt7ostreamERK8s_policy"></span><span id="pagmo::lshift-operator__osR.s_policyCR"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">os</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><span class="n"><span class="pre">s_policy</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmolsERNSt7ostreamERK8s_policy" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Stream insertion operator.</p>
+<p>This function will direct to <em>os</em> a human-readable representation of the input
+<a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">s_policy</span></code></a> <em>s</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>os</strong> – the input <code class="docutils literal notranslate"><span class="pre">std::ostream</span></code>.</p></li>
+<li><p><strong>s</strong> – the selection policy that will be directed to <em>os</em>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to <em>os</em>.</p>
+</dd>
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by querying various properties of the selection policy and directing them to <em>os</em>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="associated-type-traits">
+<h2>Associated type traits<a class="headerlink" href="#associated-type-traits" title="Permalink to this headline">#</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN5pagmo10has_selectE">
+<span id="_CPPv3I0EN5pagmo10has_selectE"></span><span id="_CPPv2I0EN5pagmo10has_selectE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_select</span></span></span><a class="headerlink" href="#_CPPv4I0EN5pagmo10has_selectE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The <a class="reference internal" href="#_CPPv4N5pagmo10has_select5valueE" title="pagmo::has_select::value"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">value</span></code></a> of this type trait will be <code class="docutils literal notranslate"><span class="pre">true</span></code> if
+<code class="docutils literal notranslate"><span class="pre">T</span></code> provides a member function with signature:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">individuals_group_t</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">individuals_group_t</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="o">::</span><span class="n">size_type</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="o">::</span><span class="n">size_type</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="o">::</span><span class="n">size_type</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="o">::</span><span class="n">size_type</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="o">::</span><span class="n">size_type</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">select()</span></code> member function is part of the interface for the definition of an
+<a class="reference internal" href="#_CPPv4N5pagmo8s_policyE" title="pagmo::s_policy"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">s_policy</span></code></a>.</p>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo10has_select5valueE">
+<span id="_CPPv3N5pagmo10has_select5valueE"></span><span id="_CPPv2N5pagmo10has_select5valueE"></span><span id="pagmo::has_select::value__bC"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><a class="headerlink" href="#_CPPv4N5pagmo10has_select5valueE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The value of the type trait.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN5pagmo7is_udspE">
+<span id="_CPPv3I0EN5pagmo7is_udspE"></span><span id="_CPPv2I0EN5pagmo7is_udspE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_udsp</span></span></span><a class="headerlink" href="#_CPPv4I0EN5pagmo7is_udspE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>This type trait detects if <code class="docutils literal notranslate"><span class="pre">T</span></code> is a user-defined selections policy (or UDSP).</p>
+<p>Specifically, the <a class="reference internal" href="#_CPPv4N5pagmo7is_udsp5valueE" title="pagmo::is_udsp::value"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">value</span></code></a> of this type trait will be <code class="docutils literal notranslate"><span class="pre">true</span></code> if:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> is not a reference or cv qualified,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> is destructible, default, copy and move constructible, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> satisfies <a class="reference internal" href="#_CPPv4I0EN5pagmo10has_selectE" title="pagmo::has_select"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::has_select</span></code></a>.</p></li>
+</ul>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo7is_udsp5valueE">
+<span id="_CPPv3N5pagmo7is_udsp5valueE"></span><span id="_CPPv2N5pagmo7is_udsp5valueE"></span><span id="pagmo::is_udsp::value__bC"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><a class="headerlink" href="#_CPPv4N5pagmo7is_udsp5valueE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The value of the type trait.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="r_policy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Replacement policy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="algorithms/null.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Null algorithm</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associated-type-traits">Associated type traits</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By pagmo development team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2017-2024, pagmo development team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

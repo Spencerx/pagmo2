@@ -1,36 +1,47 @@
- <!DOCTYPE html>
+ 
+
+<!DOCTYPE html>
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" >
+
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>NLopt solvers &#8212; pagmo 2.4 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootswatch-3.3.6/yeti/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pagmo.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../',
-        VERSION:     '2.4',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>NLopt solvers &#8212; pagmo 2.19.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/cpp/algorithms/nlopt';</script>
     <link rel="shortcut icon" href="../../../_static/logo_favico.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,941 +49,1124 @@
     <link rel="prev" title="Self-adaptive constraints handling" href="cstrs_self_adaptive.html" />
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto|Comfortaa|Space+Mono"> 
   </head>
-  <body role="document">
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="../../../index.html"><span><img src="../../../_static/logo_small_html.png"></span>
-           </a>
-        <span class="navbar-text navbar-version pull-left"><b>2.4</b></span>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">pagmo 2.19.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Capabilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/cpp_tut.html">C++ tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/cpp_tut_preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/cpp_tut_first_problem.html">Writing your first optimisation problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/evolving_a_population.html">Evolving a population</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../cpp_docs.html">C++ API documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problem.html">Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithm.html">Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../population.html">Population</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../island.html">Island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../archipelago.html">Archipelago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bfe.html">Batch fitness evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topology.html">Topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../r_policy.html">Replacement policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../s_policy.html">Selection policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="null.html">Null algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bee_colony.html">Artificial Bee Colony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmaes.html">Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compass_search.html">Compass Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de.html">Differential Evolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de1220.html">Self-adaptive Differential Evolution (DE 1220 aka pDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaco.html">Extended Ant Colony Optimization (gaco)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gwo.html">Grey Wolf Optimizer (gwo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ihs.html">Improved Harmony Search (IHS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ipopt.html">Ipopt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maco.html">Multi-objective Hypervolume-based Ant Colony Optimizer (MHACO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moead.html">Multi-objective Evolutionary Algorithm by Decomposition (MOEA/D-DE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moead_gen.html">Multi-objective Evolutionary Algorithm by Decomposition Generational (GMOEA/D-DE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mbh.html">Monotonic Basin Hopping (MBH) - Generalized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cstrs_self_adaptive.html">Self-adaptive constraints handling</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">NLopt solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsga2.html">Non dominated sorting genetic algorithm (NSGA-II)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nspso.html">Non dominated sorting particle swarm optimization(NSPSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pso.html">Particle Swarm Optimization (PSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pso_gen.html">Particle Swarm Optimization Generational (GPSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sade.html">Self-adaptive Differential Evolution (jDE and iDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sea.html">(N+1)-ES Simple Evolutionary Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sga.html">Simple Genetic Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulated_annealing.html">Simulated Annealing (Corana’s version)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xnes.html">Exponential Natural Evolution Strategies (xNES)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/null.html">Null problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/rosenbrock.html">Rosenbrock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/rastrigin.html">Rastrigin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/schwefel.html">Schwefel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/ackley.html">Ackley</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/golomb_ruler.html">Optimal Golomb Ruler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/griewank.html">Griewank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/lennard_jones.html">Lennard Jones Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/zdt.html">ZDT test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/dtlz.html">DTLZ test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/hock_schittkowski_71.html">Hock Schittkowsky No.71</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/inventory.html">News-vendor problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/luksan_vlcek1.html">Luksan Vlcek 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/minlp_rastrigin.html">MINLP Rastrigin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/translate.html">Translate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/decompose.html">Decompose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2006.html">CEC 2006 Problem Suite (single-objective, constrained)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2009.html">CEC 2009 Problem Suite (multi-objective, constrained and unconstrained)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2013.html">CEC 2013 Problem Suite (box-bound, single objective)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2014.html">CEC 2014 Problem Suite (box-bound, single objective)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/unconstrain.html">Unconstrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/wfg.html">WFG problem test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../islands/thread_island.html">Thread island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../islands/fork_island.html">Fork island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../batch_evaluators/default_bfe.html">Default BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../batch_evaluators/thread_bfe.html">Multithreaded BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../batch_evaluators/member_bfe.html">Member function BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/unconnected.html">Unconnected topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/fully_connected.html">Fully connected</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/base_bgl_topology.html">Base BGL topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/ring.html">Ring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/free_form.html">Free-form topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../r_policies/fair_replace.html">Fair replacement policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../s_policies/select_best.html">Best selection policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/multi_objective.html">Multi-objective optimization utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/constrained.html">Constrained optimization utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/discrepancy.html">Low-discrepancy sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/hypervolume.html">Hypervolumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/gradient_and_hessians.html">Utilities for gradient and hessians</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/genetic_operators.html">Genetic Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/generic.html">Generic utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/type_traits.html">Type traits and enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/exceptions.html">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/utility_classes.html">Utility classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
       </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
 
-        <div class="collapse navbar-collapse nav-collapse">
-          <ul class="nav navbar-nav">
-            
-                <li><a href="../../../index.html">Home</a></li>
-                <li><a href="../../../install.html">Install</a></li>
-                <li><a href="../../../quickstart.html">Quickstart</a></li>
-            
-            
-              <li class="dropdown globaltoc-container">
-  <a role="button"
-     id="dLabelGlobalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="../../../index.html">All <b class="caret"></b></a>
-  <ul class="dropdown-menu globaltoc"
-      role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../install.html#c">C++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../install.html#python">Python</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick start</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#c">C++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#python">Python</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../algorithm_list.html">List of algorithms (UDAs) available in pagmo/pygmo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../algorithm_list.html#heuristic-global-optimization">Heuristic Global Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../algorithm_list.html#meta-algorithms">Meta-algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../algorithm_list.html#local-optimization">Local optimization</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../problem_list.html">List of problems (UDPs) available in pagmo/pygmo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../problem_list.html#scalable-problems">Scalable problems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../problem_list.html#problem-suites">Problem suites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../problem_list.html#meta-problems">Meta-problems</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../island_list.html">List of islands (UDIs) available in pagmo/pygmo</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../cpp_docs.html">C++ Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#core-classes">Core classes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../cpp_docs.html#implemented-algorithms">Implemented algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#implemented-problems">Implemented problems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#implemented-islands">Implemented islands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#utilities">Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#miscellanea">Miscellanea</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../python/python_docs.html">Python Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../python/python_docs.html#core-classes">Core classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/python_docs.html#implemented-problems-algorithms-and-islands">Implemented problems, algorithms and islands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/python_docs.html#utilities">Utilities</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../python/tutorials/python_tut.html">Python tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#basics">Basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#coding-your-own-problem-udp">Coding your own problem (UDP)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#coding-your-own-island-udi">Coding your own island (UDI)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#local-optimization">Local optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#multi-objective-optimization">Multi-objective optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#hypervolumes">Hypervolumes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#advanced-examples">Advanced Examples</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../credits.html#main-developers">Main developers</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#unreleased">2.5 (unreleased)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id1">2.4 (2017-06-09)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id3">2.3 (2017-05-19)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id6">2.2 (2017-05-12)</a></li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
-                <li class="dropdown">
-  <a role="button"
-     id="dLabelLocalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="#">This Page <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"
-      role="menu"
-      aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">NLopt solvers</a></li>
-</ul>
-</ul>
-</li>
-              
-            
-            
-            
-            
-            
-          </ul>
+<div class="sbt-scroll-pixel-helper"></div>
 
-          
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/esa/pagmo2" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/esa/pagmo2/issues/new?title=Issue%20on%20page%20%2Fdocs/cpp/algorithms/nlopt.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/docs/cpp/algorithms/nlopt.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>NLopt solvers</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<form class="navbar-form navbar-right" action="../../../search.html" method="get">
- <div class="form-group">
-  <input type="text" name="q" class="form-control" placeholder="Search" />
- </div>
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
-          
         </div>
     </div>
-  </div>
+</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 content">
-      
-  <div class="section" id="nlopt-solvers">
-<h1>NLopt solvers<a class="headerlink" href="#nlopt-solvers" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="_CPPv2N5pagmo5nloptE">
-<span id="pagmo::nlopt"></span><span class="target" id="pagmoclasspagmo_1_1nlopt"></span><em class="property">class </em><code class="descclassname">pagmo::</code><code class="descname">nlopt</code><a class="headerlink" href="#_CPPv2N5pagmo5nloptE" title="Permalink to this definition">¶</a><br /></dt>
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="nlopt-solvers">
+<h1>NLopt solvers<a class="headerlink" href="#nlopt-solvers" title="Permalink to this headline">#</a></h1>
+<p><em>#include &lt;pagmo/algorithms/nlopt.hpp&gt;</em></p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nloptE">
+<span id="_CPPv3N5pagmo5nloptE"></span><span id="_CPPv2N5pagmo5nloptE"></span><span id="pagmo::nlopt"></span><span class="target" id="classpagmo_1_1nlopt"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nlopt</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">pagmo</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../miscellanea/utility_classes.html#_CPPv4N5pagmo20not_population_basedE" title="pagmo::not_population_based"><span class="n"><span class="pre">not_population_based</span></span></a><a class="headerlink" href="#_CPPv4N5pagmo5nloptE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>NLopt algorithms. </p>
 <p><img alt="../../../_images/nlopt.png" src="../../../_images/nlopt.png" /></p>
-<p>This user-defined algorithm wraps a selection of solvers from the <a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt">NLopt</a> library, focusing on local optimisation (both gradient-based and derivative-free). The complete list of supported NLopt algorithms is:<ul class="simple">
-<li>COBYLA,</li>
-<li>BOBYQA,</li>
-<li>NEWUOA + bound constraints,</li>
-<li>PRAXIS,</li>
-<li>Nelder-Mead simplex,</li>
-<li>sbplx,</li>
-<li>MMA (Method of Moving Asymptotes),</li>
-<li>CCSA,</li>
-<li>SLSQP,</li>
-<li>low-storage BFGS,</li>
-<li>preconditioned truncated Newton,</li>
-<li>shifted limited-memory variable-metric,</li>
-<li>augmented Lagrangian algorithm.</li>
+<p>This user-defined algorithm wraps a selection of solvers from the <a class="reference external" href="https://nlopt.readthedocs.io/en/latest/">NLopt</a> library, focusing on local optimisation (both gradient-based and derivative-free). The complete list of supported NLopt algorithms is:<ul class="simple">
+<li><p>COBYLA,</p></li>
+<li><p>BOBYQA,</p></li>
+<li><p>NEWUOA + bound constraints,</p></li>
+<li><p>PRAXIS,</p></li>
+<li><p>Nelder-Mead simplex,</p></li>
+<li><p>sbplx,</p></li>
+<li><p>MMA (Method of Moving Asymptotes),</p></li>
+<li><p>CCSA,</p></li>
+<li><p>SLSQP,</p></li>
+<li><p>low-storage BFGS,</p></li>
+<li><p>preconditioned truncated Newton,</p></li>
+<li><p>shifted limited-memory variable-metric,</p></li>
+<li><p>augmented Lagrangian algorithm.</p></li>
 </ul>
 </p>
-<p>The desired NLopt solver is selected upon construction of a <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a> algorithm. Various properties of the solver (e.g., the stopping criteria) can be configured after construction via methods provided by this class. Note that multiple stopping criteria can be active at the same time: the optimisation will stop as soon as at least one stopping criterion is satisfied. By default, only the <code class="docutils literal"><span class="pre">xtol_rel</span></code> stopping criterion is active (see <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1a9bbe3d1fbaa1dc7fc03590afcea4fd51"><span class="std std-ref">get_xtol_rel()</span></a>).</p>
-<p>All NLopt solvers support only single-objective optimisation, and, as usual in pagmo, minimisation is always assumed. The gradient-based algorithms require the optimisation problem to provide a gradient. Some solvers support equality and/or inequality constraints.</p>
-<p>In order to support pagmo&#8217;s population-based optimisation model, <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1a622ed0c3398fcf717882a101cc332747"><span class="std std-ref">nlopt::evolve()</span></a> will select a single individual from the input <a class="reference internal" href="../population.html#pagmoclasspagmo_1_1population"><span class="std std-ref">pagmo::population</span></a> to be optimised by the NLopt solver. If the optimisation produces a better individual (as established by <a class="reference internal" href="../utils/constrained.html#pagmonamespacepagmo_1accb4f0cfb71555ffec215cc381ea87bc"><span class="std std-ref">pagmo::compare_fc()</span></a>), the optimised individual will be inserted back into the population. The selection and replacement strategies can be configured via <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1ad049600ad72f5aaf61dab52ea95cd6d9"><span class="std std-ref">set_selection(const std::string &amp;)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1acb03d2e2a6b68982eeb340f8cdd4eef7"><span class="std std-ref">set_replacement(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>.</p>
-<p><div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">A moved-from <a class="reference internal" href="#_CPPv2N5pagmo5nloptE" title="pagmo::nlopt"><code class="xref cpp cpp-class docutils literal"><span class="pre">pagmo::nlopt</span></code></a> is destructible and assignable. Any other operation will result
-in undefined behaviour.</p>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This user-defined algorithm is available only if pagmo was compiled with the <code class="docutils literal"><span class="pre">PAGMO_WITH_NLOPT</span></code> option
-enabled (see the <a class="reference internal" href="../../../install.html#install"><span class="std std-ref">installation instructions</span></a>).</p>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last">The <a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt_Algorithms">NLopt website</a> contains a detailed description
+<p>The desired NLopt solver is selected upon construction of a <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a> algorithm. Various properties of the solver (e.g., the stopping criteria) can be configured after construction via methods provided by this class. Multiple stopping criteria can be active at the same time: the optimisation will stop as soon as at least one stopping criterion is satisfied. By default, only the <code class="docutils literal notranslate"><span class="pre">xtol_rel</span></code> stopping criterion is active (see <a class="reference internal" href="#classpagmo_1_1nlopt_1a9bbe3d1fbaa1dc7fc03590afcea4fd51"><span class="std std-ref">get_xtol_rel()</span></a>).</p>
+<p>All NLopt solvers support only single-objective optimisation, and, as usual in pagmo, minimisation is always assumed. The gradient-based algorithms require the optimisation problem to provide a gradient. Some solvers support equality and/or inequality constraints. The constraints’ tolerances will be set to those specified in the <a class="reference internal" href="../problem.html#classpagmo_1_1problem"><span class="std std-ref">pagmo::problem</span></a> being optimised (see <a class="reference internal" href="../problem.html#classpagmo_1_1problem_1ab1bbd8f6f4c119aef9e04fdfa499a33e"><span class="std std-ref">pagmo::problem::set_c_tol()</span></a>).</p>
+<p>In order to support pagmo’s population-based optimisation model, <a class="reference internal" href="#classpagmo_1_1nlopt_1a19fa46d8d7360074232af5f106279b97"><span class="std std-ref">nlopt::evolve()</span></a> will select a single individual from the input <a class="reference internal" href="../population.html#classpagmo_1_1population"><span class="std std-ref">pagmo::population</span></a> to be optimised by the NLopt solver. If the optimisation produces a better individual (as established by <a class="reference internal" href="../utils/constrained.html#namespacepagmo_1a5933d992cb780a189f50728594e81345"><span class="std std-ref">pagmo::compare_fc()</span></a>), the optimised individual will be inserted back into the population. The selection and replacement strategies can be configured via <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a918f089d9cc1a251005b9af0d209f2d4"><span class="std std-ref">set_selection(const std::string &amp;)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ac308e8d059b0f3c3ef901607b49f2a48"><span class="std std-ref">set_replacement(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>.</p>
+<p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The <a class="reference external" href="https://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/">NLopt website</a> contains a detailed description
 of each supported solver.</p>
 </div>
- </p>
-<p>Inherits from <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based"><span class="std std-ref">pagmo::not_population_based</span></a></p>
+</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This user-defined algorithm is available only if pagmo was compiled with the <code class="docutils literal notranslate"><span class="pre">PAGMO_WITH_NLOPT</span></code> option
+enabled (see the <a class="reference internal" href="../../../install.html#install"><span class="std std-ref">installation instructions</span></a>).</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A moved-from <a class="reference internal" href="#_CPPv4N5pagmo5nloptE" title="pagmo::nlopt"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::nlopt</span></code></a> is destructible and assignable. Any other operation will result
+in undefined behaviour.</p>
+</div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Types</p>
-<dl class="type">
-<dt id="_CPPv2N5pagmo5nlopt13log_line_typeE">
-<span class="target" id="pagmoclasspagmo_1_1nlopt_1ac073586cae8175d0de2b389f3fdb509e"></span><em class="property">using </em><code class="descname">log_line_type</code> = std::tuple&lt;unsigned long, double, <a class="reference internal" href="../types.html#_CPPv2N5pagmo13vector_doubleE" title="pagmo::vector_double">vector_double</a>::size_type, double, bool&gt;<a class="headerlink" href="#_CPPv2N5pagmo5nlopt13log_line_typeE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Single data line for the algorithm&#8217;s log. </p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt13log_line_typeE">
+<span id="_CPPv3N5pagmo5nlopt13log_line_typeE"></span><span id="_CPPv2N5pagmo5nlopt13log_line_typeE"></span><span class="target" id="classpagmo_1_1nlopt_1ac073586cae8175d0de2b389f3fdb509e"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_line_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><span class="n"><span class="pre">vector_double</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_type</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt13log_line_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Single data line for the algorithm’s log. </p>
 <p>A log data line is a tuple consisting of:<ul class="simple">
-<li>the number of objective function evaluations made so far,</li>
-<li>the objective function value for the current decision vector,</li>
-<li>the number of constraints violated by the current decision vector,</li>
-<li>the constraints violation norm for the current decision vector,</li>
-<li>a boolean flag signalling the feasibility of the current decision vector. </li>
+<li><p>the number of objective function evaluations made so far,</p></li>
+<li><p>the objective function value for the current decision vector,</p></li>
+<li><p>the number of constraints violated by the current decision vector,</p></li>
+<li><p>the constraints violation norm for the current decision vector,</p></li>
+<li><p>a boolean flag signalling the feasibility of the current decision vector. </p></li>
 </ul>
 </p>
 </dd></dl>
 
-<dl class="type">
-<dt id="_CPPv2N5pagmo5nlopt8log_typeE">
-<span class="target" id="pagmoclasspagmo_1_1nlopt_1a0bbd40bdc7321bd0caab5e010c95daa2"></span><em class="property">using </em><code class="descname">log_type</code> = std::vector&lt;<a class="reference internal" href="#_CPPv2N5pagmo5nlopt13log_line_typeE" title="pagmo::nlopt::log_line_type">log_line_type</a>&gt;<a class="headerlink" href="#_CPPv2N5pagmo5nlopt8log_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt8log_typeE">
+<span id="_CPPv3N5pagmo5nlopt8log_typeE"></span><span id="_CPPv2N5pagmo5nlopt8log_typeE"></span><span class="target" id="classpagmo_1_1nlopt_1a0bbd40bdc7321bd0caab5e010c95daa2"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N5pagmo5nlopt13log_line_typeE" title="pagmo::nlopt::log_line_type"><span class="n"><span class="pre">log_line_type</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt8log_typeE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Log type. </p>
-<p>The algorithm log is a collection of <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1ac073586cae8175d0de2b389f3fdb509e"><span class="std std-ref">nlopt::log_line_type</span></a> data lines, stored in chronological order during the optimisation if the verbosity of the algorithm is set to a nonzero value (see <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1a96226e26c0b8174bfa890f8050bb0f4f"><span class="std std-ref">nlopt::set_verbosity()</span></a>). </p>
+<p>The algorithm log is a collection of <a class="reference internal" href="#classpagmo_1_1nlopt_1ac073586cae8175d0de2b389f3fdb509e"><span class="std std-ref">nlopt::log_line_type</span></a> data lines, stored in chronological order during the optimisation if the verbosity of the algorithm is set to a nonzero value (see <a class="reference internal" href="#classpagmo_1_1nlopt_1a96226e26c0b8174bfa890f8050bb0f4f"><span class="std std-ref">nlopt::set_verbosity()</span></a>). </p>
 </dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt5nloptEv">
-<span id="pagmo::nlopt::nlopt"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a50339f55ee0906583a6693fe3456c3a5"></span><code class="descname">nlopt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt5nloptEv" title="Permalink to this definition">¶</a><br /></dt>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt5nloptEv">
+<span id="_CPPv3N5pagmo5nlopt5nloptEv"></span><span id="_CPPv2N5pagmo5nlopt5nloptEv"></span><span id="pagmo::nlopt::nlopt"></span><span class="target" id="classpagmo_1_1nlopt_1a50339f55ee0906583a6693fe3456c3a5"></span><span class="sig-name descname"><span class="n"><span class="pre">nlopt</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt5nloptEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Default constructor. </p>
-<p>The default constructor initialises the <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a> algorithm with the <code class="docutils literal"><span class="pre">&quot;cobyla&quot;</span></code> solver. The individual selection/replacement strategies are those specified by <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1ab386096795f9df0c72baed08398d87da"><span class="std std-ref">not_population_based::not_population_based()</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">unspecified</span></code>: any exception thrown by <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt(const std::string &amp;)</span></a>. </li>
-</ul>
+<p>The default constructor initialises the <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a> algorithm with the <code class="docutils literal notranslate"><span class="pre">&quot;cobyla&quot;</span></code> solver. The individual selection/replacement strategies are those specified by <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ab386096795f9df0c72baed08398d87da"><span class="std std-ref">not_population_based::not_population_based()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt(const std::string &amp;)</span></a>. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt5nloptERKNSt6stringE">
-<span id="pagmo::nlopt::nlopt__ssCR"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1aa3d990621bda657af13f464201d6300b"></span><code class="descname">nlopt</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>algo</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt5nloptERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt5nloptERKNSt6stringE">
+<span id="_CPPv3N5pagmo5nlopt5nloptERKNSt6stringE"></span><span id="_CPPv2N5pagmo5nlopt5nloptERKNSt6stringE"></span><span id="pagmo::nlopt::nlopt__ssCR"></span><span class="target" id="classpagmo_1_1nlopt_1a665cb671a41b5089fe1ec7f3657a7e72"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nlopt</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt5nloptERKNSt6stringE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Constructor from solver name. </p>
-<p>This constructor will initialise a <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a> object which will use the NLopt algorithm specified by the input string <code class="docutils literal"><span class="pre">algo</span></code>. The individual selection/replacement strategies are those specified by <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1ab386096795f9df0c72baed08398d87da"><span class="std std-ref">not_population_based::not_population_based()</span></a>. <code class="docutils literal"><span class="pre">algo</span></code> is translated to an NLopt algorithm type according to the following table: <table border="1" class="docutils">
+<p>This constructor will initialise a <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a> object which will use the NLopt algorithm specified by the input string <code class="docutils literal notranslate"><span class="pre">algo</span></code>. The individual selection/replacement strategies are those specified by <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ab386096795f9df0c72baed08398d87da"><span class="std std-ref">not_population_based::not_population_based()</span></a>. <code class="docutils literal notranslate"><span class="pre">algo</span></code> is translated to an NLopt algorithm type according to the following table: <p><table class="table">
 <colgroup>
-<col width="47%" />
-<col width="53%" />
+<col style="width: 47%" />
+<col style="width: 53%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head"><code class="docutils literal"><span class="pre">algo</span></code> string</th>
-<th class="head">NLopt algorithm</th>
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">algo</span></code> string</p></th>
+<th class="head"><p>NLopt algorithm</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;cobyla&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LN_COBYLA</span></code></td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;cobyla&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LN_COBYLA</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;bobyqa&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LN_BOBYQA</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;bobyqa&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LN_BOBYQA</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;newuoa&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LN_NEWUOA</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;newuoa&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LN_NEWUOA</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;newuoa_bound&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LN_NEWUOA_BOUND</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;newuoa_bound&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LN_NEWUOA_BOUND</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;praxis&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LN_PRAXIS</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;praxis&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LN_PRAXIS</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;neldermead&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LN_NELDERMEAD</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;neldermead&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LN_NELDERMEAD</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;sbplx&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LN_SBPLX</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;sbplx&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LN_SBPLX</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;mma&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LD_MMA</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;mma&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LD_MMA</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;ccsaq&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LD_CCSAQ</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;ccsaq&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LD_CCSAQ</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;slsqp&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LD_SLSQP</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;slsqp&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LD_SLSQP</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;lbfgs&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LD_LBFGS</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;lbfgs&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LD_LBFGS</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;tnewton_precond_restart&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LD_TNEWTON_PRECOND_RESTART</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;tnewton_precond_restart&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LD_TNEWTON_PRECOND_RESTART</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;tnewton_precond&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LD_TNEWTON_PRECOND</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;tnewton_precond&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LD_TNEWTON_PRECOND</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;tnewton_restart&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LD_TNEWTON_RESTART</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;tnewton_restart&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LD_TNEWTON_RESTART</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;tnewton&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LD_TNEWTON</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;tnewton&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LD_TNEWTON</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;var2&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LD_VAR2</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;var2&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LD_VAR2</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;var1&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_LD_VAR1</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;var1&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_LD_VAR1</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;auglag&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_AUGLAG</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;auglag&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_AUGLAG</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;auglag_eq&quot;</span></code></td>
-<td><code class="docutils literal"><span class="pre">NLOPT_AUGLAG_EQ</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;auglag_eq&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NLOPT_AUGLAG_EQ</span></code></p></td>
 </tr>
 </tbody>
 </table>
+</p>
  The parameters of the selected algorithm can be specified via the methods of this class.</p>
 <p><div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last">The <a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt_Algorithms">NLopt website</a> contains a detailed
+<p class="admonition-title">See also</p>
+<p>The <a class="reference external" href="https://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/">NLopt website</a> contains a detailed
 description of each supported solver.</p>
 </div>
 </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">algo</span></code>: the name of the NLopt algorithm that will be used by this <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a> object.</li>
-</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>algo</strong> – the name of the NLopt algorithm that will be used by this <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a> object.</p>
 </dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::runtime_error</span></code>: if the NLopt version is not at least 2. </li>
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if <code class="docutils literal"><span class="pre">algo</span></code> is not one of the allowed algorithm names. </li>
-<li><code class="docutils literal"><span class="pre">unspecified</span></code>: any exception thrown by <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1ab386096795f9df0c72baed08398d87da"><span class="std std-ref">not_population_based::not_population_based()</span></a>. </li>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if the NLopt version is not at least 2. </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if <code class="docutils literal notranslate"><span class="pre">algo</span></code> is not one of the allowed algorithm names. </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ab386096795f9df0c72baed08398d87da"><span class="std std-ref">not_population_based::not_population_based()</span></a>. </p></li>
 </ul>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt5nloptERK5nlopt">
-<span id="pagmo::nlopt::nlopt__nloptCR"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a71357b63d8bee5b59b8d5476a1d31869"></span><code class="descname">nlopt</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5pagmo5nlopt5nloptEv" title="pagmo::nlopt::nlopt">nlopt</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt5nloptERK5nlopt" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt5nloptERK5nlopt">
+<span id="_CPPv3N5pagmo5nlopt5nloptERK5nlopt"></span><span id="_CPPv2N5pagmo5nlopt5nloptERK5nlopt"></span><span id="pagmo::nlopt::nlopt__nloptCR"></span><span class="target" id="classpagmo_1_1nlopt_1ad6b9dda8a6ff20ad65339d2ff9d4bfcb"></span><span class="sig-name descname"><span class="n"><span class="pre">nlopt</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo5nlopt5nloptERK5nlopt" title="pagmo::nlopt::nlopt"><span class="n"><span class="pre">nlopt</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt5nloptERK5nlopt" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Copy constructor. </p>
-<p>The copy constructor will deep-copy the state of <code class="docutils literal"><span class="pre">other</span></code>.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">other</span></code>: the construction argument.</li>
-</ul>
+<p>The copy constructor will deep-copy the state of <code class="docutils literal notranslate"><span class="pre">other</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> – the construction argument.</p>
 </dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">unspecified</span></code>: any exception thrown by copying the internal state of <code class="docutils literal"><span class="pre">other</span></code>. </li>
-</ul>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by copying the internal state of <code class="docutils literal notranslate"><span class="pre">other</span></code>. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt5nloptERR5nlopt">
-<span id="pagmo::nlopt::nlopt__nloptRR"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1adff7b3ec099c9d95fec9e8fab349dbec"></span><code class="descname">nlopt</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N5pagmo5nlopt5nloptEv" title="pagmo::nlopt::nlopt">nlopt</a>&amp;&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt5nloptERR5nlopt" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt5nloptERR5nlopt">
+<span id="_CPPv3N5pagmo5nlopt5nloptERR5nlopt"></span><span id="_CPPv2N5pagmo5nlopt5nloptERR5nlopt"></span><span id="pagmo::nlopt::nlopt__nloptRR"></span><span class="target" id="classpagmo_1_1nlopt_1adff7b3ec099c9d95fec9e8fab349dbec"></span><span class="sig-name descname"><span class="n"><span class="pre">nlopt</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5pagmo5nlopt5nloptERR5nlopt" title="pagmo::nlopt::nlopt"><span class="n"><span class="pre">nlopt</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt5nloptERR5nlopt" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Move constructor. </p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nloptaSERR5nlopt">
-<span id="pagmo::nlopt::assign-operator__nloptRR"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a5a0efcfb74531b83a966ec6f2fba3691"></span><a class="reference internal" href="#_CPPv2N5pagmo5nloptE" title="pagmo::nlopt">nlopt</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N5pagmo5nloptE" title="pagmo::nlopt">nlopt</a>&amp;&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nloptaSERR5nlopt" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nloptaSERR5nlopt">
+<span id="_CPPv3N5pagmo5nloptaSERR5nlopt"></span><span id="_CPPv2N5pagmo5nloptaSERR5nlopt"></span><span id="pagmo::nlopt::assign-operator__nloptRR"></span><span class="target" id="classpagmo_1_1nlopt_1af139ee58e333c63d4a2da2b041a832f0"></span><a class="reference internal" href="#_CPPv4N5pagmo5nloptE" title="pagmo::nlopt"><span class="n"><span class="pre">nlopt</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5pagmo5nloptE" title="pagmo::nlopt"><span class="n"><span class="pre">nlopt</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5pagmo5nloptaSERR5nlopt" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Move assignment operator. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a reference to <code class="docutils literal"><span class="pre">this</span></code>. </dd>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a reference to <code class="docutils literal notranslate"><span class="pre">this</span></code>. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt6evolveE10population">
-<span id="pagmo::nlopt::evolve__populationC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a622ed0c3398fcf717882a101cc332747"></span><a class="reference internal" href="../population.html#_CPPv2N5pagmo10populationE" title="pagmo::population">population</a> <code class="descname">evolve</code><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv2N5pagmo10populationE" title="pagmo::population">population</a> <em>pop</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt6evolveE10population" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt6evolveE10population">
+<span id="_CPPv3NK5pagmo5nlopt6evolveE10population"></span><span id="_CPPv2NK5pagmo5nlopt6evolveE10population"></span><span id="pagmo::nlopt::evolve__populationC"></span><span class="target" id="classpagmo_1_1nlopt_1a19fa46d8d7360074232af5f106279b97"></span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10populationE" title="pagmo::population"><span class="n"><span class="pre">population</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">evolve</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10populationE" title="pagmo::population"><span class="n"><span class="pre">population</span></span></a><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt6evolveE10population" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Evolve population. </p>
-<p>This method will select an individual from <code class="docutils literal"><span class="pre">pop</span></code>, optimise it with the NLopt algorithm specified upon construction, replace an individual in <code class="docutils literal"><span class="pre">pop</span></code> with the optimised individual, and finally return <code class="docutils literal"><span class="pre">pop</span></code>. The individual selection and replacement criteria can be set via <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1ad049600ad72f5aaf61dab52ea95cd6d9"><span class="std std-ref">set_selection(const std::string &amp;)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1acb03d2e2a6b68982eeb340f8cdd4eef7"><span class="std std-ref">set_replacement(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>. The NLopt solver will run until one of the stopping criteria is satisfied, and the return status of the NLopt solver will be recorded (it can be fetched with <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1a16f3d305530abde452143f93006ce0ad"><span class="std std-ref">get_last_opt_result()</span></a>).</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the optimised population.</dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">pop</span></code>: the population to be optimised.</li>
+<p>This method will select an individual from <code class="docutils literal notranslate"><span class="pre">pop</span></code>, optimise it with the NLopt algorithm specified upon construction, replace an individual in <code class="docutils literal notranslate"><span class="pre">pop</span></code> with the optimised individual, and finally return <code class="docutils literal notranslate"><span class="pre">pop</span></code>. The individual selection and replacement criteria can be set via <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a918f089d9cc1a251005b9af0d209f2d4"><span class="std std-ref">set_selection(const std::string &amp;)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ac308e8d059b0f3c3ef901607b49f2a48"><span class="std std-ref">set_replacement(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>. The NLopt solver will run until one of the stopping criteria is satisfied, and the return status of the NLopt solver will be recorded (it can be fetched with <a class="reference internal" href="#classpagmo_1_1nlopt_1a16f3d305530abde452143f93006ce0ad"><span class="std std-ref">get_last_opt_result()</span></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pop</strong> – the population to be optimised.</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – in the following cases:<ul>
+<li><p>the population’s problem is multi-objective,</p></li>
+<li><p>the setup of the NLopt algorithm fails (e.g., if the problem is constrained but the selected NLopt solver does not support constrained optimisation),</p></li>
+<li><p>the selected NLopt solver needs gradients but they are not provided by the population’s problem,</p></li>
+<li><p>the components of the individual selected for optimisation contain NaNs or they are outside the problem’s bounds. </p></li>
+</ul>
+</p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by the public interface of <a class="reference internal" href="../problem.html#classpagmo_1_1problem"><span class="std std-ref">pagmo::problem</span></a> or <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based"><span class="std std-ref">pagmo::not_population_based</span></a>. </p></li>
 </ul>
 </dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: in the following cases:<ul>
-<li>the population&#8217;s problem is multi-objective,</li>
-<li>the setup of the NLopt algorithm fails (e.g., if the problem is constrained but the selected NLopt solver does not support constrained optimisation),</li>
-<li>the selected NLopt solver needs gradients but they are not provided by the population&#8217;s problem,</li>
-<li>the components of the individual selected for optimisation contain NaNs or they are outside the problem&#8217;s bounds. </li>
-</ul>
-</li>
-<li><code class="docutils literal"><span class="pre">unspecified</span></code>: any exception thrown by the public interface of <a class="reference internal" href="../problem.html#pagmoclasspagmo_1_1problem"><span class="std std-ref">pagmo::problem</span></a> or <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based"><span class="std std-ref">pagmo::not_population_based</span></a>. </li>
-</ul>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the optimised population.</p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt8get_nameEv">
-<span id="pagmo::nlopt::get_nameC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1ac7013473ce5b3e1f49fdbe53526c83f3"></span>std::string <code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt8get_nameEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Algorithm&#8217;s name. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a human-readable name for the algorithm. </dd>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt8get_nameEv">
+<span id="_CPPv3NK5pagmo5nlopt8get_nameEv"></span><span id="_CPPv2NK5pagmo5nlopt8get_nameEv"></span><span id="pagmo::nlopt::get_nameC"></span><span class="target" id="classpagmo_1_1nlopt_1ac7013473ce5b3e1f49fdbe53526c83f3"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt8get_nameEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Algorithm’s name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a human-readable name for the algorithm. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt13set_verbosityEj">
-<span id="pagmo::nlopt::set_verbosity__unsigned"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a96226e26c0b8174bfa890f8050bb0f4f"></span>void <code class="descname">set_verbosity</code><span class="sig-paren">(</span>unsigned <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt13set_verbosityEj" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt13set_verbosityEj">
+<span id="_CPPv3N5pagmo5nlopt13set_verbosityEj"></span><span id="_CPPv2N5pagmo5nlopt13set_verbosityEj"></span><span id="pagmo::nlopt::set_verbosity__unsigned"></span><span class="target" id="classpagmo_1_1nlopt_1a96226e26c0b8174bfa890f8050bb0f4f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_verbosity</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt13set_verbosityEj" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set verbosity. </p>
-<p>This method will set the algorithm&#8217;s verbosity. If <code class="docutils literal"><span class="pre">n</span></code> is zero, no output is produced during the optimisation and no logging is performed. If <code class="docutils literal"><span class="pre">n</span></code> is nonzero, then every <code class="docutils literal"><span class="pre">n</span></code> objective function evaluations the status of the optimisation will be both printed to screen and recorded internally. See <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1ac073586cae8175d0de2b389f3fdb509e"><span class="std std-ref">nlopt::log_line_type</span></a> and <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1a0bbd40bdc7321bd0caab5e010c95daa2"><span class="std std-ref">nlopt::log_type</span></a> for information on the logging format. The internal log can be fetched via <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1acf448ec909867566b04a4b9ce54d036b"><span class="std std-ref">get_log()</span></a>.</p>
-<p>Example (verbosity 5): <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">objevals</span><span class="p">:</span>       <span class="n">objval</span><span class="p">:</span>      <span class="n">violated</span><span class="p">:</span>    <span class="n">viol</span><span class="o">.</span> <span class="n">norm</span><span class="p">:</span>
-       <span class="mi">1</span>       <span class="mf">47.9474</span>              <span class="mi">1</span>        <span class="mf">2.07944</span> <span class="n">i</span>
-       <span class="mi">6</span>       <span class="mf">17.1986</span>              <span class="mi">2</span>       <span class="mf">0.150557</span> <span class="n">i</span>
-      <span class="mi">11</span>        <span class="mf">17.014</span>              <span class="mi">0</span>              <span class="mi">0</span>
-      <span class="mi">16</span>        <span class="mf">17.014</span>              <span class="mi">0</span>              <span class="mi">0</span>
+<p>This method will set the algorithm’s verbosity. If <code class="docutils literal notranslate"><span class="pre">n</span></code> is zero, no output is produced during the optimisation and no logging is performed. If <code class="docutils literal notranslate"><span class="pre">n</span></code> is nonzero, then every <code class="docutils literal notranslate"><span class="pre">n</span></code> objective function evaluations the status of the optimisation will be both printed to screen and recorded internally. See <a class="reference internal" href="#classpagmo_1_1nlopt_1ac073586cae8175d0de2b389f3fdb509e"><span class="std std-ref">nlopt::log_line_type</span></a> and <a class="reference internal" href="#classpagmo_1_1nlopt_1a0bbd40bdc7321bd0caab5e010c95daa2"><span class="std std-ref">nlopt::log_type</span></a> for information on the logging format. The internal log can be fetched via <a class="reference internal" href="#classpagmo_1_1nlopt_1a751ad57115eb51c516c04f1fa5f8ebd3"><span class="std std-ref">get_log()</span></a>.</p>
+<p>Example (verbosity 5): <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>objevals:       objval:      violated:    viol. norm:
+       1       47.9474              1        2.07944 i
+       6       17.1986              2       0.150557 i
+      11        17.014              0              0
+      16        17.014              0              0
 </pre></div>
 </div>
- The <code class="docutils literal"><span class="pre">i</span></code> at the end of some rows indicates that the decision vector is infeasible. Feasibility is checked against the problem&#8217;s tolerance.</p>
+ The <code class="docutils literal notranslate"><span class="pre">i</span></code> at the end of some rows indicates that the decision vector is infeasible. Feasibility is checked against the problem’s tolerance.</p>
 <p>By default, the verbosity level is zero.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">n</span></code>: the desired verbosity level. </li>
-</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – the desired verbosity level. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt14get_extra_infoEv">
-<span id="pagmo::nlopt::get_extra_infoC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1af4fb2674fb1fe56b5305d5bcf49a443b"></span>std::string <code class="descname">get_extra_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt14get_extra_infoEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt14get_extra_infoEv">
+<span id="_CPPv3NK5pagmo5nlopt14get_extra_infoEv"></span><span id="_CPPv2NK5pagmo5nlopt14get_extra_infoEv"></span><span id="pagmo::nlopt::get_extra_infoC"></span><span class="target" id="classpagmo_1_1nlopt_1af4fb2674fb1fe56b5305d5bcf49a443b"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_extra_info</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt14get_extra_infoEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get extra information about the algorithm. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a human-readable string containing useful information about the algorithm&#8217;s properties (e.g., the stopping criteria, the selection/replacement policies, etc.). </dd>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a human-readable string containing useful information about the algorithm’s properties (e.g., the stopping criteria, the selection/replacement policies, etc.). </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt7get_logEv">
-<span id="pagmo::nlopt::get_logC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1acf448ec909867566b04a4b9ce54d036b"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5pagmo5nlopt8log_typeE" title="pagmo::nlopt::log_type">log_type</a> &amp;<code class="descname">get_log</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt7get_logEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt7get_logEv">
+<span id="_CPPv3NK5pagmo5nlopt7get_logEv"></span><span id="_CPPv2NK5pagmo5nlopt7get_logEv"></span><span id="pagmo::nlopt::get_logC"></span><span class="target" id="classpagmo_1_1nlopt_1a751ad57115eb51c516c04f1fa5f8ebd3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo5nlopt8log_typeE" title="pagmo::nlopt::log_type"><span class="n"><span class="pre">log_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_log</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt7get_logEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get the optimisation log. </p>
-<p>See <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1a0bbd40bdc7321bd0caab5e010c95daa2"><span class="std std-ref">nlopt::log_type</span></a> for a description of the optimisation log. Logging is turned on/off via <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1a96226e26c0b8174bfa890f8050bb0f4f"><span class="std std-ref">set_verbosity()</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a const reference to the log. </dd>
+<p>See <a class="reference internal" href="#classpagmo_1_1nlopt_1a0bbd40bdc7321bd0caab5e010c95daa2"><span class="std std-ref">nlopt::log_type</span></a> for a description of the optimisation log. Logging is turned on/off via <a class="reference internal" href="#classpagmo_1_1nlopt_1a96226e26c0b8174bfa890f8050bb0f4f"><span class="std std-ref">set_verbosity()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a const reference to the log. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt15get_solver_nameEv">
-<span id="pagmo::nlopt::get_solver_nameC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1ad7ee7a17b023341581b64e8a7110c69d"></span>std::string <code class="descname">get_solver_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt15get_solver_nameEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the name of the solver that was used to construct this <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a> algorithm. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the name of the NLopt solver used upon construction. </dd>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt15get_solver_nameEv">
+<span id="_CPPv3NK5pagmo5nlopt15get_solver_nameEv"></span><span id="_CPPv2NK5pagmo5nlopt15get_solver_nameEv"></span><span id="pagmo::nlopt::get_solver_nameC"></span><span class="target" id="classpagmo_1_1nlopt_1ad7ee7a17b023341581b64e8a7110c69d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_solver_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt15get_solver_nameEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Get the name of the solver that was used to construct this <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a> algorithm. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the name of the NLopt solver used upon construction. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt19get_last_opt_resultEv">
-<span id="pagmo::nlopt::get_last_opt_resultC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a16f3d305530abde452143f93006ce0ad"></span>nlopt_result <code class="descname">get_last_opt_result</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt19get_last_opt_resultEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt19get_last_opt_resultEv">
+<span id="_CPPv3NK5pagmo5nlopt19get_last_opt_resultEv"></span><span id="_CPPv2NK5pagmo5nlopt19get_last_opt_resultEv"></span><span id="pagmo::nlopt::get_last_opt_resultC"></span><span class="target" id="classpagmo_1_1nlopt_1a16f3d305530abde452143f93006ce0ad"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">nlopt_result</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_last_opt_result</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt19get_last_opt_resultEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get the result of the last optimisation. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the result of the last <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1a622ed0c3398fcf717882a101cc332747"><span class="std std-ref">evolve()</span></a> call, or <code class="docutils literal"><span class="pre">NLOPT_SUCCESS</span></code> if no optimisations have been run yet. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt11get_stopvalEv">
-<span id="pagmo::nlopt::get_stopvalC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a6f785fc91ac867a6c9653f286185c077"></span>double <code class="descname">get_stopval</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt11get_stopvalEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the <code class="docutils literal"><span class="pre">stopval</span></code> stopping criterion. </p>
-<p>The <code class="docutils literal"><span class="pre">stopval</span></code> stopping criterion instructs the solver to stop when an objective value less than or equal to <code class="docutils literal"><span class="pre">stopval</span></code> is found. Defaults to the C constant <code class="docutils literal"><span class="pre">-HUGE_VAL</span></code> (that is, this stopping criterion is disabled by default).</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the <code class="docutils literal"><span class="pre">stopval</span></code> stopping criterion for this <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt11set_stopvalEd">
-<span id="pagmo::nlopt::set_stopval__double"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1ade287c2b59ebe26749ef718bb3dcb824"></span>void <code class="descname">set_stopval</code><span class="sig-paren">(</span>double <em>stopval</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt11set_stopvalEd" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the <code class="docutils literal"><span class="pre">stopval</span></code> stopping criterion. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">stopval</span></code>: the desired value for the <code class="docutils literal"><span class="pre">stopval</span></code> stopping criterion (see <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1a6f785fc91ac867a6c9653f286185c077"><span class="std std-ref">get_stopval()</span></a>).</li>
-</ul>
-</dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if <code class="docutils literal"><span class="pre">stopval</span></code> is NaN. </li>
-</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the result of the last <a class="reference internal" href="#classpagmo_1_1nlopt_1a19fa46d8d7360074232af5f106279b97"><span class="std std-ref">evolve()</span></a> call, or <code class="docutils literal notranslate"><span class="pre">NLOPT_SUCCESS</span></code> if no optimisations have been run yet. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt12get_ftol_relEv">
-<span id="pagmo::nlopt::get_ftol_relC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1aee5e90b962030e692bd7a5afd7e58615"></span>double <code class="descname">get_ftol_rel</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt12get_ftol_relEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the <code class="docutils literal"><span class="pre">ftol_rel</span></code> stopping criterion. </p>
-<p>The <code class="docutils literal"><span class="pre">ftol_rel</span></code> stopping criterion instructs the solver to stop when an optimization step (or an estimate of the optimum) changes the objective function value by less than <code class="docutils literal"><span class="pre">ftol_rel</span></code> multiplied by the absolute value of the function value. Defaults to 0 (that is, this stopping criterion is disabled by default).</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the <code class="docutils literal"><span class="pre">ftol_rel</span></code> stopping criterion for this <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt12set_ftol_relEd">
-<span id="pagmo::nlopt::set_ftol_rel__double"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a1565509923be27f9b3d485d513a387d7"></span>void <code class="descname">set_ftol_rel</code><span class="sig-paren">(</span>double <em>ftol_rel</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt12set_ftol_relEd" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the <code class="docutils literal"><span class="pre">ftol_rel</span></code> stopping criterion. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">ftol_rel</span></code>: the desired value for the <code class="docutils literal"><span class="pre">ftol_rel</span></code> stopping criterion (see <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1aee5e90b962030e692bd7a5afd7e58615"><span class="std std-ref">get_ftol_rel()</span></a>).</li>
-</ul>
-</dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if <code class="docutils literal"><span class="pre">ftol_rel</span></code> is NaN. </li>
-</ul>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt11get_stopvalEv">
+<span id="_CPPv3NK5pagmo5nlopt11get_stopvalEv"></span><span id="_CPPv2NK5pagmo5nlopt11get_stopvalEv"></span><span id="pagmo::nlopt::get_stopvalC"></span><span class="target" id="classpagmo_1_1nlopt_1a6f785fc91ac867a6c9653f286185c077"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_stopval</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt11get_stopvalEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">stopval</span></code> stopping criterion. </p>
+<p>The <code class="docutils literal notranslate"><span class="pre">stopval</span></code> stopping criterion instructs the solver to stop when an objective value less than or equal to <code class="docutils literal notranslate"><span class="pre">stopval</span></code> is found. Defaults to the C constant <code class="docutils literal notranslate"><span class="pre">-HUGE_VAL</span></code> (that is, this stopping criterion is disabled by default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the <code class="docutils literal notranslate"><span class="pre">stopval</span></code> stopping criterion for this <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt12get_ftol_absEv">
-<span id="pagmo::nlopt::get_ftol_absC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1aad1aaf9968e5796f5a9ee0a8b5cc201c"></span>double <code class="descname">get_ftol_abs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt12get_ftol_absEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the <code class="docutils literal"><span class="pre">ftol_abs</span></code> stopping criterion. </p>
-<p>The <code class="docutils literal"><span class="pre">ftol_abs</span></code> stopping criterion instructs the solver to stop when an optimization step (or an estimate of the optimum) changes the function value by less than <code class="docutils literal"><span class="pre">ftol_abs</span></code>. Defaults to 0 (that is, this stopping criterion is disabled by default).</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the <code class="docutils literal"><span class="pre">ftol_abs</span></code> stopping criterion for this <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt12set_ftol_absEd">
-<span id="pagmo::nlopt::set_ftol_abs__double"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1af4af76a5ede204bc6ddbe3a31f02b11d"></span>void <code class="descname">set_ftol_abs</code><span class="sig-paren">(</span>double <em>ftol_abs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt12set_ftol_absEd" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the <code class="docutils literal"><span class="pre">ftol_abs</span></code> stopping criterion. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">ftol_abs</span></code>: the desired value for the <code class="docutils literal"><span class="pre">ftol_abs</span></code> stopping criterion (see <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1aad1aaf9968e5796f5a9ee0a8b5cc201c"><span class="std std-ref">get_ftol_abs()</span></a>).</li>
-</ul>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt11set_stopvalEd">
+<span id="_CPPv3N5pagmo5nlopt11set_stopvalEd"></span><span id="_CPPv2N5pagmo5nlopt11set_stopvalEd"></span><span id="pagmo::nlopt::set_stopval__double"></span><span class="target" id="classpagmo_1_1nlopt_1af54f17405cfc7e0ae8f2a4909f1d55de"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_stopval</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt11set_stopvalEd" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set the <code class="docutils literal notranslate"><span class="pre">stopval</span></code> stopping criterion. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>stopval</strong> – the desired value for the <code class="docutils literal notranslate"><span class="pre">stopval</span></code> stopping criterion (see <a class="reference internal" href="#classpagmo_1_1nlopt_1a6f785fc91ac867a6c9653f286185c077"><span class="std std-ref">get_stopval()</span></a>).</p>
 </dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if <code class="docutils literal"><span class="pre">ftol_abs</span></code> is NaN. </li>
-</ul>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if <code class="docutils literal notranslate"><span class="pre">stopval</span></code> is NaN. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt12get_xtol_relEv">
-<span id="pagmo::nlopt::get_xtol_relC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a9bbe3d1fbaa1dc7fc03590afcea4fd51"></span>double <code class="descname">get_xtol_rel</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt12get_xtol_relEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the <code class="docutils literal"><span class="pre">xtol_rel</span></code> stopping criterion. </p>
-<p>The <code class="docutils literal"><span class="pre">xtol_rel</span></code> stopping criterion instructs the solver to stop when an optimization step (or an estimate of the optimum) changes every parameter by less than <code class="docutils literal"><span class="pre">xtol_rel</span></code> multiplied by the absolute value of the parameter. Defaults to 1E-8.</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the <code class="docutils literal"><span class="pre">xtol_rel</span></code> stopping criterion for this <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt12set_xtol_relEd">
-<span id="pagmo::nlopt::set_xtol_rel__double"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a0375192cf40f996e80183a41e923dd73"></span>void <code class="descname">set_xtol_rel</code><span class="sig-paren">(</span>double <em>xtol_rel</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt12set_xtol_relEd" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the <code class="docutils literal"><span class="pre">xtol_rel</span></code> stopping criterion. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">xtol_rel</span></code>: the desired value for the <code class="docutils literal"><span class="pre">xtol_rel</span></code> stopping criterion (see <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1a9bbe3d1fbaa1dc7fc03590afcea4fd51"><span class="std std-ref">get_xtol_rel()</span></a>).</li>
-</ul>
-</dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if <code class="docutils literal"><span class="pre">xtol_rel</span></code> is NaN. </li>
-</ul>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt12get_ftol_relEv">
+<span id="_CPPv3NK5pagmo5nlopt12get_ftol_relEv"></span><span id="_CPPv2NK5pagmo5nlopt12get_ftol_relEv"></span><span id="pagmo::nlopt::get_ftol_relC"></span><span class="target" id="classpagmo_1_1nlopt_1aee5e90b962030e692bd7a5afd7e58615"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_ftol_rel</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt12get_ftol_relEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">ftol_rel</span></code> stopping criterion. </p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ftol_rel</span></code> stopping criterion instructs the solver to stop when an optimization step (or an estimate of the optimum) changes the objective function value by less than <code class="docutils literal notranslate"><span class="pre">ftol_rel</span></code> multiplied by the absolute value of the function value. Defaults to 0 (that is, this stopping criterion is disabled by default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the <code class="docutils literal notranslate"><span class="pre">ftol_rel</span></code> stopping criterion for this <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt12get_xtol_absEv">
-<span id="pagmo::nlopt::get_xtol_absC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1ab3e02681606d4e8c1e7938bcf6ea324d"></span>double <code class="descname">get_xtol_abs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt12get_xtol_absEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the <code class="docutils literal"><span class="pre">xtol_abs</span></code> stopping criterion. </p>
-<p>The <code class="docutils literal"><span class="pre">xtol_abs</span></code> stopping criterion instructs the solver to stop when an optimization step (or an estimate of the optimum) changes every parameter by less than <code class="docutils literal"><span class="pre">xtol_abs</span></code>. Defaults to 0 (that is, this stopping criterion is disabled by default).</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the <code class="docutils literal"><span class="pre">xtol_abs</span></code> stopping criterion for this <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt12set_xtol_absEd">
-<span id="pagmo::nlopt::set_xtol_abs__double"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1ace5ffd5d15598a244410e3571f80d14c"></span>void <code class="descname">set_xtol_abs</code><span class="sig-paren">(</span>double <em>xtol_abs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt12set_xtol_absEd" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the <code class="docutils literal"><span class="pre">xtol_abs</span></code> stopping criterion. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">xtol_abs</span></code>: the desired value for the <code class="docutils literal"><span class="pre">xtol_abs</span></code> stopping criterion (see <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1ab3e02681606d4e8c1e7938bcf6ea324d"><span class="std std-ref">get_xtol_abs()</span></a>).</li>
-</ul>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt12set_ftol_relEd">
+<span id="_CPPv3N5pagmo5nlopt12set_ftol_relEd"></span><span id="_CPPv2N5pagmo5nlopt12set_ftol_relEd"></span><span id="pagmo::nlopt::set_ftol_rel__double"></span><span class="target" id="classpagmo_1_1nlopt_1a397aed96754684fd459ed386b1169298"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_ftol_rel</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt12set_ftol_relEd" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set the <code class="docutils literal notranslate"><span class="pre">ftol_rel</span></code> stopping criterion. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ftol_rel</strong> – the desired value for the <code class="docutils literal notranslate"><span class="pre">ftol_rel</span></code> stopping criterion (see <a class="reference internal" href="#classpagmo_1_1nlopt_1aee5e90b962030e692bd7a5afd7e58615"><span class="std std-ref">get_ftol_rel()</span></a>).</p>
 </dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if <code class="docutils literal"><span class="pre">xtol_abs</span></code> is NaN. </li>
-</ul>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if <code class="docutils literal notranslate"><span class="pre">ftol_rel</span></code> is NaN. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt11get_maxevalEv">
-<span id="pagmo::nlopt::get_maxevalC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1af16b68ecaded3050574d11a1e94a9e89"></span>int <code class="descname">get_maxeval</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt11get_maxevalEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the <code class="docutils literal"><span class="pre">maxeval</span></code> stopping criterion. </p>
-<p>The <code class="docutils literal"><span class="pre">maxeval</span></code> stopping criterion instructs the solver to stop when the number of function evaluations exceeds <code class="docutils literal"><span class="pre">maxeval</span></code>. Defaults to 0 (that is, this stopping criterion is disabled by default).</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the <code class="docutils literal"><span class="pre">maxeval</span></code> stopping criterion for this <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt11set_maxevalEi">
-<span id="pagmo::nlopt::set_maxeval__i"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1ae635aefed9892a1d6cc425c7bae97836"></span>void <code class="descname">set_maxeval</code><span class="sig-paren">(</span>int <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt11set_maxevalEi" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the <code class="docutils literal"><span class="pre">maxeval</span></code> stopping criterion. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">n</span></code>: the desired value for the <code class="docutils literal"><span class="pre">maxeval</span></code> stopping criterion (see <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1af16b68ecaded3050574d11a1e94a9e89"><span class="std std-ref">get_maxeval()</span></a>). </li>
-</ul>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt12get_ftol_absEv">
+<span id="_CPPv3NK5pagmo5nlopt12get_ftol_absEv"></span><span id="_CPPv2NK5pagmo5nlopt12get_ftol_absEv"></span><span id="pagmo::nlopt::get_ftol_absC"></span><span class="target" id="classpagmo_1_1nlopt_1aad1aaf9968e5796f5a9ee0a8b5cc201c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_ftol_abs</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt12get_ftol_absEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">ftol_abs</span></code> stopping criterion. </p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ftol_abs</span></code> stopping criterion instructs the solver to stop when an optimization step (or an estimate of the optimum) changes the function value by less than <code class="docutils literal notranslate"><span class="pre">ftol_abs</span></code>. Defaults to 0 (that is, this stopping criterion is disabled by default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the <code class="docutils literal notranslate"><span class="pre">ftol_abs</span></code> stopping criterion for this <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt11get_maxtimeEv">
-<span id="pagmo::nlopt::get_maxtimeC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a390ad95ad30162b91c79bfc8bf14e28c"></span>int <code class="descname">get_maxtime</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt11get_maxtimeEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the <code class="docutils literal"><span class="pre">maxtime</span></code> stopping criterion. </p>
-<p>The <code class="docutils literal"><span class="pre">maxtime</span></code> stopping criterion instructs the solver to stop when the optimization time (in seconds) exceeds <code class="docutils literal"><span class="pre">maxtime</span></code>. Defaults to 0 (that is, this stopping criterion is disabled by default).</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the <code class="docutils literal"><span class="pre">maxtime</span></code> stopping criterion for this <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt11set_maxtimeEi">
-<span id="pagmo::nlopt::set_maxtime__i"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a436d213f960616870724cbf5cfeaa095"></span>void <code class="descname">set_maxtime</code><span class="sig-paren">(</span>int <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt11set_maxtimeEi" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the <code class="docutils literal"><span class="pre">maxtime</span></code> stopping criterion. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">n</span></code>: the desired value for the <code class="docutils literal"><span class="pre">maxtime</span></code> stopping criterion (see <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1a390ad95ad30162b91c79bfc8bf14e28c"><span class="std std-ref">get_maxtime()</span></a>). </li>
-</ul>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt12set_ftol_absEd">
+<span id="_CPPv3N5pagmo5nlopt12set_ftol_absEd"></span><span id="_CPPv2N5pagmo5nlopt12set_ftol_absEd"></span><span id="pagmo::nlopt::set_ftol_abs__double"></span><span class="target" id="classpagmo_1_1nlopt_1a642ced01fafffdb814ca62bd1fa58faf"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_ftol_abs</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt12set_ftol_absEd" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set the <code class="docutils literal notranslate"><span class="pre">ftol_abs</span></code> stopping criterion. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ftol_abs</strong> – the desired value for the <code class="docutils literal notranslate"><span class="pre">ftol_abs</span></code> stopping criterion (see <a class="reference internal" href="#classpagmo_1_1nlopt_1aad1aaf9968e5796f5a9ee0a8b5cc201c"><span class="std std-ref">get_ftol_abs()</span></a>).</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if <code class="docutils literal notranslate"><span class="pre">ftol_abs</span></code> is NaN. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt19set_local_optimizerE5nlopt">
-<span id="pagmo::nlopt::set_local_optimizer__nlopt"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1ab86c27d160a902c25e5f95757d2c76c6"></span>void <code class="descname">set_local_optimizer</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N5pagmo5nloptE" title="pagmo::nlopt">nlopt</a> <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt19set_local_optimizerE5nlopt" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt12get_xtol_relEv">
+<span id="_CPPv3NK5pagmo5nlopt12get_xtol_relEv"></span><span id="_CPPv2NK5pagmo5nlopt12get_xtol_relEv"></span><span id="pagmo::nlopt::get_xtol_relC"></span><span class="target" id="classpagmo_1_1nlopt_1a9bbe3d1fbaa1dc7fc03590afcea4fd51"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_xtol_rel</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt12get_xtol_relEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">xtol_rel</span></code> stopping criterion. </p>
+<p>The <code class="docutils literal notranslate"><span class="pre">xtol_rel</span></code> stopping criterion instructs the solver to stop when an optimization step (or an estimate of the optimum) changes every parameter by less than <code class="docutils literal notranslate"><span class="pre">xtol_rel</span></code> multiplied by the absolute value of the parameter. Defaults to 1E-8.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the <code class="docutils literal notranslate"><span class="pre">xtol_rel</span></code> stopping criterion for this <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt12set_xtol_relEd">
+<span id="_CPPv3N5pagmo5nlopt12set_xtol_relEd"></span><span id="_CPPv2N5pagmo5nlopt12set_xtol_relEd"></span><span id="pagmo::nlopt::set_xtol_rel__double"></span><span class="target" id="classpagmo_1_1nlopt_1a6e7059724cfaca078a3b48ccce883eca"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_xtol_rel</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt12set_xtol_relEd" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set the <code class="docutils literal notranslate"><span class="pre">xtol_rel</span></code> stopping criterion. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>xtol_rel</strong> – the desired value for the <code class="docutils literal notranslate"><span class="pre">xtol_rel</span></code> stopping criterion (see <a class="reference internal" href="#classpagmo_1_1nlopt_1a9bbe3d1fbaa1dc7fc03590afcea4fd51"><span class="std std-ref">get_xtol_rel()</span></a>).</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if <code class="docutils literal notranslate"><span class="pre">xtol_rel</span></code> is NaN. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt12get_xtol_absEv">
+<span id="_CPPv3NK5pagmo5nlopt12get_xtol_absEv"></span><span id="_CPPv2NK5pagmo5nlopt12get_xtol_absEv"></span><span id="pagmo::nlopt::get_xtol_absC"></span><span class="target" id="classpagmo_1_1nlopt_1ab3e02681606d4e8c1e7938bcf6ea324d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_xtol_abs</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt12get_xtol_absEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">xtol_abs</span></code> stopping criterion. </p>
+<p>The <code class="docutils literal notranslate"><span class="pre">xtol_abs</span></code> stopping criterion instructs the solver to stop when an optimization step (or an estimate of the optimum) changes every parameter by less than <code class="docutils literal notranslate"><span class="pre">xtol_abs</span></code>. Defaults to 0 (that is, this stopping criterion is disabled by default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the <code class="docutils literal notranslate"><span class="pre">xtol_abs</span></code> stopping criterion for this <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt12set_xtol_absEd">
+<span id="_CPPv3N5pagmo5nlopt12set_xtol_absEd"></span><span id="_CPPv2N5pagmo5nlopt12set_xtol_absEd"></span><span id="pagmo::nlopt::set_xtol_abs__double"></span><span class="target" id="classpagmo_1_1nlopt_1a08bd3e34a31cf66c453735b2c58a60e4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_xtol_abs</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt12set_xtol_absEd" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set the <code class="docutils literal notranslate"><span class="pre">xtol_abs</span></code> stopping criterion. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>xtol_abs</strong> – the desired value for the <code class="docutils literal notranslate"><span class="pre">xtol_abs</span></code> stopping criterion (see <a class="reference internal" href="#classpagmo_1_1nlopt_1ab3e02681606d4e8c1e7938bcf6ea324d"><span class="std std-ref">get_xtol_abs()</span></a>).</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if <code class="docutils literal notranslate"><span class="pre">xtol_abs</span></code> is NaN. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt11get_maxevalEv">
+<span id="_CPPv3NK5pagmo5nlopt11get_maxevalEv"></span><span id="_CPPv2NK5pagmo5nlopt11get_maxevalEv"></span><span id="pagmo::nlopt::get_maxevalC"></span><span class="target" id="classpagmo_1_1nlopt_1af16b68ecaded3050574d11a1e94a9e89"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_maxeval</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt11get_maxevalEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">maxeval</span></code> stopping criterion. </p>
+<p>The <code class="docutils literal notranslate"><span class="pre">maxeval</span></code> stopping criterion instructs the solver to stop when the number of function evaluations exceeds <code class="docutils literal notranslate"><span class="pre">maxeval</span></code>. Defaults to 0 (that is, this stopping criterion is disabled by default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the <code class="docutils literal notranslate"><span class="pre">maxeval</span></code> stopping criterion for this <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt11set_maxevalEi">
+<span id="_CPPv3N5pagmo5nlopt11set_maxevalEi"></span><span id="_CPPv2N5pagmo5nlopt11set_maxevalEi"></span><span id="pagmo::nlopt::set_maxeval__i"></span><span class="target" id="classpagmo_1_1nlopt_1ae635aefed9892a1d6cc425c7bae97836"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_maxeval</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt11set_maxevalEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set the <code class="docutils literal notranslate"><span class="pre">maxeval</span></code> stopping criterion. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – the desired value for the <code class="docutils literal notranslate"><span class="pre">maxeval</span></code> stopping criterion (see <a class="reference internal" href="#classpagmo_1_1nlopt_1af16b68ecaded3050574d11a1e94a9e89"><span class="std std-ref">get_maxeval()</span></a>). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt11get_maxtimeEv">
+<span id="_CPPv3NK5pagmo5nlopt11get_maxtimeEv"></span><span id="_CPPv2NK5pagmo5nlopt11get_maxtimeEv"></span><span id="pagmo::nlopt::get_maxtimeC"></span><span class="target" id="classpagmo_1_1nlopt_1a390ad95ad30162b91c79bfc8bf14e28c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_maxtime</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt11get_maxtimeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">maxtime</span></code> stopping criterion. </p>
+<p>The <code class="docutils literal notranslate"><span class="pre">maxtime</span></code> stopping criterion instructs the solver to stop when the optimization time (in seconds) exceeds <code class="docutils literal notranslate"><span class="pre">maxtime</span></code>. Defaults to 0 (that is, this stopping criterion is disabled by default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the <code class="docutils literal notranslate"><span class="pre">maxtime</span></code> stopping criterion for this <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt11set_maxtimeEi">
+<span id="_CPPv3N5pagmo5nlopt11set_maxtimeEi"></span><span id="_CPPv2N5pagmo5nlopt11set_maxtimeEi"></span><span id="pagmo::nlopt::set_maxtime__i"></span><span class="target" id="classpagmo_1_1nlopt_1a436d213f960616870724cbf5cfeaa095"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_maxtime</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt11set_maxtimeEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set the <code class="docutils literal notranslate"><span class="pre">maxtime</span></code> stopping criterion. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – the desired value for the <code class="docutils literal notranslate"><span class="pre">maxtime</span></code> stopping criterion (see <a class="reference internal" href="#classpagmo_1_1nlopt_1a390ad95ad30162b91c79bfc8bf14e28c"><span class="std std-ref">get_maxtime()</span></a>). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt19set_local_optimizerE5nlopt">
+<span id="_CPPv3N5pagmo5nlopt19set_local_optimizerE5nlopt"></span><span id="_CPPv2N5pagmo5nlopt19set_local_optimizerE5nlopt"></span><span id="pagmo::nlopt::set_local_optimizer__nlopt"></span><span class="target" id="classpagmo_1_1nlopt_1a3960c1caca35a15f1a827735561cf7b6"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_local_optimizer</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5pagmo5nloptE" title="pagmo::nlopt"><span class="n"><span class="pre">nlopt</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt19set_local_optimizerE5nlopt" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set the local optimizer. </p>
 <p>Some NLopt algorithms rely on other NLopt algorithms as local/subsidiary optimizers. This method allows to set such local optimizer. By default, no local optimizer is specified.</p>
-<p><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">At the present time, only the <code class="docutils literal"><span class="pre">&quot;auglag&quot;</span></code> and <code class="docutils literal"><span class="pre">&quot;auglag_eq&quot;</span></code> solvers make use
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>At the present time, only the <code class="docutils literal notranslate"><span class="pre">&quot;auglag&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;auglag_eq&quot;</span></code> solvers make use
 of a local optimizer. Setting a local optimizer on any other solver will have no effect.</p>
 </div>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The objective function, bounds, and nonlinear-constraint parameters of the local
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The objective function, bounds, and nonlinear-constraint parameters of the local
 optimizer are ignored (as they are provided by the parent optimizer). Conversely, the stopping
 criteria should be specified in the local optimizer. The verbosity of
 the local optimizer is also forcibly set to zero during the optimisation.</p>
 </div>
-</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">n</span></code>: the local optimizer that will be used by this <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a> algorithm. </li>
-</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – the local optimizer that will be used by this <a class="reference internal" href="#classpagmo_1_1nlopt"><span class="std std-ref">pagmo::nlopt</span></a> algorithm. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5nlopt19get_local_optimizerEv">
-<span id="pagmo::nlopt::get_local_optimizerC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1ad590dda8dee32d984479635c7874442d"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5pagmo5nloptE" title="pagmo::nlopt">nlopt</a> *<code class="descname">get_local_optimizer</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt19get_local_optimizerEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt19get_local_optimizerEv">
+<span id="_CPPv3NK5pagmo5nlopt19get_local_optimizerEv"></span><span id="_CPPv2NK5pagmo5nlopt19get_local_optimizerEv"></span><span id="pagmo::nlopt::get_local_optimizerC"></span><span class="target" id="classpagmo_1_1nlopt_1ac6750cadeb52060e0e15fd94fdc19438"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo5nloptE" title="pagmo::nlopt"><span class="n"><span class="pre">nlopt</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_local_optimizer</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt19get_local_optimizerEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get the local optimizer. </p>
-<p>This method returns a raw const pointer to the local optimizer, if it has been set via <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1ab86c27d160a902c25e5f95757d2c76c6"><span class="std std-ref">set_local_optimizer()</span></a>. Otherwise, <code class="docutils literal"><span class="pre">nullptr</span></code> will be returned.</p>
-<p><div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The returned value is a raw non-owning pointer: the lifetime of the pointee is tied to the lifetime
-of <code class="docutils literal"><span class="pre">this</span></code>, and <code class="docutils literal"><span class="pre">delete</span></code> must never be called on the pointer.</p>
+<p>This method returns a raw const pointer to the local optimizer, if it has been set via <a class="reference internal" href="#classpagmo_1_1nlopt_1a3960c1caca35a15f1a827735561cf7b6"><span class="std std-ref">set_local_optimizer()</span></a>. Otherwise, <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> will be returned.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The returned value is a raw non-owning pointer: the lifetime of the pointee is tied to the lifetime
+of <code class="docutils literal notranslate"><span class="pre">this</span></code>, and <code class="docutils literal notranslate"><span class="pre">delete</span></code> must never be called on the pointer.</p>
 </div>
-</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a const pointer to the local optimizer. </dd>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a const pointer to the local optimizer. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt19get_local_optimizerEv">
-<span id="pagmo::nlopt::get_local_optimizer"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a705357b0c3e1b1f22ba061069ec84253"></span><a class="reference internal" href="#_CPPv2N5pagmo5nloptE" title="pagmo::nlopt">nlopt</a> *<code class="descname">get_local_optimizer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt19get_local_optimizerEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt19get_local_optimizerEv">
+<span id="_CPPv3N5pagmo5nlopt19get_local_optimizerEv"></span><span id="_CPPv2N5pagmo5nlopt19get_local_optimizerEv"></span><span id="pagmo::nlopt::get_local_optimizer"></span><span class="target" id="classpagmo_1_1nlopt_1a7c812681598b8784b3e1b26700719c09"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo5nloptE" title="pagmo::nlopt"><span class="n"><span class="pre">nlopt</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_local_optimizer</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt19get_local_optimizerEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get the local optimizer. </p>
-<p>This method returns a raw pointer to the local optimizer, if it has been set via <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1ab86c27d160a902c25e5f95757d2c76c6"><span class="std std-ref">set_local_optimizer()</span></a>. Otherwise, <code class="docutils literal"><span class="pre">nullptr</span></code> will be returned.</p>
-<p><div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The returned value is a raw non-owning pointer: the lifetime of the pointee is tied to the lifetime
-of <code class="docutils literal"><span class="pre">this</span></code>, and <code class="docutils literal"><span class="pre">delete</span></code> must never be called on the pointer.</p>
+<p>This method returns a raw pointer to the local optimizer, if it has been set via <a class="reference internal" href="#classpagmo_1_1nlopt_1a3960c1caca35a15f1a827735561cf7b6"><span class="std std-ref">set_local_optimizer()</span></a>. Otherwise, <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> will be returned.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The returned value is a raw non-owning pointer: the lifetime of the pointee is tied to the lifetime
+of <code class="docutils literal notranslate"><span class="pre">this</span></code>, and <code class="docutils literal notranslate"><span class="pre">delete</span></code> must never be called on the pointer.</p>
 </div>
-</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a pointer to the local optimizer. </dd>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ability to extract a mutable pointer is provided only in order to allow to call non-const
+methods on the local optimizer. Assigning a new local optimizer via this pointer is undefined behaviour.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a pointer to the local optimizer. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5nlopt21unset_local_optimizerEv">
-<span id="pagmo::nlopt::unset_local_optimizer"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1aa15446e239e81b9f6736448ac7f42c56"></span>void <code class="descname">unset_local_optimizer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt21unset_local_optimizerEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt21unset_local_optimizerEv">
+<span id="_CPPv3N5pagmo5nlopt21unset_local_optimizerEv"></span><span id="_CPPv2N5pagmo5nlopt21unset_local_optimizerEv"></span><span id="pagmo::nlopt::unset_local_optimizer"></span><span class="target" id="classpagmo_1_1nlopt_1aa15446e239e81b9f6736448ac7f42c56"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unset_local_optimizer</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt21unset_local_optimizerEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Unset the local optimizer. </p>
-<p>After a call to this method, <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1a705357b0c3e1b1f22ba061069ec84253"><span class="std std-ref">get_local_optimizer()</span></a> and <a class="reference internal" href="#pagmoclasspagmo_1_1nlopt_1ad590dda8dee32d984479635c7874442d"><span class="std std-ref">get_local_optimizer() const </span></a>will return <code class="docutils literal"><span class="pre">nullptr</span></code>. </p>
+<p>After a call to this method, <a class="reference internal" href="#classpagmo_1_1nlopt_1a7c812681598b8784b3e1b26700719c09"><span class="std std-ref">get_local_optimizer()</span></a> and <a class="reference internal" href="#classpagmo_1_1nlopt_1ac6750cadeb52060e0e15fd94fdc19438"><span class="std std-ref">get_local_optimizer() const </span></a>will return <code class="docutils literal notranslate"><span class="pre">nullptr</span></code>. </p>
 </dd></dl>
 
-<dl class="function">
-<dt>
-<em class="property">template </em>&lt;<em class="property">typename</em> Archive&gt;</dt>
-<dt id="_CPPv2NK5pagmo5nlopt4saveER7Archive">
-<span id="pagmo::nlopt::save__ArchiveRC"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1ab32a8c6a3ddbe92f8ce55d9422da01b3"></span>void <code class="descname">save</code><span class="sig-paren">(</span>Archive &amp;<em>ar</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5nlopt4saveER7Archive" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Save to archive. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">ar</span></code>: the target archive.</li>
-</ul>
-</dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">unspecified</span></code>: any exception thrown by the serialization of primitive types or <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based"><span class="std std-ref">pagmo::not_population_based</span></a>. </li>
-</ul>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt18set_random_sr_seedEj">
+<span id="_CPPv3N5pagmo5nlopt18set_random_sr_seedEj"></span><span id="_CPPv2N5pagmo5nlopt18set_random_sr_seedEj"></span><span id="pagmo::nlopt::set_random_sr_seed__unsigned"></span><span class="target" id="classpagmo_1_1not__population__based_1ac8cb01a8cce5a99de6d01dea185567cf"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_random_sr_seed</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt18set_random_sr_seedEj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set the seed for the <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code> selection/replacement policies. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seed</strong> – the value that will be used to seed the random number generator used by the <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code> selection/replacement policies. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt>
-<em class="property">template </em>&lt;<em class="property">typename</em> Archive&gt;</dt>
-<dt id="_CPPv2N5pagmo5nlopt4loadER7Archive">
-<span id="pagmo::nlopt::load__ArchiveR"></span><span class="target" id="pagmoclasspagmo_1_1nlopt_1a81c25e0e91e686bda95b6ab6cd9d778c"></span>void <code class="descname">load</code><span class="sig-paren">(</span>Archive &amp;<em>ar</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5nlopt4loadER7Archive" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Load from archive. </p>
-<p>In case of exceptions, <code class="docutils literal"><span class="pre">this</span></code> will be reset to a default-constructed state.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">ar</span></code>: the source archive.</li>
-</ul>
-</dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">unspecified</span></code>: any exception thrown by the deserialization of primitive types or <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based"><span class="std std-ref">pagmo::not_population_based</span></a>. </li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5pagmo20not_population_based18set_random_sr_seedEj">
-<span id="pagmo::not_population_based::set_random_sr_seed__unsigned"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1a43c196b3254e6d0ecb49a200d8e5cc17"></span>void <code class="descname">set_random_sr_seed</code><span class="sig-paren">(</span>unsigned <em>seed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo20not_population_based18set_random_sr_seedEj" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the seed for the <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code> selection/replacement policies. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">seed</span></code>: the value that will be used to seed the random number generator used by the <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code> selection/replacement policies. </li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5pagmo20not_population_based13set_selectionERKNSt6stringE">
-<span id="pagmo::not_population_based::set_selection__ssCR"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1ad049600ad72f5aaf61dab52ea95cd6d9"></span>void <code class="descname">set_selection</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>select</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo20not_population_based13set_selectionERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt13set_selectionERKNSt6stringE">
+<span id="_CPPv3N5pagmo5nlopt13set_selectionERKNSt6stringE"></span><span id="_CPPv2N5pagmo5nlopt13set_selectionERKNSt6stringE"></span><span id="pagmo::nlopt::set_selection__ssCR"></span><span class="target" id="classpagmo_1_1not__population__based_1a918f089d9cc1a251005b9af0d209f2d4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_selection</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt13set_selectionERKNSt6stringE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set the individual selection policy. </p>
-<p>This method will set the policy that is used to select the individual that will be optimised when calling the <code class="docutils literal"><span class="pre">evolve()</span></code> method of the algorithm.</p>
-<p>The input string must be one of <code class="docutils literal"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;worst&quot;</span></code> and <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code>:<ul class="simple">
-<li><code class="docutils literal"><span class="pre">&quot;best&quot;</span></code> will select the best individual in the population,</li>
-<li><code class="docutils literal"><span class="pre">&quot;worst&quot;</span></code> will select the worst individual in the population,</li>
-<li><code class="docutils literal"><span class="pre">&quot;random&quot;</span></code> will randomly choose one individual in the population.</li>
+<p>This method will set the policy that is used to select the individual that will be optimised when calling the <code class="docutils literal notranslate"><span class="pre">evolve()</span></code> method of the algorithm.</p>
+<p>The input string must be one of <code class="docutils literal notranslate"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;worst&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code>:<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;best&quot;</span></code> will select the best individual in the population,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;worst&quot;</span></code> will select the worst individual in the population,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code> will randomly choose one individual in the population.</p></li>
 </ul>
 </p>
-<p><a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a43c196b3254e6d0ecb49a200d8e5cc17"><span class="std std-ref">set_random_sr_seed()</span></a> can be used to seed the random number generator used by the <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code> policy.</p>
-<p>Instead of a selection policy, a specific individual in the population can be selected via <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">select</span></code>: the selection policy.</li>
-</ul>
+<p><a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ac8cb01a8cce5a99de6d01dea185567cf"><span class="std std-ref">set_random_sr_seed()</span></a> can be used to seed the random number generator used by the <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code> policy.</p>
+<p>Instead of a selection policy, a specific individual in the population can be selected via <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>select</strong> – the selection policy.</p>
 </dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if <code class="docutils literal"><span class="pre">select</span></code> is not one of <code class="docutils literal"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;worst&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code>. </li>
-</ul>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if <code class="docutils literal notranslate"><span class="pre">select</span></code> is not one of <code class="docutils literal notranslate"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;worst&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code>. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo20not_population_based13set_selectionEN10population9size_typeE">
-<span id="pagmo::not_population_based::set_selection__population::size_type"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"></span>void <code class="descname">set_selection</code><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv2N5pagmo10populationE" title="pagmo::population">population</a>::<a class="reference internal" href="../population.html#_CPPv2N5pagmo10population9size_typeE" title="pagmo::population::size_type">size_type</a> <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo20not_population_based13set_selectionEN10population9size_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt13set_selectionEN10population9size_typeE">
+<span id="_CPPv3N5pagmo5nlopt13set_selectionEN10population9size_typeE"></span><span id="_CPPv2N5pagmo5nlopt13set_selectionEN10population9size_typeE"></span><span id="pagmo::nlopt::set_selection__population::size_type"></span><span class="target" id="classpagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_selection</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10populationE" title="pagmo::population"><span class="n"><span class="pre">population</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10population9size_typeE" title="pagmo::population::size_type"><span class="n"><span class="pre">size_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt13set_selectionEN10population9size_typeE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set the individual selection index. </p>
-<p>This method will set the index of the individual that is selected for optimisation in the <code class="docutils literal"><span class="pre">evolve()</span></code> method of the algorithm.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">n</span></code>: the index in the population of the individual to be selected for optimisation. </li>
-</ul>
+<p>This method will set the index of the individual that is selected for optimisation in the <code class="docutils literal notranslate"><span class="pre">evolve()</span></code> method of the algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – the index in the population of the individual to be selected for optimisation. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo20not_population_based13get_selectionEv">
-<span id="pagmo::not_population_based::get_selectionC"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1a15516c323e4c8c093eb076eb0da5b026"></span>boost::any <code class="descname">get_selection</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo20not_population_based13get_selectionEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt13get_selectionEv">
+<span id="_CPPv3NK5pagmo5nlopt13get_selectionEv"></span><span id="_CPPv2NK5pagmo5nlopt13get_selectionEv"></span><span id="pagmo::nlopt::get_selectionC"></span><span class="target" id="classpagmo_1_1not__population__based_1a15516c323e4c8c093eb076eb0da5b026"></span><span class="n"><span class="pre">boost</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">any</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_selection</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt13get_selectionEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get the individual selection policy or index. </p>
-<p>This method will return a <code class="docutils literal"><span class="pre">boost::any</span></code> containing either the individual selection policy (as an <code class="docutils literal"><span class="pre">std::string</span></code>) or the individual selection index (as a <a class="reference internal" href="../population.html#pagmoclasspagmo_1_1population_1a78bf280404ba0555cd7320e8431a587e"><span class="std std-ref">population::size_type</span></a>). The selection policy or index is set via <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1ad049600ad72f5aaf61dab52ea95cd6d9"><span class="std std-ref">set_selection(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the individual selection policy or index. </dd>
+<p>This method will return a <code class="docutils literal notranslate"><span class="pre">boost::any</span></code> containing either the individual selection policy (as an <code class="docutils literal notranslate"><span class="pre">std::string</span></code>) or the individual selection index (as a <a class="reference internal" href="../population.html#classpagmo_1_1population_1a6eb52f7d48a0cfd0ce37956139a3a862"><span class="std std-ref">population::size_type</span></a>). The selection policy or index is set via <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a918f089d9cc1a251005b9af0d209f2d4"><span class="std std-ref">set_selection(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the individual selection policy or index. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo20not_population_based15set_replacementERKNSt6stringE">
-<span id="pagmo::not_population_based::set_replacement__ssCR"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1acb03d2e2a6b68982eeb340f8cdd4eef7"></span>void <code class="descname">set_replacement</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>replace</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo20not_population_based15set_replacementERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt15set_replacementERKNSt6stringE">
+<span id="_CPPv3N5pagmo5nlopt15set_replacementERKNSt6stringE"></span><span id="_CPPv2N5pagmo5nlopt15set_replacementERKNSt6stringE"></span><span id="pagmo::nlopt::set_replacement__ssCR"></span><span class="target" id="classpagmo_1_1not__population__based_1ac308e8d059b0f3c3ef901607b49f2a48"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_replacement</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt15set_replacementERKNSt6stringE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set the individual replacement policy. </p>
-<p>This method will set the policy that is used in the <code class="docutils literal"><span class="pre">evolve()</span></code> method of the algorithm to select the individual that will be replaced by the optimised individual.</p>
-<p>The input string must be one of <code class="docutils literal"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;worst&quot;</span></code> and <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code>:<ul class="simple">
-<li><code class="docutils literal"><span class="pre">&quot;best&quot;</span></code> will select the best individual in the population,</li>
-<li><code class="docutils literal"><span class="pre">&quot;worst&quot;</span></code> will select the worst individual in the population,</li>
-<li><code class="docutils literal"><span class="pre">&quot;random&quot;</span></code> will randomly choose one individual in the population.</li>
+<p>This method will set the policy that is used in the <code class="docutils literal notranslate"><span class="pre">evolve()</span></code> method of the algorithm to select the individual that will be replaced by the optimised individual.</p>
+<p>The input string must be one of <code class="docutils literal notranslate"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;worst&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code>:<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;best&quot;</span></code> will select the best individual in the population,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;worst&quot;</span></code> will select the worst individual in the population,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code> will randomly choose one individual in the population.</p></li>
 </ul>
 </p>
-<p><a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a43c196b3254e6d0ecb49a200d8e5cc17"><span class="std std-ref">set_random_sr_seed()</span></a> can be used to seed the random number generator used by the <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code> policy.</p>
-<p>Instead of a replacement policy, a specific individual in the population can be selected via <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">replace</span></code>: the replacement policy.</li>
-</ul>
+<p><a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ac8cb01a8cce5a99de6d01dea185567cf"><span class="std std-ref">set_random_sr_seed()</span></a> can be used to seed the random number generator used by the <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code> policy.</p>
+<p>Instead of a replacement policy, a specific individual in the population can be selected via <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>replace</strong> – the replacement policy.</p>
 </dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if <code class="docutils literal"><span class="pre">replace</span></code> is not one of <code class="docutils literal"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;worst&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code>. </li>
-</ul>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if <code class="docutils literal notranslate"><span class="pre">replace</span></code> is not one of <code class="docutils literal notranslate"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;worst&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code>. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo20not_population_based15set_replacementEN10population9size_typeE">
-<span id="pagmo::not_population_based::set_replacement__population::size_type"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"></span>void <code class="descname">set_replacement</code><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv2N5pagmo10populationE" title="pagmo::population">population</a>::<a class="reference internal" href="../population.html#_CPPv2N5pagmo10population9size_typeE" title="pagmo::population::size_type">size_type</a> <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo20not_population_based15set_replacementEN10population9size_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5nlopt15set_replacementEN10population9size_typeE">
+<span id="_CPPv3N5pagmo5nlopt15set_replacementEN10population9size_typeE"></span><span id="_CPPv2N5pagmo5nlopt15set_replacementEN10population9size_typeE"></span><span id="pagmo::nlopt::set_replacement__population::size_type"></span><span class="target" id="classpagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_replacement</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10populationE" title="pagmo::population"><span class="n"><span class="pre">population</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10population9size_typeE" title="pagmo::population::size_type"><span class="n"><span class="pre">size_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5nlopt15set_replacementEN10population9size_typeE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set the individual replacement index. </p>
-<p>This method will set the index of the individual that is replaced after the optimisation in the <code class="docutils literal"><span class="pre">evolve()</span></code> method of the algorithm.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">n</span></code>: the index in the population of the individual to be replaced after the optimisation. </li>
-</ul>
+<p>This method will set the index of the individual that is replaced after the optimisation in the <code class="docutils literal notranslate"><span class="pre">evolve()</span></code> method of the algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – the index in the population of the individual to be replaced after the optimisation. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo20not_population_based15get_replacementEv">
-<span id="pagmo::not_population_based::get_replacementC"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1a74c7d941a9b9a317374a9a77a200c255"></span>boost::any <code class="descname">get_replacement</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo20not_population_based15get_replacementEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5nlopt15get_replacementEv">
+<span id="_CPPv3NK5pagmo5nlopt15get_replacementEv"></span><span id="_CPPv2NK5pagmo5nlopt15get_replacementEv"></span><span id="pagmo::nlopt::get_replacementC"></span><span class="target" id="classpagmo_1_1not__population__based_1a74c7d941a9b9a317374a9a77a200c255"></span><span class="n"><span class="pre">boost</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">any</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_replacement</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5nlopt15get_replacementEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get the individual replacement policy or index. </p>
-<p>This method will return a <code class="docutils literal"><span class="pre">boost::any</span></code> containing either the individual replacement policy (as an <code class="docutils literal"><span class="pre">std::string</span></code>) or the individual replacement index (as a <a class="reference internal" href="../population.html#pagmoclasspagmo_1_1population_1a78bf280404ba0555cd7320e8431a587e"><span class="std std-ref">population::size_type</span></a>). The replacement policy or index is set via <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1acb03d2e2a6b68982eeb340f8cdd4eef7"><span class="std std-ref">set_replacement(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the individual replacement policy or index. </dd>
+<p>This method will return a <code class="docutils literal notranslate"><span class="pre">boost::any</span></code> containing either the individual replacement policy (as an <code class="docutils literal notranslate"><span class="pre">std::string</span></code>) or the individual replacement index (as a <a class="reference internal" href="../population.html#classpagmo_1_1population_1a6eb52f7d48a0cfd0ce37956139a3a862"><span class="std std-ref">population::size_type</span></a>). The replacement policy or index is set via <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ac308e8d059b0f3c3ef901607b49f2a48"><span class="std std-ref">set_replacement(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the individual replacement policy or index. </p>
+</dd>
 </dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cstrs_self_adaptive.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Self-adaptive constraints handling</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="nsga2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Non dominated sorting genetic algorithm (NSGA-II)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By pagmo development team
 </p>
-</dd></dl>
 
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2017-2024, pagmo development team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
-</dd></dl>
+          </footer>
+        
 
-</div>
-
-
+      </main>
     </div>
-      
   </div>
-</div>
-<footer class="footer">
-  <div class="container">
-    <p class="pull-right">
-      <a href="#">Back to top</a>
-      
-    </p>
-    <p>
-        &copy; Copyright 2017, pagmo development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.<br/>
-    </p>
-  </div>
-</footer>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

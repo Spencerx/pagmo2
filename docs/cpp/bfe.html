@@ -1,0 +1,925 @@
+ 
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Batch fitness evaluator &#8212; pagmo 2.19.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/cpp/bfe';</script>
+    <link rel="shortcut icon" href="../../_static/logo_favico.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Topology" href="topology.html" />
+    <link rel="prev" title="Archipelago" href="archipelago.html" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto|Comfortaa|Space+Mono"> 
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">pagmo 2.19.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Capabilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/cpp_tut.html">C++ tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/cpp_tut_preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/cpp_tut_first_problem.html">Writing your first optimisation problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/evolving_a_population.html">Evolving a population</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="cpp_docs.html">C++ API documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem.html">Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithm.html">Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="population.html">Population</a></li>
+<li class="toctree-l2"><a class="reference internal" href="island.html">Island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="archipelago.html">Archipelago</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Batch fitness evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="r_policy.html">Replacement policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s_policy.html">Selection policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/null.html">Null algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/bee_colony.html">Artificial Bee Colony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/cmaes.html">Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/compass_search.html">Compass Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/de.html">Differential Evolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/de1220.html">Self-adaptive Differential Evolution (DE 1220 aka pDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/gaco.html">Extended Ant Colony Optimization (gaco)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/gwo.html">Grey Wolf Optimizer (gwo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/ihs.html">Improved Harmony Search (IHS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/ipopt.html">Ipopt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/maco.html">Multi-objective Hypervolume-based Ant Colony Optimizer (MHACO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/moead.html">Multi-objective Evolutionary Algorithm by Decomposition (MOEA/D-DE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/moead_gen.html">Multi-objective Evolutionary Algorithm by Decomposition Generational (GMOEA/D-DE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/mbh.html">Monotonic Basin Hopping (MBH) - Generalized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/cstrs_self_adaptive.html">Self-adaptive constraints handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/nlopt.html">NLopt solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/nsga2.html">Non dominated sorting genetic algorithm (NSGA-II)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/nspso.html">Non dominated sorting particle swarm optimization(NSPSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/pso.html">Particle Swarm Optimization (PSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/pso_gen.html">Particle Swarm Optimization Generational (GPSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/sade.html">Self-adaptive Differential Evolution (jDE and iDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/sea.html">(N+1)-ES Simple Evolutionary Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/sga.html">Simple Genetic Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/simulated_annealing.html">Simulated Annealing (Corana’s version)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/xnes.html">Exponential Natural Evolution Strategies (xNES)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/null.html">Null problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/rosenbrock.html">Rosenbrock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/rastrigin.html">Rastrigin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/schwefel.html">Schwefel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/ackley.html">Ackley</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/golomb_ruler.html">Optimal Golomb Ruler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/griewank.html">Griewank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/lennard_jones.html">Lennard Jones Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/zdt.html">ZDT test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/dtlz.html">DTLZ test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/hock_schittkowski_71.html">Hock Schittkowsky No.71</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/inventory.html">News-vendor problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/luksan_vlcek1.html">Luksan Vlcek 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/minlp_rastrigin.html">MINLP Rastrigin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/translate.html">Translate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/decompose.html">Decompose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/cec2006.html">CEC 2006 Problem Suite (single-objective, constrained)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/cec2009.html">CEC 2009 Problem Suite (multi-objective, constrained and unconstrained)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/cec2013.html">CEC 2013 Problem Suite (box-bound, single objective)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/cec2014.html">CEC 2014 Problem Suite (box-bound, single objective)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/unconstrain.html">Unconstrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems/wfg.html">WFG problem test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="islands/thread_island.html">Thread island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="islands/fork_island.html">Fork island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_evaluators/default_bfe.html">Default BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_evaluators/thread_bfe.html">Multithreaded BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_evaluators/member_bfe.html">Member function BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topologies/unconnected.html">Unconnected topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topologies/fully_connected.html">Fully connected</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topologies/base_bgl_topology.html">Base BGL topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topologies/ring.html">Ring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topologies/free_form.html">Free-form topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="r_policies/fair_replace.html">Fair replacement policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s_policies/select_best.html">Best selection policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/multi_objective.html">Multi-objective optimization utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/constrained.html">Constrained optimization utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/discrepancy.html">Low-discrepancy sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/hypervolume.html">Hypervolumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/gradient_and_hessians.html">Utilities for gradient and hessians</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/genetic_operators.html">Genetic Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellanea/generic.html">Generic utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellanea/type_traits.html">Type traits and enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellanea/exceptions.html">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellanea/utility_classes.html">Utility classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/esa/pagmo2" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/esa/pagmo2/issues/new?title=Issue%20on%20page%20%2Fdocs/cpp/bfe.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/cpp/bfe.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Batch fitness evaluator</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associated-type-traits">Associated type traits</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="batch-fitness-evaluator">
+<h1>Batch fitness evaluator<a class="headerlink" href="#batch-fitness-evaluator" title="Permalink to this headline">#</a></h1>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 2.11.</span></p>
+</div>
+<p><em>#include &lt;pagmo/bfe.hpp&gt;</em></p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3bfeE">
+<span id="_CPPv3N5pagmo3bfeE"></span><span id="_CPPv2N5pagmo3bfeE"></span><span id="pagmo::bfe"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bfe</span></span></span><a class="headerlink" href="#_CPPv4N5pagmo3bfeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>This class implements the evaluation of decision vectors in batch mode. That is,
+whereas a <a class="reference internal" href="problem.html#_CPPv4N5pagmo7problemE" title="pagmo::problem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::problem</span></code></a> provides the means to evaluate a single decision
+vector via the <a class="reference internal" href="problem.html#_CPPv4NK5pagmo7problem7fitnessERK13vector_double" title="pagmo::problem::fitness"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">pagmo::problem::fitness()</span></code></a> member function, a
+<a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a> (short for <em>batch fitness evaluator</em>) enables a <a class="reference internal" href="problem.html#_CPPv4N5pagmo7problemE" title="pagmo::problem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">problem</span></code></a>
+to evaluate the fitnesses of a group (or a <em>batch</em>) of decision vectors, possibly
+in a parallel/vectorised fashion.</p>
+<p>Together with the <a class="reference internal" href="problem.html#_CPPv4NK5pagmo7problem13batch_fitnessERK13vector_double" title="pagmo::problem::batch_fitness"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">pagmo::problem::batch_fitness()</span></code></a> member function,
+<a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a> is one of the mechanisms provided
+by pagmo to enable a form of parallelism on a finer level than the
+<a class="reference internal" href="archipelago.html#_CPPv4N5pagmo11archipelagoE" title="pagmo::archipelago"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">archipelago</span></code></a> and <a class="reference internal" href="island.html#_CPPv4N5pagmo6islandE" title="pagmo::island"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">island</span></code></a> classes.
+However, while the <a class="reference internal" href="problem.html#_CPPv4NK5pagmo7problem13batch_fitnessERK13vector_double" title="pagmo::problem::batch_fitness"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">pagmo::problem::batch_fitness()</span></code></a> member function must be
+implemented on a UDP-by-UDP basis, a <a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a>
+provides generic batch fitness evaluation capabilities for any <a class="reference internal" href="problem.html#_CPPv4N5pagmo7problemE" title="pagmo::problem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">problem</span></code></a>,
+and it can thus be used also with UDPs which do not implement the
+<a class="reference internal" href="problem.html#_CPPv4NK5pagmo7problem13batch_fitnessERK13vector_double" title="pagmo::problem::batch_fitness"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">pagmo::problem::batch_fitness()</span></code></a> member function.</p>
+<p>Like <a class="reference internal" href="problem.html#_CPPv4N5pagmo7problemE" title="pagmo::problem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">problem</span></code></a>, <a class="reference internal" href="algorithm.html#_CPPv4N5pagmo9algorithmE" title="pagmo::algorithm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">algorithm</span></code></a>, and many other
+pagmo classes, <a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a> is a generic container
+(or, in the parlance of C++, a <em>type-erased</em> class) which stores internally
+a user-defined batch fitness evaluator (UDBFE for short) which actually
+implements the fitness evaluation in batch mode. Users are free to either
+use one of the evaluators provided with pagmo, or to write their own UDBFE.</p>
+<p>Every UDBFE must be a callable with a signature equivalent to</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">vector_double</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">problem</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>UDBFEs receive in input a <a class="reference internal" href="problem.html#_CPPv4N5pagmo7problemE" title="pagmo::problem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">problem</span></code></a> and a batch of decision vectors
+stored contiguously in a <a class="reference internal" href="types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">vector_double</span></code></a>, and they return
+a <a class="reference internal" href="types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">vector_double</span></code></a> containing the fitness vectors
+corresponding to the input batch of decision vectors (as evaluated by the input problem and
+stored contiguously).</p>
+<p>Additionally, UDBFEs must also be destructible and default, copy and move constructible.
+Note that pointers to plain C++ functions with an appropriate signature
+are UDBFEs, but lambda functions are not (as they currently are not default-constructible).</p>
+<p>UDBFEs can also implement the following (optional) member functions:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">get_name</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">get_extra_info</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="n">thread_safety</span><span class="w"> </span><span class="nf">get_thread_safety</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>See the documentation of the corresponding member functions in this class for details on how the optional
+member functions in the UDBFE are used by <a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The only operations allowed on a moved-from <a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::bfe</span></code></a> are destruction,
+assignment, and the invocation of the <a class="reference internal" href="#_CPPv4NK5pagmo3bfe8is_validEv" title="pagmo::bfe::is_valid"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">is_valid()</span></code></a> member function.
+Any other operation will result in undefined behaviour.</p>
+</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3bfe3bfeEv">
+<span id="_CPPv3N5pagmo3bfe3bfeEv"></span><span id="_CPPv2N5pagmo3bfe3bfeEv"></span><span id="pagmo::bfe::bfe"></span><span class="sig-name descname"><span class="n"><span class="pre">bfe</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo3bfe3bfeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Default constructor.</p>
+<p>The default constructor will initialize a <a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a> containing a <a class="reference internal" href="batch_evaluators/default_bfe.html#_CPPv4N5pagmo11default_bfeE" title="pagmo::default_bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">default_bfe</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception raised by the constructor from a generic UDBFE.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3bfe3bfeERK3bfe">
+<span id="_CPPv3N5pagmo3bfe3bfeERK3bfe"></span><span id="_CPPv2N5pagmo3bfe3bfeERK3bfe"></span><span id="pagmo::bfe::bfe__bfeCR"></span><span class="sig-name descname"><span class="n"><span class="pre">bfe</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo3bfe3bfeERK3bfe" title="pagmo::bfe::bfe"><span class="n"><span class="pre">bfe</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo3bfe3bfeERK3bfe" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3bfe3bfeERR3bfe">
+<span id="_CPPv3N5pagmo3bfe3bfeERR3bfe"></span><span id="_CPPv2N5pagmo3bfe3bfeERR3bfe"></span><span id="pagmo::bfe::bfe__bfeRR"></span><span class="sig-name descname"><span class="n"><span class="pre">bfe</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5pagmo3bfe3bfeERR3bfe" title="pagmo::bfe::bfe"><span class="n"><span class="pre">bfe</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N5pagmo3bfe3bfeERR3bfe" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3bfeaSERK3bfe">
+<span id="_CPPv3N5pagmo3bfeaSERK3bfe"></span><span id="_CPPv2N5pagmo3bfeaSERK3bfe"></span><span id="pagmo::bfe::assign-operator__bfeCR"></span><a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><span class="n"><span class="pre">bfe</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><span class="n"><span class="pre">bfe</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo3bfeaSERK3bfe" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3bfeaSERR3bfe">
+<span id="_CPPv3N5pagmo3bfeaSERR3bfe"></span><span id="_CPPv2N5pagmo3bfeaSERR3bfe"></span><span id="pagmo::bfe::assign-operator__bfeRR"></span><a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><span class="n"><span class="pre">bfe</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><span class="n"><span class="pre">bfe</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N5pagmo3bfeaSERR3bfe" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a> is copy/move constructible, and copy/move assignable.
+Copy construction/assignment will perform deep copies, move operations will leave the moved-from object in
+a state which is destructible and assignable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – when performing copy operations, any exception raised by the UDBFE upon copying, or by memory allocation failures.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN5pagmo3bfe3bfeERR1T">
+<span id="_CPPv3I0EN5pagmo3bfe3bfeERR1T"></span><span id="_CPPv2I0EN5pagmo3bfe3bfeERR1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bfe</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5pagmo3bfe3bfeERR1T" title="pagmo::bfe::bfe::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5pagmo3bfe3bfeERR1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Generic constructor from a UDBFE.</p>
+<p>This constructor participates in overload resolution only if <code class="docutils literal notranslate"><span class="pre">T</span></code>, after the removal of reference
+and cv qualifiers, is not <a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a> and if it satisfies <a class="reference internal" href="#_CPPv4I0EN5pagmo8is_udbfeE" title="pagmo::is_udbfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::is_udbfe</span></code></a>.</p>
+<p>Additionally, the constructor will also be enabled if <code class="docutils literal notranslate"><span class="pre">T</span></code>, after the removal of reference and cv qualifiers, is a function type with
+the following signature</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">vector_double</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">problem</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The input parameter <em>x</em> will be perfectly forwarded to construct the internal UDBFE instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> – the input UDBFE.</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by the public API of the UDBFE, or by memory allocation failures.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN5pagmo3bfeaSER3bfeRR1T">
+<span id="_CPPv3I0EN5pagmo3bfeaSERR1T"></span><span id="_CPPv2I0EN5pagmo3bfeaSERR1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><span class="n"><span class="pre">bfe</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5pagmo3bfeaSER3bfeRR1T" title="pagmo::bfe::operator=::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5pagmo3bfeaSER3bfeRR1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Generic assignment operator from a UDBFE.</p>
+<p>This operator participates in overload resolution only if <code class="docutils literal notranslate"><span class="pre">T</span></code>, after the removal of reference
+and cv qualifiers, is not <a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a> and if it satisfies <a class="reference internal" href="#_CPPv4I0EN5pagmo8is_udbfeE" title="pagmo::is_udbfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::is_udbfe</span></code></a>.</p>
+<p>Additionally, the operator will also be enabled if <code class="docutils literal notranslate"><span class="pre">T</span></code>, after the removal of reference and cv qualifiers,
+is a function type with the following signature</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">vector_double</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">problem</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vector_double</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This operator will set the internal UDBFE to <em>x</em> by constructing a <a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a> from <em>x</em>,
+and then move-assigning the result to <em>this</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> – the input UDBFE.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to <em>this</em>.</p>
+</dd>
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by the generic constructor from a UDBFE.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK5pagmo3bfe7extractEPK1Tv">
+<span id="_CPPv3I0ENK5pagmo3bfe7extractEv"></span><span id="_CPPv2I0ENK5pagmo3bfe7extractEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK5pagmo3bfe7extractEPK1Tv" title="pagmo::bfe::extract::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">extract</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4I0ENK5pagmo3bfe7extractEPK1Tv" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN5pagmo3bfe7extractEP1Tv">
+<span id="_CPPv3I0EN5pagmo3bfe7extractEv"></span><span id="_CPPv2I0EN5pagmo3bfe7extractEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0EN5pagmo3bfe7extractEP1Tv" title="pagmo::bfe::extract::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">extract</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4I0EN5pagmo3bfe7extractEP1Tv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Extract a (const) pointer to the internal UDBFE instance.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">T</span></code> is the type of the UDBFE currently stored within this object, then this function
+will return a (const) pointer to the internal UDBFE instance. Otherwise, <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> will be returned.</p>
+<p>The returned value is a raw non-owning pointer: the lifetime of the pointee is tied to the lifetime
+of <code class="docutils literal notranslate"><span class="pre">this</span></code>, and <code class="docutils literal notranslate"><span class="pre">delete</span></code> must never be called on the pointer.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The non-const overload of this function is provided only in order to allow to call non-const
+member functions on the internal UDBFE instance. Assigning a new UDBFE via pointers obtained
+through this function is undefined behaviour.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a (const) pointer to the internal UDBFE instance, or <code class="docutils literal notranslate"><span class="pre">nullptr</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK5pagmo3bfe2isEbv">
+<span id="_CPPv3I0ENK5pagmo3bfe2isEv"></span><span id="_CPPv2I0ENK5pagmo3bfe2isEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4I0ENK5pagmo3bfe2isEbv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Check the type of the UDBFE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">T</span></code> is the type of the UDBFE currently stored within this object, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3bfeclERK7problemRK13vector_double">
+<span id="_CPPv3NK5pagmo3bfeclERK7problemRK13vector_double"></span><span id="_CPPv2NK5pagmo3bfeclERK7problemRK13vector_double"></span><span id="pagmo::bfe::call-operator__problemCR.vector_doubleCRC"></span><a class="reference internal" href="types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><span class="n"><span class="pre">vector_double</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="problem.html#_CPPv4N5pagmo7problemE" title="pagmo::problem"><span class="n"><span class="pre">problem</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">p</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><span class="n"><span class="pre">vector_double</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dvs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3bfeclERK7problemRK13vector_double" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Call operator.</p>
+<p>The call operator will invoke the internal UDBFE instance to perform the evaluation in batch mode
+of the decision vectors stored in <em>dvs</em> using the input problem <em>p</em>, and it will return the corresponding
+fitness vectors.</p>
+<p>The input decision vectors must be stored contiguously in <em>dvs</em>: for a problem with dimension <span class="math notranslate nohighlight">\(n\)</span>, the first
+decision vector in <em>dvs</em> occupies the index range <span class="math notranslate nohighlight">\(\left[0, n\right)\)</span>, the second decision vector
+occupies the range <span class="math notranslate nohighlight">\(\left[n, 2n\right)\)</span>, and so on. Similarly, the output fitness vectors must be
+laid out contiguously in the return value: for a problem with fitness dimension <span class="math notranslate nohighlight">\(f\)</span>, the first fitness
+vector will occupy the index range <span class="math notranslate nohighlight">\(\left[0, f\right)\)</span>, the second fitness vector
+will occupy the range <span class="math notranslate nohighlight">\(\left[f, 2f\right)\)</span>, and so on.</p>
+<p>This function will perform a variety of sanity checks on both <em>dvs</em> and on the return value.
+It will also take care of increasing the fitness evaluation counter in <em>p</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> – the input <a class="reference internal" href="problem.html#_CPPv4N5pagmo7problemE" title="pagmo::problem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">problem</span></code></a>.</p></li>
+<li><p><strong>dvs</strong> – the input decision vectors that will be evaluated in batch mode.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the fitness vectors corresponding to the input decision vectors in <em>dvs</em>.</p>
+</dd>
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if <em>dvs</em> or the return value produced by the UDBFE are incompatible with the input problem <em>p</em>.</p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception raised by the invocation of the UDBFE.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3bfe8get_nameEv">
+<span id="_CPPv3NK5pagmo3bfe8get_nameEv"></span><span id="_CPPv2NK5pagmo3bfe8get_nameEv"></span><span id="pagmo::bfe::get_nameC"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3bfe8get_nameEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Get the name of this batch fitness evaluator.</p>
+<p>If the UDBFE satisfies <a class="reference internal" href="miscellanea/type_traits.html#_CPPv4I0EN5pagmo8has_nameE" title="pagmo::has_name"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::has_name</span></code></a>, then this member function will return the output of its <code class="docutils literal notranslate"><span class="pre">get_name()</span></code> member function.
+Otherwise, an implementation-defined name based on the type of the UDBFE will be returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the name of this batch fitness evaluator.</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by copying an <code class="docutils literal notranslate"><span class="pre">std::string</span></code> object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3bfe14get_extra_infoEv">
+<span id="_CPPv3NK5pagmo3bfe14get_extra_infoEv"></span><span id="_CPPv2NK5pagmo3bfe14get_extra_infoEv"></span><span id="pagmo::bfe::get_extra_infoC"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_extra_info</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3bfe14get_extra_infoEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Extra info for this batch fitness evaluator.</p>
+<p>If the UDBFE satisfies <a class="reference internal" href="miscellanea/type_traits.html#_CPPv4I0EN5pagmo14has_extra_infoE" title="pagmo::has_extra_info"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::has_extra_info</span></code></a>, then this member function will return the output of its
+<code class="docutils literal notranslate"><span class="pre">get_extra_info()</span></code> member function. Otherwise, an empty string will be returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>extra info about the UDBFE.</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by the <code class="docutils literal notranslate"><span class="pre">get_extra_info()</span></code> member function of the UDBFE, or by copying an <code class="docutils literal notranslate"><span class="pre">std::string</span></code> object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3bfe17get_thread_safetyEv">
+<span id="_CPPv3NK5pagmo3bfe17get_thread_safetyEv"></span><span id="_CPPv2NK5pagmo3bfe17get_thread_safetyEv"></span><span id="pagmo::bfe::get_thread_safetyC"></span><a class="reference internal" href="miscellanea/type_traits.html#_CPPv4N5pagmo13thread_safetyE" title="pagmo::thread_safety"><span class="n"><span class="pre">thread_safety</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_thread_safety</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3bfe17get_thread_safetyEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Thread safety level of this batch fitness evaluator.</p>
+<p>If the UDBFE satisfies <a class="reference internal" href="miscellanea/type_traits.html#_CPPv4I0EN5pagmo21has_get_thread_safetyE" title="pagmo::has_get_thread_safety"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::has_get_thread_safety</span></code></a>, then this member function will return the output of its
+<code class="docutils literal notranslate"><span class="pre">get_thread_safety()</span></code> member function. Otherwise, <a class="reference internal" href="miscellanea/type_traits.html#_CPPv4N5pagmo13thread_safety5basicE" title="pagmo::thread_safety::basic"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">pagmo::thread_safety::basic</span></code></a> will be returned.
+That is, pagmo assumes by default that is it safe to operate concurrently on distinct UDBFE instances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the thread safety level of the UDBFE.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3bfe8is_validEv">
+<span id="_CPPv3NK5pagmo3bfe8is_validEv"></span><span id="_CPPv2NK5pagmo3bfe8is_validEv"></span><span id="pagmo::bfe::is_validC"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_valid</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3bfe8is_validEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Check if this bfe is in a valid state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if <em>this</em> was moved from, <code class="docutils literal notranslate"><span class="pre">true</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3bfe14get_type_indexEv">
+<span id="_CPPv3NK5pagmo3bfe14get_type_indexEv"></span><span id="_CPPv2NK5pagmo3bfe14get_type_indexEv"></span><span id="pagmo::bfe::get_type_indexC"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">type_index</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_type_index</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3bfe14get_type_indexEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 2.15.</span></p>
+</div>
+<p>Get the type of the UDBFE.</p>
+<p>This function will return the type
+of the UDBFE stored within this <a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a>
+instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the type of the UDBFE.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3bfe7get_ptrEv">
+<span id="_CPPv3NK5pagmo3bfe7get_ptrEv"></span><span id="_CPPv2NK5pagmo3bfe7get_ptrEv"></span><span id="pagmo::bfe::get_ptrC"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_ptr</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3bfe7get_ptrEv" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3bfe7get_ptrEv">
+<span id="_CPPv3N5pagmo3bfe7get_ptrEv"></span><span id="_CPPv2N5pagmo3bfe7get_ptrEv"></span><span id="pagmo::bfe::get_ptr"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_ptr</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo3bfe7get_ptrEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 2.15.</span></p>
+</div>
+<p>Get a pointer to the UDBFE.</p>
+<p>These functions will return a raw (const) pointer
+to the internal UDBFE instance. Differently from
+the <a class="reference internal" href="#_CPPv4I0ENK5pagmo3bfe7extractEPK1Tv" title="pagmo::bfe::extract"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">extract()</span></code></a> overloads, these functions
+do not require to pass the correct type
+in input. It is however the user’s responsibility
+to cast the returned void pointer to the correct type.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The returned value is a raw non-owning pointer: the lifetime of the pointee is tied to the lifetime
+of <code class="docutils literal notranslate"><span class="pre">this</span></code>, and <code class="docutils literal notranslate"><span class="pre">delete</span></code> must never be called on the pointer.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ability to extract a mutable pointer is provided only in order to allow to call non-const
+methods on the internal UDBFE instance. Assigning a new UDBFE via this pointer is undefined behaviour.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a pointer to the internal UDBFE.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmolsERNSt7ostreamERK3bfe">
+<span id="_CPPv3N5pagmolsERNSt7ostreamERK3bfe"></span><span id="_CPPv2N5pagmolsERNSt7ostreamERK3bfe"></span><span id="pagmo::lshift-operator__osR.bfeCR"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">os</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><span class="n"><span class="pre">bfe</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmolsERNSt7ostreamERK3bfe" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Stream insertion operator.</p>
+<p>This function will direct to <em>os</em> a human-readable representation of the input
+<a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a> <em>b</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>os</strong> – the input <code class="docutils literal notranslate"><span class="pre">std::ostream</span></code>.</p></li>
+<li><p><strong>b</strong> – the batch fitness evaluator that will be directed to <em>os</em>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to <em>os</em>.</p>
+</dd>
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by querying various properties of the evaluator and directing them to <em>os</em>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="associated-type-traits">
+<h2>Associated type traits<a class="headerlink" href="#associated-type-traits" title="Permalink to this headline">#</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN5pagmo21has_bfe_call_operatorE">
+<span id="_CPPv3I0EN5pagmo21has_bfe_call_operatorE"></span><span id="_CPPv2I0EN5pagmo21has_bfe_call_operatorE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_bfe_call_operator</span></span></span><a class="headerlink" href="#_CPPv4I0EN5pagmo21has_bfe_call_operatorE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>This type trait detects if <code class="docutils literal notranslate"><span class="pre">T</span></code> is a callable whose signature is compatible with the one
+required by <a class="reference internal" href="#_CPPv4N5pagmo3bfeE" title="pagmo::bfe"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">bfe</span></code></a>.</p>
+<p>Specifically, the <a class="reference internal" href="#_CPPv4N5pagmo21has_bfe_call_operator5valueE" title="pagmo::has_bfe_call_operator::value"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">value</span></code></a> of this type trait will be <code class="docutils literal notranslate"><span class="pre">true</span></code> if the expression
+<code class="docutils literal notranslate"><span class="pre">B(p,</span> <span class="pre">dvs)</span></code>, where</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">B</span></code> is a const reference to an instance of <code class="docutils literal notranslate"><span class="pre">T</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p</span></code> is a const reference to a <a class="reference internal" href="problem.html#_CPPv4N5pagmo7problemE" title="pagmo::problem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">problem</span></code></a>, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dvs</span></code> is a const reference to a <a class="reference internal" href="types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">vector_double</span></code></a>,</p></li>
+</ul>
+<p>is well-formed and if it returns a <a class="reference internal" href="types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">vector_double</span></code></a>.</p>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo21has_bfe_call_operator5valueE">
+<span id="_CPPv3N5pagmo21has_bfe_call_operator5valueE"></span><span id="_CPPv2N5pagmo21has_bfe_call_operator5valueE"></span><span id="pagmo::has_bfe_call_operator::value__bC"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><a class="headerlink" href="#_CPPv4N5pagmo21has_bfe_call_operator5valueE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The value of the type trait.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN5pagmo8is_udbfeE">
+<span id="_CPPv3I0EN5pagmo8is_udbfeE"></span><span id="_CPPv2I0EN5pagmo8is_udbfeE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_udbfe</span></span></span><a class="headerlink" href="#_CPPv4I0EN5pagmo8is_udbfeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>This type trait detects if <code class="docutils literal notranslate"><span class="pre">T</span></code> is a user-defined batch fitness evaluator (or UDBFE).</p>
+<p>Specifically, the <a class="reference internal" href="#_CPPv4N5pagmo8is_udbfe5valueE" title="pagmo::is_udbfe::value"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">value</span></code></a> of this type trait will be <code class="docutils literal notranslate"><span class="pre">true</span></code> if:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> is not a reference or cv qualified,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> is destructible, default, copy and move constructible, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> satisfies <a class="reference internal" href="#_CPPv4I0EN5pagmo21has_bfe_call_operatorE" title="pagmo::has_bfe_call_operator"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::has_bfe_call_operator</span></code></a>.</p></li>
+</ul>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo8is_udbfe5valueE">
+<span id="_CPPv3N5pagmo8is_udbfe5valueE"></span><span id="_CPPv2N5pagmo8is_udbfe5valueE"></span><span id="pagmo::is_udbfe::value__bC"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><a class="headerlink" href="#_CPPv4N5pagmo8is_udbfe5valueE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The value of the type trait.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="archipelago.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Archipelago</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="topology.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Topology</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associated-type-traits">Associated type traits</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By pagmo development team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2017-2024, pagmo development team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

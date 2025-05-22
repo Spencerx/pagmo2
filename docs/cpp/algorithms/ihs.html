@@ -1,0 +1,708 @@
+ 
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Improved Harmony Search (IHS) &#8212; pagmo 2.19.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/cpp/algorithms/ihs';</script>
+    <link rel="shortcut icon" href="../../../_static/logo_favico.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Ipopt" href="ipopt.html" />
+    <link rel="prev" title="Grey Wolf Optimizer (gwo)" href="gwo.html" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto|Comfortaa|Space+Mono"> 
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">pagmo 2.19.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Capabilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/cpp_tut.html">C++ tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/cpp_tut_preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/cpp_tut_first_problem.html">Writing your first optimisation problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/evolving_a_population.html">Evolving a population</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../cpp_docs.html">C++ API documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problem.html">Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithm.html">Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../population.html">Population</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../island.html">Island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../archipelago.html">Archipelago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bfe.html">Batch fitness evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topology.html">Topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../r_policy.html">Replacement policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../s_policy.html">Selection policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="null.html">Null algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bee_colony.html">Artificial Bee Colony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmaes.html">Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compass_search.html">Compass Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de.html">Differential Evolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de1220.html">Self-adaptive Differential Evolution (DE 1220 aka pDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaco.html">Extended Ant Colony Optimization (gaco)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gwo.html">Grey Wolf Optimizer (gwo)</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Improved Harmony Search (IHS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ipopt.html">Ipopt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maco.html">Multi-objective Hypervolume-based Ant Colony Optimizer (MHACO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moead.html">Multi-objective Evolutionary Algorithm by Decomposition (MOEA/D-DE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moead_gen.html">Multi-objective Evolutionary Algorithm by Decomposition Generational (GMOEA/D-DE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mbh.html">Monotonic Basin Hopping (MBH) - Generalized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cstrs_self_adaptive.html">Self-adaptive constraints handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlopt.html">NLopt solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsga2.html">Non dominated sorting genetic algorithm (NSGA-II)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nspso.html">Non dominated sorting particle swarm optimization(NSPSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pso.html">Particle Swarm Optimization (PSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pso_gen.html">Particle Swarm Optimization Generational (GPSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sade.html">Self-adaptive Differential Evolution (jDE and iDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sea.html">(N+1)-ES Simple Evolutionary Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sga.html">Simple Genetic Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulated_annealing.html">Simulated Annealing (Corana’s version)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xnes.html">Exponential Natural Evolution Strategies (xNES)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/null.html">Null problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/rosenbrock.html">Rosenbrock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/rastrigin.html">Rastrigin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/schwefel.html">Schwefel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/ackley.html">Ackley</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/golomb_ruler.html">Optimal Golomb Ruler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/griewank.html">Griewank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/lennard_jones.html">Lennard Jones Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/zdt.html">ZDT test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/dtlz.html">DTLZ test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/hock_schittkowski_71.html">Hock Schittkowsky No.71</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/inventory.html">News-vendor problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/luksan_vlcek1.html">Luksan Vlcek 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/minlp_rastrigin.html">MINLP Rastrigin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/translate.html">Translate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/decompose.html">Decompose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2006.html">CEC 2006 Problem Suite (single-objective, constrained)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2009.html">CEC 2009 Problem Suite (multi-objective, constrained and unconstrained)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2013.html">CEC 2013 Problem Suite (box-bound, single objective)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2014.html">CEC 2014 Problem Suite (box-bound, single objective)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/unconstrain.html">Unconstrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/wfg.html">WFG problem test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../islands/thread_island.html">Thread island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../islands/fork_island.html">Fork island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../batch_evaluators/default_bfe.html">Default BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../batch_evaluators/thread_bfe.html">Multithreaded BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../batch_evaluators/member_bfe.html">Member function BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/unconnected.html">Unconnected topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/fully_connected.html">Fully connected</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/base_bgl_topology.html">Base BGL topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/ring.html">Ring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/free_form.html">Free-form topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../r_policies/fair_replace.html">Fair replacement policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../s_policies/select_best.html">Best selection policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/multi_objective.html">Multi-objective optimization utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/constrained.html">Constrained optimization utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/discrepancy.html">Low-discrepancy sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/hypervolume.html">Hypervolumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/gradient_and_hessians.html">Utilities for gradient and hessians</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/genetic_operators.html">Genetic Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/generic.html">Generic utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/type_traits.html">Type traits and enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/exceptions.html">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/utility_classes.html">Utility classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/esa/pagmo2" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/esa/pagmo2/issues/new?title=Issue%20on%20page%20%2Fdocs/cpp/algorithms/ihs.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/docs/cpp/algorithms/ihs.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Improved Harmony Search (IHS)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="improved-harmony-search-ihs">
+<h1>Improved Harmony Search (IHS)<a class="headerlink" href="#improved-harmony-search-ihs" title="Permalink to this headline">#</a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3ihsE">
+<span id="_CPPv3N5pagmo3ihsE"></span><span id="_CPPv2N5pagmo3ihsE"></span><span id="pagmo::ihs"></span><span class="target" id="classpagmo_1_1ihs"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ihs</span></span></span><a class="headerlink" href="#_CPPv4N5pagmo3ihsE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Improved Harmony Search. </p>
+<p><img alt="../../../_images/ihs.gif" src="../../../_images/ihs.gif" /></p>
+<p>Harmony search (HS) is a metaheuristic algorithm said to mimic the improvisation process of musicians. In the metaphor, each musician (i.e., each variable) plays (i.e., generates) a note (i.e., a value) for finding a best harmony (i.e., the global optimum) all together.</p>
+<p>This code implements the so-called improved harmony search algorithm (IHS), in which the probability of picking the variables from the decision vector and the amount of mutation to which they are subject vary (respectively linearly and exponentially) at each call of the <code class="docutils literal notranslate"><a class="reference internal" href="#classpagmo_1_1ihs_1a2e6e87e094bd1a22ed3cd2c3f7324b8e"><span class="std std-ref"><span class="pre">evolve()</span></span></a></code> method.</p>
+<p>In this algorithm the number of fitness function evaluations is equal to the number of iterations. All the individuals in the input population participate in the evolution. A new individual is generated at every iteration, substituting the current worst individual of the population if better.</p>
+<p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Harmony_search">https://en.wikipedia.org/wiki/Harmony_search</a> for an introduction on harmony search.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://linkinghub.elsevier.com/retrieve/pii/S0096300306015098">https://linkinghub.elsevier.com/retrieve/pii/S0096300306015098</a> for the paper that introduces and explains improved
+harmony search.</p>
+</div>
+</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The original IHS algorithm was designed to solve unconstrained, deterministic single objective problems.
+In pagmo, the algorithm was modified to tackle also multi-objective (unconstrained), constrained
+(single-objective), mixed-integer and stochastic problems. Such extension is original with pagmo.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The HS algorithm can and has been  criticized, not for its performances,
+but for the use of a metaphor that does not add anything to existing ones. The HS
+algorithm essentially applies mutation and crossover operators to a background population and as such
+should have been developed in the context of Evolutionary Strategies or Genetic Algorithms and studied
+in that context. The use of the musicians metaphor only obscures its internal functioning
+making theoretical results from ES and GA erroneously seem as unapplicable to HS.</p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3ihs13log_line_typeE">
+<span id="_CPPv3N5pagmo3ihs13log_line_typeE"></span><span id="_CPPv2N5pagmo3ihs13log_line_typeE"></span><span id="pagmo::ihs::log_line_type"></span><span class="target" id="classpagmo_1_1ihs_1a98e25ba152bfa267ac0a91ae161430de"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><span class="n"><span class="pre">vector_double</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_type</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><span class="n"><span class="pre">vector_double</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_line_type</span></span></span><a class="headerlink" href="#_CPPv4N5pagmo3ihs13log_line_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Single data line for the algorithm’s log. </p>
+<p>A log data line is a tuple consisting of:<ul class="simple">
+<li><p>the number of objective function evaluations made so far,</p></li>
+<li><p>the pitch adjustment rate,</p></li>
+<li><p>the distance bandwidth</p></li>
+<li><p>the population flatness evaluated as the distance between the decisions vector of the best and of the worst individual (or -1 in a multiobjective case),</p></li>
+<li><p>the population flatness evaluated as the distance between the fitness of the best and of the worst individual (or -1 in a multiobjective case),</p></li>
+<li><p>the number of constraints violated by the current decision vector,</p></li>
+<li><p>the constraints violation norm for the current decision vector,</p></li>
+<li><p>the objective value of the best solution or, in the multiobjective case, the ideal point </p></li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3ihs8log_typeE">
+<span id="_CPPv3N5pagmo3ihs8log_typeE"></span><span id="_CPPv2N5pagmo3ihs8log_typeE"></span><span id="pagmo::ihs::log_type"></span><span class="target" id="classpagmo_1_1ihs_1aa27cd611977fd1375a7b2603eaad8634"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N5pagmo3ihs13log_line_typeE" title="pagmo::ihs::log_line_type"><span class="n"><span class="pre">log_line_type</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_type</span></span></span><a class="headerlink" href="#_CPPv4N5pagmo3ihs8log_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Log type. </p>
+<p>The algorithm log is a collection of <a class="reference internal" href="#classpagmo_1_1ihs_1a98e25ba152bfa267ac0a91ae161430de"><span class="std std-ref">ihs::log_line_type</span></a> data lines, stored in chronological order during the optimisation if the verbosity of the algorithm is set to a nonzero value (see <a class="reference internal" href="#classpagmo_1_1ihs_1a2da9cce0eff422ca0fffd0256c28f39f"><span class="std std-ref">ihs::set_verbosity()</span></a>). </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3ihs3ihsEjdddddj">
+<span id="_CPPv3N5pagmo3ihs3ihsEjdddddj"></span><span id="_CPPv2N5pagmo3ihs3ihsEjdddddj"></span><span id="pagmo::ihs::ihs__unsigned.double.double.double.double.double.unsigned"></span><span class="target" id="classpagmo_1_1ihs_1abd9859b48876020027dfa85919b5779f"></span><span class="sig-name descname"><span class="n"><span class="pre">ihs</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gen</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1u</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">phmcr</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0.85</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ppar_min</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0.35</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ppar_max</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0.99</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bw_min</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1E-5</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bw_max</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1.</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">seed</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">pagmo</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">random_device</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo3ihs3ihsEjdddddj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructor. </p>
+<p>Constructs ihs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gen</strong> – Number of generations to consider. Each generation will compute the objective function once. </p></li>
+<li><p><strong>phmcr</strong> – probability of choosing from memory (similar to a crossover probability) </p></li>
+<li><p><strong>ppar_min</strong> – minimum pitch adjustment rate. (similar to a mutation rate) </p></li>
+<li><p><strong>ppar_max</strong> – maximum pitch adjustment rate. (similar to a mutation rate) </p></li>
+<li><p><strong>bw_min</strong> – minimum distance bandwidth. (similar to a mutation width) </p></li>
+<li><p><strong>bw_max</strong> – maximum distance bandwidth. (similar to a mutation width) </p></li>
+<li><p><strong>seed</strong> – seed used by the internal random number generator</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">value_error</span></span></span> – if phmcr is not in the ]0,1[ interval, ppar min/max are not in the ]0,1[ interval, min/max quantities are less than/greater than max/min quantities, bw_min is negative. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3ihs6evolveE10population">
+<span id="_CPPv3NK5pagmo3ihs6evolveE10population"></span><span id="_CPPv2NK5pagmo3ihs6evolveE10population"></span><span id="pagmo::ihs::evolve__populationC"></span><span class="target" id="classpagmo_1_1ihs_1a2e6e87e094bd1a22ed3cd2c3f7324b8e"></span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10populationE" title="pagmo::population"><span class="n"><span class="pre">population</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">evolve</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10populationE" title="pagmo::population"><span class="n"><span class="pre">population</span></span></a><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3ihs6evolveE10population" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Algorithm evolve method. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pop</strong> – population to be evolved </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if the problem is multi-objective or constrained </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>evolved population </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3ihs13set_verbosityEj">
+<span id="_CPPv3N5pagmo3ihs13set_verbosityEj"></span><span id="_CPPv2N5pagmo3ihs13set_verbosityEj"></span><span id="pagmo::ihs::set_verbosity__unsigned"></span><span class="target" id="classpagmo_1_1ihs_1a2da9cce0eff422ca0fffd0256c28f39f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_verbosity</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo3ihs13set_verbosityEj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set verbosity. </p>
+<p>This method will set the algorithm’s verbosity. If <code class="docutils literal notranslate"><span class="pre">n</span></code> is zero, no output is produced during the optimisation and no logging is performed. If <code class="docutils literal notranslate"><span class="pre">n</span></code> is nonzero, then every <code class="docutils literal notranslate"><span class="pre">n</span></code> objective function evaluations the status of the optimisation will be both printed to screen and recorded internally. See <a class="reference internal" href="#classpagmo_1_1ihs_1a98e25ba152bfa267ac0a91ae161430de"><span class="std std-ref">ihs::log_line_type</span></a> and <a class="reference internal" href="#classpagmo_1_1ihs_1aa27cd611977fd1375a7b2603eaad8634"><span class="std std-ref">ihs::log_type</span></a> for information on the logging format. The internal log can be fetched via <a class="reference internal" href="#classpagmo_1_1ihs_1a5efd3df26edc54c7d76e852ceab1677e"><span class="std std-ref">get_log()</span></a>.</p>
+<p>Example (verbosity 100, a constrained problem): <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Fevals:          ppar:            bw:            dx:            df:      Violated:    Viol. Norm:        ideal1:
+      1        0.35064       0.988553        5.17002        68.4027              1      0.0495288        85.1946
+    101        0.41464       0.312608        4.21626         46.248              1      0.0495288        85.1946
+    201        0.47864      0.0988553        2.27851        8.00679              1      0.0495288        85.1946
+    301        0.54264      0.0312608        3.94453        31.9834              1      0.0495288        85.1946
+    401        0.60664     0.00988553        4.74834         40.188              1      0.0495288        85.1946
+    501        0.67064     0.00312608        2.91583        6.53575              1     0.00904482        90.3601
+    601        0.73464    0.000988553        2.98691        10.6425              1    0.000760728        110.121
+    701        0.79864    0.000312608        2.27775        39.7507              1    0.000760728        110.121
+    801        0.86264    9.88553e-05       0.265908         4.5488              1    0.000760728        110.121
+    901        0.92664    3.12608e-05       0.566348       0.354253              1    0.000760728        110.121
+</pre></div>
+</div>
+ Feasibility is checked against the problem’s tolerance.</p>
+<p>By default, the verbosity level is zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – the desired verbosity level. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3ihs13get_verbosityEv">
+<span id="_CPPv3NK5pagmo3ihs13get_verbosityEv"></span><span id="_CPPv2NK5pagmo3ihs13get_verbosityEv"></span><span id="pagmo::ihs::get_verbosityC"></span><span class="target" id="classpagmo_1_1ihs_1abf72adfdc7358b2a1b1e434eec2f3d65"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_verbosity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3ihs13get_verbosityEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets the verbosity level. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the verbosity level </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo3ihs8set_seedEj">
+<span id="_CPPv3N5pagmo3ihs8set_seedEj"></span><span id="_CPPv2N5pagmo3ihs8set_seedEj"></span><span id="pagmo::ihs::set_seed__unsigned"></span><span class="target" id="classpagmo_1_1ihs_1a6d8a85bb97256eaf0f4126b2822d586d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_seed</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo3ihs8set_seedEj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Sets the seed. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seed</strong> – the seed controlling the algorithm stochastic behaviour </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3ihs8get_seedEv">
+<span id="_CPPv3NK5pagmo3ihs8get_seedEv"></span><span id="_CPPv2NK5pagmo3ihs8get_seedEv"></span><span id="pagmo::ihs::get_seedC"></span><span class="target" id="classpagmo_1_1ihs_1a9508242003ca610c14a67de8b1f6b021"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_seed</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3ihs8get_seedEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets the seed. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the seed controlling the algorithm stochastic behaviour </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3ihs8get_nameEv">
+<span id="_CPPv3NK5pagmo3ihs8get_nameEv"></span><span id="_CPPv2NK5pagmo3ihs8get_nameEv"></span><span id="pagmo::ihs::get_nameC"></span><span class="target" id="classpagmo_1_1ihs_1af1b16999df2c5002d7f897510a0a643c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3ihs8get_nameEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Algorithm name. </p>
+<p>One of the optional methods of any user-defined algorithm (UDA).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a string containing the algorithm name </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3ihs14get_extra_infoEv">
+<span id="_CPPv3NK5pagmo3ihs14get_extra_infoEv"></span><span id="_CPPv2NK5pagmo3ihs14get_extra_infoEv"></span><span id="pagmo::ihs::get_extra_infoC"></span><span class="target" id="classpagmo_1_1ihs_1a0fa01c57728fc1466a1edb9848755db1"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_extra_info</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3ihs14get_extra_infoEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Extra info. </p>
+<p>One of the optional methods of any user-defined algorithm (UDA).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a string containing extra info on the algorithm </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo3ihs7get_logEv">
+<span id="_CPPv3NK5pagmo3ihs7get_logEv"></span><span id="_CPPv2NK5pagmo3ihs7get_logEv"></span><span id="pagmo::ihs::get_logC"></span><span class="target" id="classpagmo_1_1ihs_1a5efd3df26edc54c7d76e852ceab1677e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo3ihs8log_typeE" title="pagmo::ihs::log_type"><span class="n"><span class="pre">log_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_log</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo3ihs7get_logEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Get the optimisation log. </p>
+<p>See <a class="reference internal" href="#classpagmo_1_1ihs_1aa27cd611977fd1375a7b2603eaad8634"><span class="std std-ref">ihs::log_type</span></a> for a description of the optimisation log. Logging is turned on/off via <a class="reference internal" href="#classpagmo_1_1ihs_1a2da9cce0eff422ca0fffd0256c28f39f"><span class="std std-ref">set_verbosity()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a const reference to the log. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="gwo.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Grey Wolf Optimizer (gwo)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ipopt.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Ipopt</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By pagmo development team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2017-2024, pagmo development team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

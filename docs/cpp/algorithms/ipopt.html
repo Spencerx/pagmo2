@@ -1,723 +1,953 @@
- <!DOCTYPE html>
+ 
+
+<!DOCTYPE html>
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" >
+
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Ipopt &#8212; pagmo 2.4 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootswatch-3.3.6/yeti/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pagmo.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../',
-        VERSION:     '2.4',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Ipopt &#8212; pagmo 2.19.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/cpp/algorithms/ipopt';</script>
     <link rel="shortcut icon" href="../../../_static/logo_favico.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Multi-objective Evolutionary Algorithm by Decomposition (MOEA/D-DE)" href="moead.html" />
-    <link rel="prev" title="Self-adaptive Differential Evolution (DE 1220 aka pDE)" href="de1220.html" />
+    <link rel="next" title="Multi-objective Hypervolume-based Ant Colony Optimizer (MHACO)" href="maco.html" />
+    <link rel="prev" title="Improved Harmony Search (IHS)" href="ihs.html" />
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto|Comfortaa|Space+Mono"> 
   </head>
-  <body role="document">
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="../../../index.html"><span><img src="../../../_static/logo_small_html.png"></span>
-           </a>
-        <span class="navbar-text navbar-version pull-left"><b>2.4</b></span>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">pagmo 2.19.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Capabilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/cpp_tut.html">C++ tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/cpp_tut_preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/cpp_tut_first_problem.html">Writing your first optimisation problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/evolving_a_population.html">Evolving a population</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../cpp_docs.html">C++ API documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problem.html">Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithm.html">Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../population.html">Population</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../island.html">Island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../archipelago.html">Archipelago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bfe.html">Batch fitness evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topology.html">Topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../r_policy.html">Replacement policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../s_policy.html">Selection policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="null.html">Null algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bee_colony.html">Artificial Bee Colony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmaes.html">Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compass_search.html">Compass Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de.html">Differential Evolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de1220.html">Self-adaptive Differential Evolution (DE 1220 aka pDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaco.html">Extended Ant Colony Optimization (gaco)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gwo.html">Grey Wolf Optimizer (gwo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ihs.html">Improved Harmony Search (IHS)</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Ipopt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maco.html">Multi-objective Hypervolume-based Ant Colony Optimizer (MHACO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moead.html">Multi-objective Evolutionary Algorithm by Decomposition (MOEA/D-DE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moead_gen.html">Multi-objective Evolutionary Algorithm by Decomposition Generational (GMOEA/D-DE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mbh.html">Monotonic Basin Hopping (MBH) - Generalized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cstrs_self_adaptive.html">Self-adaptive constraints handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlopt.html">NLopt solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsga2.html">Non dominated sorting genetic algorithm (NSGA-II)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nspso.html">Non dominated sorting particle swarm optimization(NSPSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pso.html">Particle Swarm Optimization (PSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pso_gen.html">Particle Swarm Optimization Generational (GPSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sade.html">Self-adaptive Differential Evolution (jDE and iDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sea.html">(N+1)-ES Simple Evolutionary Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sga.html">Simple Genetic Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulated_annealing.html">Simulated Annealing (Corana’s version)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xnes.html">Exponential Natural Evolution Strategies (xNES)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/null.html">Null problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/rosenbrock.html">Rosenbrock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/rastrigin.html">Rastrigin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/schwefel.html">Schwefel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/ackley.html">Ackley</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/golomb_ruler.html">Optimal Golomb Ruler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/griewank.html">Griewank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/lennard_jones.html">Lennard Jones Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/zdt.html">ZDT test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/dtlz.html">DTLZ test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/hock_schittkowski_71.html">Hock Schittkowsky No.71</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/inventory.html">News-vendor problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/luksan_vlcek1.html">Luksan Vlcek 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/minlp_rastrigin.html">MINLP Rastrigin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/translate.html">Translate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/decompose.html">Decompose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2006.html">CEC 2006 Problem Suite (single-objective, constrained)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2009.html">CEC 2009 Problem Suite (multi-objective, constrained and unconstrained)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2013.html">CEC 2013 Problem Suite (box-bound, single objective)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/cec2014.html">CEC 2014 Problem Suite (box-bound, single objective)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/unconstrain.html">Unconstrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems/wfg.html">WFG problem test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../islands/thread_island.html">Thread island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../islands/fork_island.html">Fork island</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../batch_evaluators/default_bfe.html">Default BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../batch_evaluators/thread_bfe.html">Multithreaded BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../batch_evaluators/member_bfe.html">Member function BFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/unconnected.html">Unconnected topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/fully_connected.html">Fully connected</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/base_bgl_topology.html">Base BGL topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/ring.html">Ring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topologies/free_form.html">Free-form topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../r_policies/fair_replace.html">Fair replacement policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../s_policies/select_best.html">Best selection policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/multi_objective.html">Multi-objective optimization utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/constrained.html">Constrained optimization utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/discrepancy.html">Low-discrepancy sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/hypervolume.html">Hypervolumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/gradient_and_hessians.html">Utilities for gradient and hessians</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/genetic_operators.html">Genetic Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/generic.html">Generic utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/type_traits.html">Type traits and enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/exceptions.html">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellanea/utility_classes.html">Utility classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
       </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
 
-        <div class="collapse navbar-collapse nav-collapse">
-          <ul class="nav navbar-nav">
-            
-                <li><a href="../../../index.html">Home</a></li>
-                <li><a href="../../../install.html">Install</a></li>
-                <li><a href="../../../quickstart.html">Quickstart</a></li>
-            
-            
-              <li class="dropdown globaltoc-container">
-  <a role="button"
-     id="dLabelGlobalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="../../../index.html">All <b class="caret"></b></a>
-  <ul class="dropdown-menu globaltoc"
-      role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../install.html#c">C++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../install.html#python">Python</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick start</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#c">C++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#python">Python</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../algorithm_list.html">List of algorithms (UDAs) available in pagmo/pygmo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../algorithm_list.html#heuristic-global-optimization">Heuristic Global Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../algorithm_list.html#meta-algorithms">Meta-algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../algorithm_list.html#local-optimization">Local optimization</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../problem_list.html">List of problems (UDPs) available in pagmo/pygmo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../problem_list.html#scalable-problems">Scalable problems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../problem_list.html#problem-suites">Problem suites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../problem_list.html#meta-problems">Meta-problems</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../island_list.html">List of islands (UDIs) available in pagmo/pygmo</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../cpp_docs.html">C++ Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#core-classes">Core classes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../cpp_docs.html#implemented-algorithms">Implemented algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#implemented-problems">Implemented problems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#implemented-islands">Implemented islands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#utilities">Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cpp_docs.html#miscellanea">Miscellanea</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../python/python_docs.html">Python Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../python/python_docs.html#core-classes">Core classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/python_docs.html#implemented-problems-algorithms-and-islands">Implemented problems, algorithms and islands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/python_docs.html#utilities">Utilities</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../python/tutorials/python_tut.html">Python tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#basics">Basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#coding-your-own-problem-udp">Coding your own problem (UDP)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#coding-your-own-island-udi">Coding your own island (UDI)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#local-optimization">Local optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#multi-objective-optimization">Multi-objective optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#hypervolumes">Hypervolumes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/tutorials/python_tut.html#advanced-examples">Advanced Examples</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../credits.html">Credits</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../credits.html#main-developers">Main developers</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#unreleased">2.5 (unreleased)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id1">2.4 (2017-06-09)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id3">2.3 (2017-05-19)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id6">2.2 (2017-05-12)</a></li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
-                <li class="dropdown">
-  <a role="button"
-     id="dLabelLocalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="#">This Page <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"
-      role="menu"
-      aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Ipopt</a></li>
-</ul>
-</ul>
-</li>
-              
-            
-            
-            
-            
-            
-          </ul>
+<div class="sbt-scroll-pixel-helper"></div>
 
-          
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/esa/pagmo2" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/esa/pagmo2/issues/new?title=Issue%20on%20page%20%2Fdocs/cpp/algorithms/ipopt.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/docs/cpp/algorithms/ipopt.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Ipopt</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<form class="navbar-form navbar-right" action="../../../search.html" method="get">
- <div class="form-group">
-  <input type="text" name="q" class="form-control" placeholder="Search" />
- </div>
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
-          
         </div>
     </div>
-  </div>
+</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 content">
-      
-  <div class="section" id="ipopt">
-<h1>Ipopt<a class="headerlink" href="#ipopt" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="_CPPv2N5pagmo5ipoptE">
-<span id="pagmo::ipopt"></span><span class="target" id="pagmoclasspagmo_1_1ipopt"></span><em class="property">class </em><code class="descclassname">pagmo::</code><code class="descname">ipopt</code><a class="headerlink" href="#_CPPv2N5pagmo5ipoptE" title="Permalink to this definition">¶</a><br /></dt>
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="ipopt">
+<h1>Ipopt<a class="headerlink" href="#ipopt" title="Permalink to this headline">#</a></h1>
+<p><em>#include &lt;pagmo/algorithms/ipopt.hpp&gt;</em></p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipoptE">
+<span id="_CPPv3N5pagmo5ipoptE"></span><span id="_CPPv2N5pagmo5ipoptE"></span><span id="pagmo::ipopt"></span><span class="target" id="classpagmo_1_1ipopt"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ipopt</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">pagmo</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../miscellanea/utility_classes.html#_CPPv4N5pagmo20not_population_basedE" title="pagmo::not_population_based"><span class="n"><span class="pre">not_population_based</span></span></a><a class="headerlink" href="#_CPPv4N5pagmo5ipoptE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Ipopt. </p>
 <p><img alt="../../../_images/ipopt.png" src="../../../_images/ipopt.png" /></p>
 <p><div class="versionadded">
-<p><span class="versionmodified">New in version 2.2.</span></p>
+<p><span class="versionmodified added">New in version 2.2.</span></p>
 </div>
 </p>
-<p>This class is a user-defined algorithm (UDA) that wraps the Ipopt (Interior Point OPTimizer) solver, a software package for large-scale nonlinear optimization. Ipopt is a powerful solver that is able to handle robustly and efficiently constrained nonlinear opimization problems at high dimensionalities.</p>
+<p>This class is a user-defined algorithm (UDA) that wraps the Ipopt (Interior Point OPTimizer) solver, a software package for large-scale nonlinear optimization. Ipopt is a powerful solver that is able to handle robustly and efficiently constrained nonlinear optimization problems at high dimensionalities.</p>
 <p>Ipopt supports only single-objective minimisation, and it requires the availability of the gradient in the optimisation problem. If possible, for best results the Hessians should be provided as well (but Ipopt can estimate numerically the Hessians if needed).</p>
-<p>In order to support pagmo&#8217;s population-based optimisation model, <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a69053fa0154e4b6f2f0e1b67c9490a45"><span class="std std-ref">ipopt::evolve()</span></a> will select a single individual from the input <a class="reference internal" href="../population.html#pagmoclasspagmo_1_1population"><span class="std std-ref">pagmo::population</span></a> to be optimised. If the optimisation produces a better individual (as established by <a class="reference internal" href="../utils/constrained.html#pagmonamespacepagmo_1accb4f0cfb71555ffec215cc381ea87bc"><span class="std std-ref">pagmo::compare_fc()</span></a>), the optimised individual will be inserted back into the population. The selection and replacement strategies can be configured via <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1ad049600ad72f5aaf61dab52ea95cd6d9"><span class="std std-ref">set_selection(const std::string &amp;)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1acb03d2e2a6b68982eeb340f8cdd4eef7"><span class="std std-ref">set_replacement(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>.</p>
-<p><em>Configuring the optimsation run </em></p>
-<p>Ipopt supports a large amount of options for the configuration of the optimisation run. The options are divided into three categories:<ul class="simple">
-<li><em>string</em> options (i.e., the type of the option is <code class="docutils literal"><span class="pre">std::string</span></code>),</li>
-<li><em>integer</em> options (i.e., the type of the option is <code class="docutils literal"><span class="pre">Ipopt::Index</span></code> - an alias for some integer type, typically <code class="docutils literal"><span class="pre">int</span></code>),</li>
-<li><em>numeric</em> options (i.e., the type of the option is <code class="docutils literal"><span class="pre">double</span></code>).</li>
+<p>In order to support pagmo’s population-based optimisation model, <a class="reference internal" href="#classpagmo_1_1ipopt_1aa0a70c0c153949cf6e217cdb23776402"><span class="std std-ref">ipopt::evolve()</span></a> will select a single individual from the input <a class="reference internal" href="../population.html#classpagmo_1_1population"><span class="std std-ref">pagmo::population</span></a> to be optimised. If the optimisation produces a better individual (as established by <a class="reference internal" href="../utils/constrained.html#namespacepagmo_1a5933d992cb780a189f50728594e81345"><span class="std std-ref">pagmo::compare_fc()</span></a>), the optimised individual will be inserted back into the population. The selection and replacement strategies can be configured via <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a918f089d9cc1a251005b9af0d209f2d4"><span class="std std-ref">set_selection(const std::string &amp;)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ac308e8d059b0f3c3ef901607b49f2a48"><span class="std std-ref">set_replacement(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>.</p>
+<section id="classpagmo_1_1ipopt_1autotoc_md0_1s1">
+<h2><a class="headerlink" href="#classpagmo_1_1ipopt_1autotoc_md0_1s1" title="Permalink to this headline">#</a></h2>
+<section id="classpagmo_1_1ipopt_1autotoc_md0">
+<span id="classpagmo_1_1ipopt_1autotoc_md0_1s1"></span><h3>Configuring the optimization run<a class="headerlink" href="#classpagmo_1_1ipopt_1autotoc_md0" title="Permalink to this headline">#</a></h3>
+<p id="classpagmo_1_1ipopt_1autotoc_md0">Ipopt supports a large amount of options for the configuration of the optimisation run. The options are divided into three categories:<ul class="simple">
+<li><p><em>string</em> options (i.e., the type of the option is <code class="docutils literal notranslate"><span class="pre">std::string</span></code>),</p></li>
+<li><p><em>integer</em> options (i.e., the type of the option is <code class="docutils literal notranslate"><span class="pre">Ipopt::Index</span></code> - an alias for some integer type, typically <code class="docutils literal notranslate"><span class="pre">int</span></code>),</p></li>
+<li><p><em>numeric</em> options (i.e., the type of the option is <code class="docutils literal notranslate"><span class="pre">double</span></code>).</p></li>
 </ul>
 </p>
-<p>The full list of options is available on the <a class="reference external" href="https://www.coin-or.org/Ipopt/documentation/node40.html">Ipopt website</a>. <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt"><span class="std std-ref">pagmo::ipopt</span></a> allows to configure any Ipopt option via methods such as <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a28e48ec5b6deef682286c3e99a0bd299"><span class="std std-ref">ipopt::set_string_options()</span></a>, <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1ad02e6ef02ac274cef26d22ce862617d8"><span class="std std-ref">ipopt::set_string_option()</span></a>, <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1ad38bb90a49f316230ab32601269b2cfe"><span class="std std-ref">ipopt::set_integer_options()</span></a>, etc., which need to be used before invoking <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a69053fa0154e4b6f2f0e1b67c9490a45"><span class="std std-ref">ipopt::evolve()</span></a>.</p>
-<p>If the user does not set any option, <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt"><span class="std std-ref">pagmo::ipopt</span></a> will use Ipopt&#8217;s default values for the options (see the <a class="reference external" href="https://www.coin-or.org/Ipopt/documentation/node40.html">documentation</a>), with the following modifications:<ul class="simple">
-<li>if the <code class="docutils literal"><span class="pre">&quot;print_level&quot;</span></code> integer option is <strong>not</strong> set by the user, it will be set to 0 by <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt"><span class="std std-ref">pagmo::ipopt</span></a> (this will suppress most screen output produced by the solver - note that we support an alternative form of logging via the <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a758ec78a12b9903b555e2c1cb55c14ab"><span class="std std-ref">ipopt::set_verbosity()</span></a> method);</li>
-<li>if the <code class="docutils literal"><span class="pre">&quot;hessian_approximation&quot;</span></code> string option is <strong>not</strong> set by the user and the optimisation problem does <strong>not</strong> provide the Hessians, then the option will be set to <code class="docutils literal"><span class="pre">&quot;limited-memory&quot;</span></code> by <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt"><span class="std std-ref">pagmo::ipopt</span></a>. This makes it possible to optimise problems without Hessians out-of-the-box (i.e., Ipopt will approximate numerically the Hessians for you);</li>
-<li>if the <code class="docutils literal"><span class="pre">&quot;constr_viol_tol&quot;</span></code> numeric option is <strong>not</strong> set by the user and the optimisation problem is constrained, then <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt"><span class="std std-ref">pagmo::ipopt</span></a> will compute the minimum value <code class="docutils literal"><span class="pre">min_tol</span></code> in the vector returned by <a class="reference internal" href="../problem.html#pagmoclasspagmo_1_1problem_1a22a38321cad16dface23ea5c5efb147a"><span class="std std-ref">pagmo::problem::get_c_tol()</span></a> for the optimisation problem at hand. If <code class="docutils literal"><span class="pre">min_tol</span></code> is nonzero, then the <code class="docutils literal"><span class="pre">&quot;constr_viol_tol&quot;</span></code> Ipopt option will be set to <code class="docutils literal"><span class="pre">min_tol</span></code>, otherwise the default Ipopt value (1E-4) will be used for the option. This ensures that, if the constraint tolerance is not explicitly set by the user, a solution deemed feasible by Ipopt is also deemed feasible by pagmo (but the opposite is not necessarily true).</li>
+<p>The full list of options is available on the <a class="reference external" href="https://coin-or.github.io/Ipopt/OPTIONS.html">Ipopt website</a>. <a class="reference internal" href="#classpagmo_1_1ipopt"><span class="std std-ref">pagmo::ipopt</span></a> allows to configure any Ipopt option via methods such as <a class="reference internal" href="#classpagmo_1_1ipopt_1aee7d3399c0bbf817f9682d95161e8c7c"><span class="std std-ref">ipopt::set_string_options()</span></a>, <a class="reference internal" href="#classpagmo_1_1ipopt_1a722f0d2d89ce0668c94609188f0c624b"><span class="std std-ref">ipopt::set_string_option()</span></a>, <a class="reference internal" href="#classpagmo_1_1ipopt_1adafd021849a25fbf01631c77a622b554"><span class="std std-ref">ipopt::set_integer_options()</span></a>, etc., which need to be used before invoking <a class="reference internal" href="#classpagmo_1_1ipopt_1aa0a70c0c153949cf6e217cdb23776402"><span class="std std-ref">ipopt::evolve()</span></a>.</p>
+<p>If the user does not set any option, <a class="reference internal" href="#classpagmo_1_1ipopt"><span class="std std-ref">pagmo::ipopt</span></a> will use Ipopt’s default values for the options (see the <a class="reference external" href="https://coin-or.github.io/Ipopt/OPTIONS.html">documentation</a>), with the following modifications:<ul class="simple">
+<li><p>if the <code class="docutils literal notranslate"><span class="pre">&quot;print_level&quot;</span></code> integer option is <strong>not</strong> set by the user, it will be set to 0 by <a class="reference internal" href="#classpagmo_1_1ipopt"><span class="std std-ref">pagmo::ipopt</span></a> (this will suppress most screen output produced by the solver - note that we support an alternative form of logging via the <a class="reference internal" href="#classpagmo_1_1ipopt_1a758ec78a12b9903b555e2c1cb55c14ab"><span class="std std-ref">ipopt::set_verbosity()</span></a> method);</p></li>
+<li><p>if the <code class="docutils literal notranslate"><span class="pre">&quot;hessian_approximation&quot;</span></code> string option is <strong>not</strong> set by the user and the optimisation problem does <strong>not</strong> provide the Hessians, then the option will be set to <code class="docutils literal notranslate"><span class="pre">&quot;limited-memory&quot;</span></code> by <a class="reference internal" href="#classpagmo_1_1ipopt"><span class="std std-ref">pagmo::ipopt</span></a>. This makes it possible to optimise problems without Hessians out-of-the-box (i.e., Ipopt will approximate numerically the Hessians for you);</p></li>
+<li><p>if the <code class="docutils literal notranslate"><span class="pre">&quot;constr_viol_tol&quot;</span></code> numeric option is <strong>not</strong> set by the user and the optimisation problem is constrained, then <a class="reference internal" href="#classpagmo_1_1ipopt"><span class="std std-ref">pagmo::ipopt</span></a> will compute the minimum value <code class="docutils literal notranslate"><span class="pre">min_tol</span></code> in the vector returned by <a class="reference internal" href="../problem.html#classpagmo_1_1problem_1a22a38321cad16dface23ea5c5efb147a"><span class="std std-ref">pagmo::problem::get_c_tol()</span></a> for the optimisation problem at hand. If <code class="docutils literal notranslate"><span class="pre">min_tol</span></code> is nonzero, then the <code class="docutils literal notranslate"><span class="pre">&quot;constr_viol_tol&quot;</span></code> Ipopt option will be set to <code class="docutils literal notranslate"><span class="pre">min_tol</span></code>, otherwise the default Ipopt value (1E-4) will be used for the option. This ensures that, if the constraint tolerance is not explicitly set by the user, a solution deemed feasible by Ipopt is also deemed feasible by pagmo (but the opposite is not necessarily true).</p></li>
 </ul>
 </p>
-<p><div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">A moved-from <a class="reference internal" href="#_CPPv2N5pagmo5ipoptE" title="pagmo::ipopt"><code class="xref cpp cpp-class docutils literal"><span class="pre">pagmo::ipopt</span></code></a> is destructible and assignable. Any other operation will result
-in undefined behaviour.</p>
+<p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://projects.coin-or.org/Ipopt">https://projects.coin-or.org/Ipopt</a>.</p>
 </div>
+</p>
+</section>
+</section>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This user-defined algorithm is available only if pagmo was compiled with the <code class="docutils literal"><span class="pre">PAGMO_WITH_IPOPT</span></code> option
+<p class="admonition-title">Note</p>
+<p>This user-defined algorithm is available only if pagmo was compiled with the <code class="docutils literal notranslate"><span class="pre">PAGMO_WITH_IPOPT</span></code> option
 enabled (see the <a class="reference internal" href="../../../install.html#install"><span class="std std-ref">installation instructions</span></a>).</p>
 </div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference external" href="https://projects.coin-or.org/Ipopt">https://projects.coin-or.org/Ipopt</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A moved-from <a class="reference internal" href="#_CPPv4N5pagmo5ipoptE" title="pagmo::ipopt"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::ipopt</span></code></a> is destructible and assignable. Any other operation will result
+in undefined behaviour.</p>
 </div>
- </p>
-<p>Inherits from <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based"><span class="std std-ref">pagmo::not_population_based</span></a></p>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Types</p>
-<dl class="type">
-<dt id="_CPPv2N5pagmo5ipopt13log_line_typeE">
-<span class="target" id="pagmoclasspagmo_1_1ipopt_1ac5e712ea5dcc0093ae9ba4649b0fedad"></span><em class="property">using </em><code class="descname">log_line_type</code> = std::tuple&lt;unsigned long, double, <a class="reference internal" href="../types.html#_CPPv2N5pagmo13vector_doubleE" title="pagmo::vector_double">vector_double</a>::size_type, double, bool&gt;<a class="headerlink" href="#_CPPv2N5pagmo5ipopt13log_line_typeE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Single data line for the algorithm&#8217;s log. </p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt13log_line_typeE">
+<span id="_CPPv3N5pagmo5ipopt13log_line_typeE"></span><span id="_CPPv2N5pagmo5ipopt13log_line_typeE"></span><span class="target" id="classpagmo_1_1ipopt_1ac5e712ea5dcc0093ae9ba4649b0fedad"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_line_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../types.html#_CPPv4N5pagmo13vector_doubleE" title="pagmo::vector_double"><span class="n"><span class="pre">vector_double</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_type</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt13log_line_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Single data line for the algorithm’s log. </p>
 <p>A log data line is a tuple consisting of:<ul class="simple">
-<li>the number of objective function evaluations made so far,</li>
-<li>the objective function value for the current decision vector,</li>
-<li>the number of constraints violated by the current decision vector,</li>
-<li>the constraints violation norm for the current decision vector,</li>
-<li>a boolean flag signalling the feasibility of the current decision vector. </li>
+<li><p>the number of objective function evaluations made so far,</p></li>
+<li><p>the objective function value for the current decision vector,</p></li>
+<li><p>the number of constraints violated by the current decision vector,</p></li>
+<li><p>the constraints violation norm for the current decision vector,</p></li>
+<li><p>a boolean flag signalling the feasibility of the current decision vector. </p></li>
 </ul>
 </p>
 </dd></dl>
 
-<dl class="type">
-<dt id="_CPPv2N5pagmo5ipopt8log_typeE">
-<span class="target" id="pagmoclasspagmo_1_1ipopt_1a7320e3c2277c5a684be9d594319d8e7e"></span><em class="property">using </em><code class="descname">log_type</code> = std::vector&lt;<a class="reference internal" href="#_CPPv2N5pagmo5ipopt13log_line_typeE" title="pagmo::ipopt::log_line_type">log_line_type</a>&gt;<a class="headerlink" href="#_CPPv2N5pagmo5ipopt8log_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt8log_typeE">
+<span id="_CPPv3N5pagmo5ipopt8log_typeE"></span><span id="_CPPv2N5pagmo5ipopt8log_typeE"></span><span class="target" id="classpagmo_1_1ipopt_1a7320e3c2277c5a684be9d594319d8e7e"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N5pagmo5ipopt13log_line_typeE" title="pagmo::ipopt::log_line_type"><span class="n"><span class="pre">log_line_type</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt8log_typeE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Log type. </p>
-<p>The algorithm log is a collection of <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1ac5e712ea5dcc0093ae9ba4649b0fedad"><span class="std std-ref">ipopt::log_line_type</span></a> data lines, stored in chronological order during the optimisation if the verbosity of the algorithm is set to a nonzero value (see <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a758ec78a12b9903b555e2c1cb55c14ab"><span class="std std-ref">ipopt::set_verbosity()</span></a>). </p>
+<p>The algorithm log is a collection of <a class="reference internal" href="#classpagmo_1_1ipopt_1ac5e712ea5dcc0093ae9ba4649b0fedad"><span class="std std-ref">ipopt::log_line_type</span></a> data lines, stored in chronological order during the optimisation if the verbosity of the algorithm is set to a nonzero value (see <a class="reference internal" href="#classpagmo_1_1ipopt_1a758ec78a12b9903b555e2c1cb55c14ab"><span class="std std-ref">ipopt::set_verbosity()</span></a>). </p>
 </dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5ipopt6evolveE10population">
-<span id="pagmo::ipopt::evolve__populationC"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a69053fa0154e4b6f2f0e1b67c9490a45"></span><a class="reference internal" href="../population.html#_CPPv2N5pagmo10populationE" title="pagmo::population">population</a> <code class="descname">evolve</code><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv2N5pagmo10populationE" title="pagmo::population">population</a> <em>pop</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5ipopt6evolveE10population" title="Permalink to this definition">¶</a><br /></dt>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5ipopt6evolveE10population">
+<span id="_CPPv3NK5pagmo5ipopt6evolveE10population"></span><span id="_CPPv2NK5pagmo5ipopt6evolveE10population"></span><span id="pagmo::ipopt::evolve__populationC"></span><span class="target" id="classpagmo_1_1ipopt_1aa0a70c0c153949cf6e217cdb23776402"></span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10populationE" title="pagmo::population"><span class="n"><span class="pre">population</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">evolve</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10populationE" title="pagmo::population"><span class="n"><span class="pre">population</span></span></a><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5ipopt6evolveE10population" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Evolve population. </p>
-<p>This method will select an individual from <code class="docutils literal"><span class="pre">pop</span></code>, optimise it with Ipopt, replace an individual in <code class="docutils literal"><span class="pre">pop</span></code> with the optimised individual, and finally return <code class="docutils literal"><span class="pre">pop</span></code>. The individual selection and replacement criteria can be set via <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1ad049600ad72f5aaf61dab52ea95cd6d9"><span class="std std-ref">set_selection(const std::string &amp;)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1acb03d2e2a6b68982eeb340f8cdd4eef7"><span class="std std-ref">set_replacement(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>. The return status of the Ipopt optimisation run will be recorded (it can be fetched with <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a5500d5fa950098411152a8abf34e249c"><span class="std std-ref">get_last_opt_result()</span></a>).</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the optimised population.</dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">pop</span></code>: the population to be optimised.</li>
+<p>This method will select an individual from <code class="docutils literal notranslate"><span class="pre">pop</span></code>, optimise it with Ipopt, replace an individual in <code class="docutils literal notranslate"><span class="pre">pop</span></code> with the optimised individual, and finally return <code class="docutils literal notranslate"><span class="pre">pop</span></code>. The individual selection and replacement criteria can be set via <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a918f089d9cc1a251005b9af0d209f2d4"><span class="std std-ref">set_selection(const std::string &amp;)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>, <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ac308e8d059b0f3c3ef901607b49f2a48"><span class="std std-ref">set_replacement(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>. The return status of the Ipopt optimisation run will be recorded (it can be fetched with <a class="reference internal" href="#classpagmo_1_1ipopt_1a5500d5fa950098411152a8abf34e249c"><span class="std std-ref">get_last_opt_result()</span></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pop</strong> – the population to be optimised.</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – in the following cases:<ul>
+<li><p>the population’s problem is multi-objective or it does not provide the gradient,</p></li>
+<li><p>the setup of the Ipopt solver options fails (e.g., an invalid option was specified by the user),</p></li>
+<li><p>the components of the individual selected for optimisation contain NaNs or they are outside the problem’s bounds,</p></li>
+<li><p>the exact evaluation of the Hessians was requested, but the problem does not support it. </p></li>
+</ul>
+</p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if the initialization of the Ipopt solver fails. </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">unspecified</span></span></span> – any exception thrown by the public interface of <a class="reference internal" href="../problem.html#classpagmo_1_1problem"><span class="std std-ref">pagmo::problem</span></a> or <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based"><span class="std std-ref">pagmo::not_population_based</span></a>. </p></li>
 </ul>
 </dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: in the following cases:<ul>
-<li>the population&#8217;s problem is multi-objective or it does not provide the gradient,</li>
-<li>the setup of the Ipopt solver options fails (e.g., an invalid option was specified by the user),</li>
-<li>the components of the individual selected for optimisation contain NaNs or they are outside the problem&#8217;s bounds,</li>
-<li>the exact evaluation of the Hessians was requested, but the problem does not support it. </li>
-</ul>
-</li>
-<li><code class="docutils literal"><span class="pre">std::runtime_error</span></code>: if the initialization of the Ipopt solver fails. </li>
-<li><code class="docutils literal"><span class="pre">unspecified</span></code>: any exception thrown by the public interface of <a class="reference internal" href="../problem.html#pagmoclasspagmo_1_1problem"><span class="std std-ref">pagmo::problem</span></a> or <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based"><span class="std std-ref">pagmo::not_population_based</span></a>. </li>
-</ul>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the optimised population.</p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5ipopt19get_last_opt_resultEv">
-<span id="pagmo::ipopt::get_last_opt_resultC"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a5500d5fa950098411152a8abf34e249c"></span>Ipopt::ApplicationReturnStatus <code class="descname">get_last_opt_result</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5ipopt19get_last_opt_resultEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5ipopt19get_last_opt_resultEv">
+<span id="_CPPv3NK5pagmo5ipopt19get_last_opt_resultEv"></span><span id="_CPPv2NK5pagmo5ipopt19get_last_opt_resultEv"></span><span id="pagmo::ipopt::get_last_opt_resultC"></span><span class="target" id="classpagmo_1_1ipopt_1a5500d5fa950098411152a8abf34e249c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">Ipopt</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ApplicationReturnStatus</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_last_opt_result</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5ipopt19get_last_opt_resultEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get the result of the last optimisation. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the result of the last <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a69053fa0154e4b6f2f0e1b67c9490a45"><span class="std std-ref">evolve()</span></a> call, or <code class="docutils literal"><span class="pre">Ipopt::Solve_Succeeded</span></code> if no optimisations have been run yet. </dd>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the result of the last <a class="reference internal" href="#classpagmo_1_1ipopt_1aa0a70c0c153949cf6e217cdb23776402"><span class="std std-ref">evolve()</span></a> call, or <code class="docutils literal notranslate"><span class="pre">Ipopt::Solve_Succeeded</span></code> if no optimisations have been run yet. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5ipopt8get_nameEv">
-<span id="pagmo::ipopt::get_nameC"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a8fd60b3470c3969bed5cc34331cda160"></span>std::string <code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5ipopt8get_nameEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the algorithm&#8217;s name. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd><code class="docutils literal"><span class="pre">&quot;Ipopt&quot;</span></code>. </dd>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5ipopt8get_nameEv">
+<span id="_CPPv3NK5pagmo5ipopt8get_nameEv"></span><span id="_CPPv2NK5pagmo5ipopt8get_nameEv"></span><span id="pagmo::ipopt::get_nameC"></span><span class="target" id="classpagmo_1_1ipopt_1a8fd60b3470c3969bed5cc34331cda160"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5ipopt8get_nameEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Get the algorithm’s name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">&quot;Ipopt&quot;</span></code>. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5ipopt14get_extra_infoEv">
-<span id="pagmo::ipopt::get_extra_infoC"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a575fb04887173c1abf444eda14931d36"></span>std::string <code class="descname">get_extra_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5ipopt14get_extra_infoEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5ipopt14get_extra_infoEv">
+<span id="_CPPv3NK5pagmo5ipopt14get_extra_infoEv"></span><span id="_CPPv2NK5pagmo5ipopt14get_extra_infoEv"></span><span id="pagmo::ipopt::get_extra_infoC"></span><span class="target" id="classpagmo_1_1ipopt_1a575fb04887173c1abf444eda14931d36"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_extra_info</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5ipopt14get_extra_infoEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get extra information about the algorithm. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a human-readable string containing useful information about the algorithm&#8217;s properties (e.g., the Ipopt optimisation options, the selection/replacement policies, etc.). </dd>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a human-readable string containing useful information about the algorithm’s properties (e.g., the Ipopt optimisation options, the selection/replacement policies, etc.). </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5ipopt13set_verbosityEj">
-<span id="pagmo::ipopt::set_verbosity__unsigned"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a758ec78a12b9903b555e2c1cb55c14ab"></span>void <code class="descname">set_verbosity</code><span class="sig-paren">(</span>unsigned <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5ipopt13set_verbosityEj" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt13set_verbosityEj">
+<span id="_CPPv3N5pagmo5ipopt13set_verbosityEj"></span><span id="_CPPv2N5pagmo5ipopt13set_verbosityEj"></span><span id="pagmo::ipopt::set_verbosity__unsigned"></span><span class="target" id="classpagmo_1_1ipopt_1a758ec78a12b9903b555e2c1cb55c14ab"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_verbosity</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt13set_verbosityEj" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set verbosity. </p>
-<p>This method will set the algorithm&#8217;s verbosity. If <code class="docutils literal"><span class="pre">n</span></code> is zero, no output is produced during the optimisation and no logging is performed. If <code class="docutils literal"><span class="pre">n</span></code> is nonzero, then every <code class="docutils literal"><span class="pre">n</span></code> objective function evaluations the status of the optimisation will be both printed to screen and recorded internally. See <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1ac5e712ea5dcc0093ae9ba4649b0fedad"><span class="std std-ref">ipopt::log_line_type</span></a> and <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a7320e3c2277c5a684be9d594319d8e7e"><span class="std std-ref">ipopt::log_type</span></a> for information on the logging format. The internal log can be fetched via <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a98f87836db4d7df3742fb48b31404518"><span class="std std-ref">get_log()</span></a>.</p>
-<p>Example (verbosity 1): <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">objevals</span><span class="p">:</span>        <span class="n">objval</span><span class="p">:</span>      <span class="n">violated</span><span class="p">:</span>    <span class="n">viol</span><span class="o">.</span> <span class="n">norm</span><span class="p">:</span>
-        <span class="mi">1</span>        <span class="mf">48.9451</span>              <span class="mi">1</span>        <span class="mf">1.25272</span> <span class="n">i</span>
-        <span class="mi">2</span>         <span class="mf">30.153</span>              <span class="mi">1</span>       <span class="mf">0.716591</span> <span class="n">i</span>
-        <span class="mi">3</span>        <span class="mf">26.2884</span>              <span class="mi">1</span>        <span class="mf">1.04269</span> <span class="n">i</span>
-        <span class="mi">4</span>        <span class="mf">14.6958</span>              <span class="mi">2</span>        <span class="mf">7.80753</span> <span class="n">i</span>
-        <span class="mi">5</span>        <span class="mf">14.7742</span>              <span class="mi">2</span>        <span class="mf">5.41342</span> <span class="n">i</span>
-        <span class="mi">6</span>         <span class="mf">17.093</span>              <span class="mi">1</span>      <span class="mf">0.0905025</span> <span class="n">i</span>
-        <span class="mi">7</span>        <span class="mf">17.1772</span>              <span class="mi">1</span>      <span class="mf">0.0158448</span> <span class="n">i</span>
-        <span class="mi">8</span>        <span class="mf">17.0254</span>              <span class="mi">2</span>      <span class="mf">0.0261289</span> <span class="n">i</span>
-        <span class="mi">9</span>        <span class="mf">17.0162</span>              <span class="mi">2</span>     <span class="mf">0.00435195</span> <span class="n">i</span>
-       <span class="mi">10</span>        <span class="mf">17.0142</span>              <span class="mi">2</span>    <span class="mf">0.000188461</span> <span class="n">i</span>
-       <span class="mi">11</span>         <span class="mf">17.014</span>              <span class="mi">1</span>    <span class="mf">1.90997e-07</span> <span class="n">i</span>
-       <span class="mi">12</span>         <span class="mf">17.014</span>              <span class="mi">0</span>              <span class="mi">0</span>
+<p>This method will set the algorithm’s verbosity. If <code class="docutils literal notranslate"><span class="pre">n</span></code> is zero, no output is produced during the optimisation and no logging is performed. If <code class="docutils literal notranslate"><span class="pre">n</span></code> is nonzero, then every <code class="docutils literal notranslate"><span class="pre">n</span></code> objective function evaluations the status of the optimisation will be both printed to screen and recorded internally. See <a class="reference internal" href="#classpagmo_1_1ipopt_1ac5e712ea5dcc0093ae9ba4649b0fedad"><span class="std std-ref">ipopt::log_line_type</span></a> and <a class="reference internal" href="#classpagmo_1_1ipopt_1a7320e3c2277c5a684be9d594319d8e7e"><span class="std std-ref">ipopt::log_type</span></a> for information on the logging format. The internal log can be fetched via <a class="reference internal" href="#classpagmo_1_1ipopt_1a359a18751d494dd6c810bd36e4f58540"><span class="std std-ref">get_log()</span></a>.</p>
+<p>Example (verbosity 1): <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>objevals:        objval:      violated:    viol. norm:
+        1        48.9451              1        1.25272 i
+        2         30.153              1       0.716591 i
+        3        26.2884              1        1.04269 i
+        4        14.6958              2        7.80753 i
+        5        14.7742              2        5.41342 i
+        6         17.093              1      0.0905025 i
+        7        17.1772              1      0.0158448 i
+        8        17.0254              2      0.0261289 i
+        9        17.0162              2     0.00435195 i
+       10        17.0142              2    0.000188461 i
+       11         17.014              1    1.90997e-07 i
+       12         17.014              0              0
 </pre></div>
 </div>
- The <code class="docutils literal"><span class="pre">i</span></code> at the end of some rows indicates that the decision vector is infeasible. Feasibility is checked against the problem&#8217;s tolerance.</p>
+ The <code class="docutils literal notranslate"><span class="pre">i</span></code> at the end of some rows indicates that the decision vector is infeasible. Feasibility is checked against the problem’s tolerance.</p>
 <p>By default, the verbosity level is zero.</p>
-<p><div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The number of constraints violated, the constraints violation norm and the feasibility flag stored in the log
-are all determined via the facilities and the tolerances specified within <a class="reference internal" href="../problem.html#_CPPv2N5pagmo7problemE" title="pagmo::problem"><code class="xref cpp cpp-class docutils literal"><span class="pre">pagmo::problem</span></code></a>. That
-is, they might not necessarily be consistent with Ipopt&#8217;s notion of feasibility. See the explanation
-of how the <code class="docutils literal"><span class="pre">&quot;constr_viol_tol&quot;</span></code> numeric option is handled in <a class="reference internal" href="#_CPPv2N5pagmo5ipoptE" title="pagmo::ipopt"><code class="xref cpp cpp-class docutils literal"><span class="pre">pagmo::ipopt</span></code></a>.</p>
-</div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Ipopt supports its own logging format and protocol, including the ability to print to screen and write to
-file. Ipopt&#8217;s screen logging is disabled by default (i.e., the Ipopt verbosity setting is set to 0 - see
-<a class="reference internal" href="#_CPPv2N5pagmo5ipoptE" title="pagmo::ipopt"><code class="xref cpp cpp-class docutils literal"><span class="pre">pagmo::ipopt</span></code></a>). On-screen logging can be enabled via the <code class="docutils literal"><span class="pre">&quot;print_level&quot;</span></code> string option.</p>
+<p class="admonition-title">Note</p>
+<p>Ipopt supports its own logging format and protocol, including the ability to print to screen and write to
+file. Ipopt’s screen logging is disabled by default (i.e., the Ipopt verbosity setting is set to 0 - see
+<a class="reference internal" href="#_CPPv4N5pagmo5ipoptE" title="pagmo::ipopt"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::ipopt</span></code></a>). On-screen logging can be enabled via the <code class="docutils literal notranslate"><span class="pre">&quot;print_level&quot;</span></code> string option.</p>
 </div>
-</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">n</span></code>: the desired verbosity level. </li>
-</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The number of constraints violated, the constraints violation norm and the feasibility flag stored in the log
+are all determined via the facilities and the tolerances specified within <a class="reference internal" href="../problem.html#_CPPv4N5pagmo7problemE" title="pagmo::problem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::problem</span></code></a>. That
+is, they might not necessarily be consistent with Ipopt’s notion of feasibility. See the explanation
+of how the <code class="docutils literal notranslate"><span class="pre">&quot;constr_viol_tol&quot;</span></code> numeric option is handled in <a class="reference internal" href="#_CPPv4N5pagmo5ipoptE" title="pagmo::ipopt"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">pagmo::ipopt</span></code></a>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – the desired verbosity level. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5ipopt7get_logEv">
-<span id="pagmo::ipopt::get_logC"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a98f87836db4d7df3742fb48b31404518"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5pagmo5ipopt8log_typeE" title="pagmo::ipopt::log_type">log_type</a> &amp;<code class="descname">get_log</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5ipopt7get_logEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5ipopt7get_logEv">
+<span id="_CPPv3NK5pagmo5ipopt7get_logEv"></span><span id="_CPPv2NK5pagmo5ipopt7get_logEv"></span><span id="pagmo::ipopt::get_logC"></span><span class="target" id="classpagmo_1_1ipopt_1a359a18751d494dd6c810bd36e4f58540"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5pagmo5ipopt8log_typeE" title="pagmo::ipopt::log_type"><span class="n"><span class="pre">log_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_log</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5ipopt7get_logEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get the optimisation log. </p>
-<p>See <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a7320e3c2277c5a684be9d594319d8e7e"><span class="std std-ref">ipopt::log_type</span></a> for a description of the optimisation log. Logging is turned on/off via <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a758ec78a12b9903b555e2c1cb55c14ab"><span class="std std-ref">set_verbosity()</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a const reference to the log. </dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<em class="property">template </em>&lt;<em class="property">typename</em> Archive&gt;</dt>
-<dt id="_CPPv2NK5pagmo5ipopt4saveER7Archive">
-<span id="pagmo::ipopt::save__ArchiveRC"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a6406e9b3834da0f7226927641744caab"></span>void <code class="descname">save</code><span class="sig-paren">(</span>Archive &amp;<em>ar</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5ipopt4saveER7Archive" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Save to archive. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">ar</span></code>: the target archive.</li>
-</ul>
-</dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">unspecified</span></code>: any exception thrown by the serialization of primitive types or <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based"><span class="std std-ref">pagmo::not_population_based</span></a>. </li>
-</ul>
+<p>See <a class="reference internal" href="#classpagmo_1_1ipopt_1a7320e3c2277c5a684be9d594319d8e7e"><span class="std std-ref">ipopt::log_type</span></a> for a description of the optimisation log. Logging is turned on/off via <a class="reference internal" href="#classpagmo_1_1ipopt_1a758ec78a12b9903b555e2c1cb55c14ab"><span class="std std-ref">set_verbosity()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a const reference to the log. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt>
-<em class="property">template </em>&lt;<em class="property">typename</em> Archive&gt;</dt>
-<dt id="_CPPv2N5pagmo5ipopt4loadER7Archive">
-<span id="pagmo::ipopt::load__ArchiveR"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a83df657fb7626f9edf3ddbb17b1415cb"></span>void <code class="descname">load</code><span class="sig-paren">(</span>Archive &amp;<em>ar</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5ipopt4loadER7Archive" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Load from archive. </p>
-<p>In case of exceptions, <code class="docutils literal"><span class="pre">this</span></code> will be reset to a default-constructed state.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">ar</span></code>: the source archive.</li>
-</ul>
-</dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">unspecified</span></code>: any exception thrown by the deserialization of primitive types or <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based"><span class="std std-ref">pagmo::not_population_based</span></a>. </li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5pagmo5ipopt17set_string_optionERKNSt6stringERKNSt6stringE">
-<span id="pagmo::ipopt::set_string_option__ssCR.ssCR"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1ad02e6ef02ac274cef26d22ce862617d8"></span>void <code class="descname">set_string_option</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em>, <em class="property">const</em> std::string &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5ipopt17set_string_optionERKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt17set_string_optionERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N5pagmo5ipopt17set_string_optionERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N5pagmo5ipopt17set_string_optionERKNSt6stringERKNSt6stringE"></span><span id="pagmo::ipopt::set_string_option__ssCR.ssCR"></span><span class="target" id="classpagmo_1_1ipopt_1a722f0d2d89ce0668c94609188f0c624b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_string_option</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&amp;</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt17set_string_optionERKNSt6stringERKNSt6stringE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set string option. </p>
-<p>This method will set the optimisation string option <code class="docutils literal"><span class="pre">name</span></code> to <code class="docutils literal"><span class="pre">value</span></code>. The optimisation options are passed to the Ipopt API when calling <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a69053fa0154e4b6f2f0e1b67c9490a45"><span class="std std-ref">evolve()</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">name</span></code>: of the option. </li>
-<li><code class="docutils literal"><span class="pre">value</span></code>: of the option. </li>
+<p>This method will set the optimisation string option <code class="docutils literal notranslate"><span class="pre">name</span></code> to <code class="docutils literal notranslate"><span class="pre">value</span></code>. The optimisation options are passed to the Ipopt API when calling <a class="reference internal" href="#classpagmo_1_1ipopt_1aa0a70c0c153949cf6e217cdb23776402"><span class="std std-ref">evolve()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – of the option. </p></li>
+<li><p><strong>value</strong> – of the option. </p></li>
 </ul>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5ipopt18set_integer_optionERKNSt6stringEN5Ipopt5IndexE">
-<span id="pagmo::ipopt::set_integer_option__ssCR.Ipopt::Index"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a0da6321d5cd0280c922a3fd4ad9205c3"></span>void <code class="descname">set_integer_option</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em>, Ipopt::Index <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5ipopt18set_integer_optionERKNSt6stringEN5Ipopt5IndexE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt18set_integer_optionERKNSt6stringEN5Ipopt5IndexE">
+<span id="_CPPv3N5pagmo5ipopt18set_integer_optionERKNSt6stringEN5Ipopt5IndexE"></span><span id="_CPPv2N5pagmo5ipopt18set_integer_optionERKNSt6stringEN5Ipopt5IndexE"></span><span id="pagmo::ipopt::set_integer_option__ssCR.Ipopt::Index"></span><span class="target" id="classpagmo_1_1ipopt_1abf6d8045bb7487cd3fda0c3165a58f6f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_integer_option</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&amp;</span></span>, <span class="n"><span class="pre">Ipopt</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Index</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt18set_integer_optionERKNSt6stringEN5Ipopt5IndexE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set integer option. </p>
-<p>This method will set the optimisation integer option <code class="docutils literal"><span class="pre">name</span></code> to <code class="docutils literal"><span class="pre">value</span></code>. The optimisation options are passed to the Ipopt API when calling <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a69053fa0154e4b6f2f0e1b67c9490a45"><span class="std std-ref">evolve()</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">name</span></code>: of the option. </li>
-<li><code class="docutils literal"><span class="pre">value</span></code>: of the option. </li>
+<p>This method will set the optimisation integer option <code class="docutils literal notranslate"><span class="pre">name</span></code> to <code class="docutils literal notranslate"><span class="pre">value</span></code>. The optimisation options are passed to the Ipopt API when calling <a class="reference internal" href="#classpagmo_1_1ipopt_1aa0a70c0c153949cf6e217cdb23776402"><span class="std std-ref">evolve()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – of the option. </p></li>
+<li><p><strong>value</strong> – of the option. </p></li>
 </ul>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5ipopt18set_numeric_optionERKNSt6stringEd">
-<span id="pagmo::ipopt::set_numeric_option__ssCR.double"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a6a27620449017bc2472d68a6654d7fc6"></span>void <code class="descname">set_numeric_option</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em>, double <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5ipopt18set_numeric_optionERKNSt6stringEd" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt18set_numeric_optionERKNSt6stringEd">
+<span id="_CPPv3N5pagmo5ipopt18set_numeric_optionERKNSt6stringEd"></span><span id="_CPPv2N5pagmo5ipopt18set_numeric_optionERKNSt6stringEd"></span><span id="pagmo::ipopt::set_numeric_option__ssCR.double"></span><span class="target" id="classpagmo_1_1ipopt_1af7c1921fdd1b881e2687ac09ddc37bc2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_numeric_option</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&amp;</span></span>, <span class="kt"><span class="pre">double</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt18set_numeric_optionERKNSt6stringEd" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set numeric option. </p>
-<p>This method will set the optimisation numeric option <code class="docutils literal"><span class="pre">name</span></code> to <code class="docutils literal"><span class="pre">value</span></code>. The optimisation options are passed to the Ipopt API when calling <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a69053fa0154e4b6f2f0e1b67c9490a45"><span class="std std-ref">evolve()</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">name</span></code>: of the option. </li>
-<li><code class="docutils literal"><span class="pre">value</span></code>: of the option. </li>
+<p>This method will set the optimisation numeric option <code class="docutils literal notranslate"><span class="pre">name</span></code> to <code class="docutils literal notranslate"><span class="pre">value</span></code>. The optimisation options are passed to the Ipopt API when calling <a class="reference internal" href="#classpagmo_1_1ipopt_1aa0a70c0c153949cf6e217cdb23776402"><span class="std std-ref">evolve()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – of the option. </p></li>
+<li><p><strong>value</strong> – of the option. </p></li>
 </ul>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5ipopt18set_string_optionsERKNSt3mapINSt6stringENSt6stringEEE">
-<span id="pagmo::ipopt::set_string_options__std::map:ss.ss:CR"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a28e48ec5b6deef682286c3e99a0bd299"></span>void <code class="descname">set_string_options</code><span class="sig-paren">(</span><em class="property">const</em> std::map&lt;std::string, std::string&gt; &amp;<em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5ipopt18set_string_optionsERKNSt3mapINSt6stringENSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt18set_string_optionsERKNSt3mapINSt6stringENSt6stringEEE">
+<span id="_CPPv3N5pagmo5ipopt18set_string_optionsERKNSt3mapINSt6stringENSt6stringEEE"></span><span id="_CPPv2N5pagmo5ipopt18set_string_optionsERKNSt3mapINSt6stringENSt6stringEEE"></span><span id="pagmo::ipopt::set_string_options__std::map:ss.ss:CR"></span><span class="target" id="classpagmo_1_1ipopt_1aee7d3399c0bbf817f9682d95161e8c7c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_string_options</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt18set_string_optionsERKNSt3mapINSt6stringENSt6stringEEE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set string options. </p>
-<p>This method will set the optimisation string options contained in <code class="docutils literal"><span class="pre">m</span></code>. It is equivalent to calling <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1ad02e6ef02ac274cef26d22ce862617d8"><span class="std std-ref">set_string_option()</span></a> passing all the name-value pairs in <code class="docutils literal"><span class="pre">m</span></code> as arguments.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">m</span></code>: the name-value map that will be used to set the options. </li>
-</ul>
+<p>This method will set the optimisation string options contained in <code class="docutils literal notranslate"><span class="pre">m</span></code>. It is equivalent to calling <a class="reference internal" href="#classpagmo_1_1ipopt_1a722f0d2d89ce0668c94609188f0c624b"><span class="std std-ref">set_string_option()</span></a> passing all the name-value pairs in <code class="docutils literal notranslate"><span class="pre">m</span></code> as arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>m</strong> – the name-value map that will be used to set the options. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5ipopt19set_integer_optionsERKNSt3mapINSt6stringEN5Ipopt5IndexEEE">
-<span id="pagmo::ipopt::set_integer_options__std::map:ss.Ipopt::Index:CR"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1ad38bb90a49f316230ab32601269b2cfe"></span>void <code class="descname">set_integer_options</code><span class="sig-paren">(</span><em class="property">const</em> std::map&lt;std::string, Ipopt::Index&gt; &amp;<em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5ipopt19set_integer_optionsERKNSt3mapINSt6stringEN5Ipopt5IndexEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt19set_integer_optionsERKNSt3mapINSt6stringEN5Ipopt5IndexEEE">
+<span id="_CPPv3N5pagmo5ipopt19set_integer_optionsERKNSt3mapINSt6stringEN5Ipopt5IndexEEE"></span><span id="_CPPv2N5pagmo5ipopt19set_integer_optionsERKNSt3mapINSt6stringEN5Ipopt5IndexEEE"></span><span id="pagmo::ipopt::set_integer_options__std::map:ss.Ipopt::Index:CR"></span><span class="target" id="classpagmo_1_1ipopt_1adafd021849a25fbf01631c77a622b554"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_integer_options</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Ipopt</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Index</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt19set_integer_optionsERKNSt3mapINSt6stringEN5Ipopt5IndexEEE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set integer options. </p>
-<p>This method will set the optimisation integer options contained in <code class="docutils literal"><span class="pre">m</span></code>. It is equivalent to calling <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a0da6321d5cd0280c922a3fd4ad9205c3"><span class="std std-ref">set_integer_option()</span></a> passing all the name-value pairs in <code class="docutils literal"><span class="pre">m</span></code> as arguments.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">m</span></code>: the name-value map that will be used to set the options. </li>
-</ul>
+<p>This method will set the optimisation integer options contained in <code class="docutils literal notranslate"><span class="pre">m</span></code>. It is equivalent to calling <a class="reference internal" href="#classpagmo_1_1ipopt_1abf6d8045bb7487cd3fda0c3165a58f6f"><span class="std std-ref">set_integer_option()</span></a> passing all the name-value pairs in <code class="docutils literal notranslate"><span class="pre">m</span></code> as arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>m</strong> – the name-value map that will be used to set the options. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5ipopt19set_numeric_optionsERKNSt3mapINSt6stringEdEE">
-<span id="pagmo::ipopt::set_numeric_options__std::map:ss.double:CR"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a537e96bad328f61e0f2b8a3fd30603f6"></span>void <code class="descname">set_numeric_options</code><span class="sig-paren">(</span><em class="property">const</em> std::map&lt;std::string, double&gt; &amp;<em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5ipopt19set_numeric_optionsERKNSt3mapINSt6stringEdEE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt19set_numeric_optionsERKNSt3mapINSt6stringEdEE">
+<span id="_CPPv3N5pagmo5ipopt19set_numeric_optionsERKNSt3mapINSt6stringEdEE"></span><span id="_CPPv2N5pagmo5ipopt19set_numeric_optionsERKNSt3mapINSt6stringEdEE"></span><span id="pagmo::ipopt::set_numeric_options__std::map:ss.double:CR"></span><span class="target" id="classpagmo_1_1ipopt_1a3bf68ffce53ff87b093633c781e73fa0"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_numeric_options</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt19set_numeric_optionsERKNSt3mapINSt6stringEdEE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set numeric options. </p>
-<p>This method will set the optimisation numeric options contained in <code class="docutils literal"><span class="pre">m</span></code>. It is equivalent to calling <a class="reference internal" href="#pagmoclasspagmo_1_1ipopt_1a6a27620449017bc2472d68a6654d7fc6"><span class="std std-ref">set_numeric_option()</span></a> passing all the name-value pairs in <code class="docutils literal"><span class="pre">m</span></code> as arguments.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">m</span></code>: the name-value map that will be used to set the options. </li>
-</ul>
+<p>This method will set the optimisation numeric options contained in <code class="docutils literal notranslate"><span class="pre">m</span></code>. It is equivalent to calling <a class="reference internal" href="#classpagmo_1_1ipopt_1af7c1921fdd1b881e2687ac09ddc37bc2"><span class="std std-ref">set_numeric_option()</span></a> passing all the name-value pairs in <code class="docutils literal notranslate"><span class="pre">m</span></code> as arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>m</strong> – the name-value map that will be used to set the options. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5ipopt18get_string_optionsEv">
-<span id="pagmo::ipopt::get_string_optionsC"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a2acbc465fd982e6ac86cb520b5c517fd"></span>std::map&lt;std::string, std::string&gt; <code class="descname">get_string_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5ipopt18get_string_optionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5ipopt18get_string_optionsEv">
+<span id="_CPPv3NK5pagmo5ipopt18get_string_optionsEv"></span><span id="_CPPv2NK5pagmo5ipopt18get_string_optionsEv"></span><span id="pagmo::ipopt::get_string_optionsC"></span><span class="target" id="classpagmo_1_1ipopt_1a23cdc3b4690980b02bc4ac3ae7073f3b"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_string_options</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5ipopt18get_string_optionsEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get string options. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the name-value map of optimisation string options. </dd>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the name-value map of optimisation string options. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5ipopt19get_integer_optionsEv">
-<span id="pagmo::ipopt::get_integer_optionsC"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1ad0187e1d60f8430997ebfded3bf5723a"></span>std::map&lt;std::string, Ipopt::Index&gt; <code class="descname">get_integer_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5ipopt19get_integer_optionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5ipopt19get_integer_optionsEv">
+<span id="_CPPv3NK5pagmo5ipopt19get_integer_optionsEv"></span><span id="_CPPv2NK5pagmo5ipopt19get_integer_optionsEv"></span><span id="pagmo::ipopt::get_integer_optionsC"></span><span class="target" id="classpagmo_1_1ipopt_1ac0e4262d89dc11c013783d656ac59c63"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Ipopt</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Index</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_integer_options</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5ipopt19get_integer_optionsEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get integer options. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the name-value map of optimisation integer options. </dd>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the name-value map of optimisation integer options. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5ipopt19get_numeric_optionsEv">
-<span id="pagmo::ipopt::get_numeric_optionsC"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1af6f70f98d5df18a1d38b910cf741088f"></span>std::map&lt;std::string, double&gt; <code class="descname">get_numeric_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5ipopt19get_numeric_optionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5ipopt19get_numeric_optionsEv">
+<span id="_CPPv3NK5pagmo5ipopt19get_numeric_optionsEv"></span><span id="_CPPv2NK5pagmo5ipopt19get_numeric_optionsEv"></span><span id="pagmo::ipopt::get_numeric_optionsC"></span><span class="target" id="classpagmo_1_1ipopt_1a29477f9c783601d5314ad0ff74b9430e"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_numeric_options</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5ipopt19get_numeric_optionsEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get numeric options. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the name-value map of optimisation numeric options. </dd>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the name-value map of optimisation numeric options. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5ipopt20reset_string_optionsEv">
-<span id="pagmo::ipopt::reset_string_options"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a0a10307e5134fba04ccee7f8fcbb1173"></span>void <code class="descname">reset_string_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5ipopt20reset_string_optionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt20reset_string_optionsEv">
+<span id="_CPPv3N5pagmo5ipopt20reset_string_optionsEv"></span><span id="_CPPv2N5pagmo5ipopt20reset_string_optionsEv"></span><span id="pagmo::ipopt::reset_string_options"></span><span class="target" id="classpagmo_1_1ipopt_1a0a10307e5134fba04ccee7f8fcbb1173"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset_string_options</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt20reset_string_optionsEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Clear all string options. </p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5ipopt21reset_integer_optionsEv">
-<span id="pagmo::ipopt::reset_integer_options"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1ab18d3063b07231e3f732c2d45ad0b3f6"></span>void <code class="descname">reset_integer_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5ipopt21reset_integer_optionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt21reset_integer_optionsEv">
+<span id="_CPPv3N5pagmo5ipopt21reset_integer_optionsEv"></span><span id="_CPPv2N5pagmo5ipopt21reset_integer_optionsEv"></span><span id="pagmo::ipopt::reset_integer_options"></span><span class="target" id="classpagmo_1_1ipopt_1ab18d3063b07231e3f732c2d45ad0b3f6"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset_integer_options</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt21reset_integer_optionsEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Clear all integer options. </p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo5ipopt21reset_numeric_optionsEv">
-<span id="pagmo::ipopt::reset_numeric_options"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1aebde77817dad9b8b82c0d3d52d44b68e"></span>void <code class="descname">reset_numeric_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo5ipopt21reset_numeric_optionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt21reset_numeric_optionsEv">
+<span id="_CPPv3N5pagmo5ipopt21reset_numeric_optionsEv"></span><span id="_CPPv2N5pagmo5ipopt21reset_numeric_optionsEv"></span><span id="pagmo::ipopt::reset_numeric_options"></span><span class="target" id="classpagmo_1_1ipopt_1aebde77817dad9b8b82c0d3d52d44b68e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset_numeric_options</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt21reset_numeric_optionsEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Clear all numeric options. </p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo5ipopt17get_thread_safetyEv">
-<span id="pagmo::ipopt::get_thread_safetyC"></span><span class="target" id="pagmoclasspagmo_1_1ipopt_1a49e35a3541c65ed78a265b43da200cf2"></span><a class="reference internal" href="../miscellanea/type_traits.html#_CPPv2N5pagmo13thread_safetyE" title="pagmo::thread_safety">thread_safety</a> <code class="descname">get_thread_safety</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo5ipopt17get_thread_safetyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5ipopt17get_thread_safetyEv">
+<span id="_CPPv3NK5pagmo5ipopt17get_thread_safetyEv"></span><span id="_CPPv2NK5pagmo5ipopt17get_thread_safetyEv"></span><span id="pagmo::ipopt::get_thread_safetyC"></span><span class="target" id="classpagmo_1_1ipopt_1a49e35a3541c65ed78a265b43da200cf2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="../miscellanea/type_traits.html#_CPPv4N5pagmo13thread_safetyE" title="pagmo::thread_safety"><span class="n"><span class="pre">thread_safety</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_thread_safety</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5ipopt17get_thread_safetyEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Thread safety level. </p>
 <p>According to the official Ipopt documentation, it is not safe to use Ipopt in a multithreaded environment.</p>
-<p><div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference external" href="https://projects.coin-or.org/Ipopt/wiki/FAQ">https://projects.coin-or.org/Ipopt/wiki/FAQ</a></p>
+<p><p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://projects.coin-or.org/Ipopt/wiki/FAQ">https://projects.coin-or.org/Ipopt/wiki/FAQ</a></p>
 </div>
- <dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd><a class="reference internal" href="../miscellanea/type_traits.html#pagmonamespacepagmo_1a35bc6a268c3da8a63a8a293ee2061af1a334c4a4c42fdb79d7ebc3e73b517e6f8"><span class="std std-ref">thread_safety::none</span></a>.</dd>
-</dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5pagmo20not_population_based18set_random_sr_seedEj">
-<span id="pagmo::not_population_based::set_random_sr_seed__unsigned"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1a43c196b3254e6d0ecb49a200d8e5cc17"></span>void <code class="descname">set_random_sr_seed</code><span class="sig-paren">(</span>unsigned <em>seed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo20not_population_based18set_random_sr_seedEj" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the seed for the <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code> selection/replacement policies. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">seed</span></code>: the value that will be used to seed the random number generator used by the <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code> selection/replacement policies. </li>
-</ul>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>thread_safety::none.</p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo20not_population_based13set_selectionERKNSt6stringE">
-<span id="pagmo::not_population_based::set_selection__ssCR"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1ad049600ad72f5aaf61dab52ea95cd6d9"></span>void <code class="descname">set_selection</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>select</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo20not_population_based13set_selectionERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt18set_random_sr_seedEj">
+<span id="_CPPv3N5pagmo5ipopt18set_random_sr_seedEj"></span><span id="_CPPv2N5pagmo5ipopt18set_random_sr_seedEj"></span><span id="pagmo::ipopt::set_random_sr_seed__unsigned"></span><span class="target" id="classpagmo_1_1not__population__based_1ac8cb01a8cce5a99de6d01dea185567cf"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_random_sr_seed</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt18set_random_sr_seedEj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set the seed for the <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code> selection/replacement policies. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seed</strong> – the value that will be used to seed the random number generator used by the <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code> selection/replacement policies. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt13set_selectionERKNSt6stringE">
+<span id="_CPPv3N5pagmo5ipopt13set_selectionERKNSt6stringE"></span><span id="_CPPv2N5pagmo5ipopt13set_selectionERKNSt6stringE"></span><span id="pagmo::ipopt::set_selection__ssCR"></span><span class="target" id="classpagmo_1_1not__population__based_1a918f089d9cc1a251005b9af0d209f2d4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_selection</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt13set_selectionERKNSt6stringE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set the individual selection policy. </p>
-<p>This method will set the policy that is used to select the individual that will be optimised when calling the <code class="docutils literal"><span class="pre">evolve()</span></code> method of the algorithm.</p>
-<p>The input string must be one of <code class="docutils literal"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;worst&quot;</span></code> and <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code>:<ul class="simple">
-<li><code class="docutils literal"><span class="pre">&quot;best&quot;</span></code> will select the best individual in the population,</li>
-<li><code class="docutils literal"><span class="pre">&quot;worst&quot;</span></code> will select the worst individual in the population,</li>
-<li><code class="docutils literal"><span class="pre">&quot;random&quot;</span></code> will randomly choose one individual in the population.</li>
+<p>This method will set the policy that is used to select the individual that will be optimised when calling the <code class="docutils literal notranslate"><span class="pre">evolve()</span></code> method of the algorithm.</p>
+<p>The input string must be one of <code class="docutils literal notranslate"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;worst&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code>:<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;best&quot;</span></code> will select the best individual in the population,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;worst&quot;</span></code> will select the worst individual in the population,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code> will randomly choose one individual in the population.</p></li>
 </ul>
 </p>
-<p><a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a43c196b3254e6d0ecb49a200d8e5cc17"><span class="std std-ref">set_random_sr_seed()</span></a> can be used to seed the random number generator used by the <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code> policy.</p>
-<p>Instead of a selection policy, a specific individual in the population can be selected via <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">select</span></code>: the selection policy.</li>
-</ul>
+<p><a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ac8cb01a8cce5a99de6d01dea185567cf"><span class="std std-ref">set_random_sr_seed()</span></a> can be used to seed the random number generator used by the <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code> policy.</p>
+<p>Instead of a selection policy, a specific individual in the population can be selected via <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>select</strong> – the selection policy.</p>
 </dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if <code class="docutils literal"><span class="pre">select</span></code> is not one of <code class="docutils literal"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;worst&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code>. </li>
-</ul>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if <code class="docutils literal notranslate"><span class="pre">select</span></code> is not one of <code class="docutils literal notranslate"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;worst&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code>. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo20not_population_based13set_selectionEN10population9size_typeE">
-<span id="pagmo::not_population_based::set_selection__population::size_type"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"></span>void <code class="descname">set_selection</code><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv2N5pagmo10populationE" title="pagmo::population">population</a>::<a class="reference internal" href="../population.html#_CPPv2N5pagmo10population9size_typeE" title="pagmo::population::size_type">size_type</a> <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo20not_population_based13set_selectionEN10population9size_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt13set_selectionEN10population9size_typeE">
+<span id="_CPPv3N5pagmo5ipopt13set_selectionEN10population9size_typeE"></span><span id="_CPPv2N5pagmo5ipopt13set_selectionEN10population9size_typeE"></span><span id="pagmo::ipopt::set_selection__population::size_type"></span><span class="target" id="classpagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_selection</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10populationE" title="pagmo::population"><span class="n"><span class="pre">population</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10population9size_typeE" title="pagmo::population::size_type"><span class="n"><span class="pre">size_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt13set_selectionEN10population9size_typeE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set the individual selection index. </p>
-<p>This method will set the index of the individual that is selected for optimisation in the <code class="docutils literal"><span class="pre">evolve()</span></code> method of the algorithm.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">n</span></code>: the index in the population of the individual to be selected for optimisation. </li>
-</ul>
+<p>This method will set the index of the individual that is selected for optimisation in the <code class="docutils literal notranslate"><span class="pre">evolve()</span></code> method of the algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – the index in the population of the individual to be selected for optimisation. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo20not_population_based13get_selectionEv">
-<span id="pagmo::not_population_based::get_selectionC"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1a15516c323e4c8c093eb076eb0da5b026"></span>boost::any <code class="descname">get_selection</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo20not_population_based13get_selectionEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5ipopt13get_selectionEv">
+<span id="_CPPv3NK5pagmo5ipopt13get_selectionEv"></span><span id="_CPPv2NK5pagmo5ipopt13get_selectionEv"></span><span id="pagmo::ipopt::get_selectionC"></span><span class="target" id="classpagmo_1_1not__population__based_1a15516c323e4c8c093eb076eb0da5b026"></span><span class="n"><span class="pre">boost</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">any</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_selection</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5ipopt13get_selectionEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get the individual selection policy or index. </p>
-<p>This method will return a <code class="docutils literal"><span class="pre">boost::any</span></code> containing either the individual selection policy (as an <code class="docutils literal"><span class="pre">std::string</span></code>) or the individual selection index (as a <a class="reference internal" href="../population.html#pagmoclasspagmo_1_1population_1a78bf280404ba0555cd7320e8431a587e"><span class="std std-ref">population::size_type</span></a>). The selection policy or index is set via <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1ad049600ad72f5aaf61dab52ea95cd6d9"><span class="std std-ref">set_selection(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the individual selection policy or index. </dd>
+<p>This method will return a <code class="docutils literal notranslate"><span class="pre">boost::any</span></code> containing either the individual selection policy (as an <code class="docutils literal notranslate"><span class="pre">std::string</span></code>) or the individual selection index (as a <a class="reference internal" href="../population.html#classpagmo_1_1population_1a6eb52f7d48a0cfd0ce37956139a3a862"><span class="std std-ref">population::size_type</span></a>). The selection policy or index is set via <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a918f089d9cc1a251005b9af0d209f2d4"><span class="std std-ref">set_selection(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a5cb5ec801a147d7bea1a46f511f216e2"><span class="std std-ref">set_selection(population::size_type)</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the individual selection policy or index. </p>
+</dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo20not_population_based15set_replacementERKNSt6stringE">
-<span id="pagmo::not_population_based::set_replacement__ssCR"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1acb03d2e2a6b68982eeb340f8cdd4eef7"></span>void <code class="descname">set_replacement</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>replace</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo20not_population_based15set_replacementERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt15set_replacementERKNSt6stringE">
+<span id="_CPPv3N5pagmo5ipopt15set_replacementERKNSt6stringE"></span><span id="_CPPv2N5pagmo5ipopt15set_replacementERKNSt6stringE"></span><span id="pagmo::ipopt::set_replacement__ssCR"></span><span class="target" id="classpagmo_1_1not__population__based_1ac308e8d059b0f3c3ef901607b49f2a48"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_replacement</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt15set_replacementERKNSt6stringE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set the individual replacement policy. </p>
-<p>This method will set the policy that is used in the <code class="docutils literal"><span class="pre">evolve()</span></code> method of the algorithm to select the individual that will be replaced by the optimised individual.</p>
-<p>The input string must be one of <code class="docutils literal"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;worst&quot;</span></code> and <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code>:<ul class="simple">
-<li><code class="docutils literal"><span class="pre">&quot;best&quot;</span></code> will select the best individual in the population,</li>
-<li><code class="docutils literal"><span class="pre">&quot;worst&quot;</span></code> will select the worst individual in the population,</li>
-<li><code class="docutils literal"><span class="pre">&quot;random&quot;</span></code> will randomly choose one individual in the population.</li>
+<p>This method will set the policy that is used in the <code class="docutils literal notranslate"><span class="pre">evolve()</span></code> method of the algorithm to select the individual that will be replaced by the optimised individual.</p>
+<p>The input string must be one of <code class="docutils literal notranslate"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;worst&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code>:<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;best&quot;</span></code> will select the best individual in the population,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;worst&quot;</span></code> will select the worst individual in the population,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code> will randomly choose one individual in the population.</p></li>
 </ul>
 </p>
-<p><a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a43c196b3254e6d0ecb49a200d8e5cc17"><span class="std std-ref">set_random_sr_seed()</span></a> can be used to seed the random number generator used by the <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code> policy.</p>
-<p>Instead of a replacement policy, a specific individual in the population can be selected via <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">replace</span></code>: the replacement policy.</li>
-</ul>
+<p><a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ac8cb01a8cce5a99de6d01dea185567cf"><span class="std std-ref">set_random_sr_seed()</span></a> can be used to seed the random number generator used by the <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code> policy.</p>
+<p>Instead of a replacement policy, a specific individual in the population can be selected via <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>replace</strong> – the replacement policy.</p>
 </dd>
-<dt><strong>Exceptions</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">std::invalid_argument</span></code>: if <code class="docutils literal"><span class="pre">replace</span></code> is not one of <code class="docutils literal"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;worst&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code>. </li>
-</ul>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if <code class="docutils literal notranslate"><span class="pre">replace</span></code> is not one of <code class="docutils literal notranslate"><span class="pre">&quot;best&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;worst&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code>. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N5pagmo20not_population_based15set_replacementEN10population9size_typeE">
-<span id="pagmo::not_population_based::set_replacement__population::size_type"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"></span>void <code class="descname">set_replacement</code><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv2N5pagmo10populationE" title="pagmo::population">population</a>::<a class="reference internal" href="../population.html#_CPPv2N5pagmo10population9size_typeE" title="pagmo::population::size_type">size_type</a> <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5pagmo20not_population_based15set_replacementEN10population9size_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5pagmo5ipopt15set_replacementEN10population9size_typeE">
+<span id="_CPPv3N5pagmo5ipopt15set_replacementEN10population9size_typeE"></span><span id="_CPPv2N5pagmo5ipopt15set_replacementEN10population9size_typeE"></span><span id="pagmo::ipopt::set_replacement__population::size_type"></span><span class="target" id="classpagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_replacement</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10populationE" title="pagmo::population"><span class="n"><span class="pre">population</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../population.html#_CPPv4N5pagmo10population9size_typeE" title="pagmo::population::size_type"><span class="n"><span class="pre">size_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5pagmo5ipopt15set_replacementEN10population9size_typeE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Set the individual replacement index. </p>
-<p>This method will set the index of the individual that is replaced after the optimisation in the <code class="docutils literal"><span class="pre">evolve()</span></code> method of the algorithm.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">n</span></code>: the index in the population of the individual to be replaced after the optimisation. </li>
-</ul>
+<p>This method will set the index of the individual that is replaced after the optimisation in the <code class="docutils literal notranslate"><span class="pre">evolve()</span></code> method of the algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – the index in the population of the individual to be replaced after the optimisation. </p>
 </dd>
 </dl>
-</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2NK5pagmo20not_population_based15get_replacementEv">
-<span id="pagmo::not_population_based::get_replacementC"></span><span class="target" id="pagmoclasspagmo_1_1not__population__based_1a74c7d941a9b9a317374a9a77a200c255"></span>boost::any <code class="descname">get_replacement</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5pagmo20not_population_based15get_replacementEv" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5pagmo5ipopt15get_replacementEv">
+<span id="_CPPv3NK5pagmo5ipopt15get_replacementEv"></span><span id="_CPPv2NK5pagmo5ipopt15get_replacementEv"></span><span id="pagmo::ipopt::get_replacementC"></span><span class="target" id="classpagmo_1_1not__population__based_1a74c7d941a9b9a317374a9a77a200c255"></span><span class="n"><span class="pre">boost</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">any</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_replacement</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5pagmo5ipopt15get_replacementEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get the individual replacement policy or index. </p>
-<p>This method will return a <code class="docutils literal"><span class="pre">boost::any</span></code> containing either the individual replacement policy (as an <code class="docutils literal"><span class="pre">std::string</span></code>) or the individual replacement index (as a <a class="reference internal" href="../population.html#pagmoclasspagmo_1_1population_1a78bf280404ba0555cd7320e8431a587e"><span class="std std-ref">population::size_type</span></a>). The replacement policy or index is set via <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1acb03d2e2a6b68982eeb340f8cdd4eef7"><span class="std std-ref">set_replacement(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#pagmoclasspagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>.</p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the individual replacement policy or index. </dd>
+<p>This method will return a <code class="docutils literal notranslate"><span class="pre">boost::any</span></code> containing either the individual replacement policy (as an <code class="docutils literal notranslate"><span class="pre">std::string</span></code>) or the individual replacement index (as a <a class="reference internal" href="../population.html#classpagmo_1_1population_1a6eb52f7d48a0cfd0ce37956139a3a862"><span class="std std-ref">population::size_type</span></a>). The replacement policy or index is set via <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1ac308e8d059b0f3c3ef901607b49f2a48"><span class="std std-ref">set_replacement(const std::string &amp;)</span></a> and <a class="reference internal" href="../miscellanea/utility_classes.html#classpagmo_1_1not__population__based_1a7e448fdbbcb611723769163afd3da600"><span class="std std-ref">set_replacement(population::size_type)</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the individual replacement policy or index. </p>
+</dd>
 </dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ihs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Improved Harmony Search (IHS)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="maco.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Multi-objective Hypervolume-based Ant Colony Optimizer (MHACO)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By pagmo development team
 </p>
-</dd></dl>
 
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2017-2024, pagmo development team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
-</dd></dl>
+          </footer>
+        
 
-</div>
-
-
+      </main>
     </div>
-      
   </div>
-</div>
-<footer class="footer">
-  <div class="container">
-    <p class="pull-right">
-      <a href="#">Back to top</a>
-      
-    </p>
-    <p>
-        &copy; Copyright 2017, pagmo development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.<br/>
-    </p>
-  </div>
-</footer>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
